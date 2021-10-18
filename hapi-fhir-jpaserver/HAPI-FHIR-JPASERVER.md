@@ -340,7 +340,7 @@ Now we will take a look at boot-up metrics on different embedded web servers.
 Moreover, to decrease the boot-up time we added [spring-indexer](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-scanning-index).
 While classpath scanning is very fast, it is possible to improve the startup performance of large applications by creating a static list of candidates at compilation time.
 In this mode, all modules that are targets of component scanning must use this mechanism.
-It creates `META-INF/spring.components`
+It creates `META-INF/spring.components` were all the beans described.
 
 Actually, it increases the build time in few seconds, but every cloud has a silver lining.
 
