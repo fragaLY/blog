@@ -227,6 +227,7 @@ The average time to boot up the service depends on if it's the first start becau
 For sure, on production, we will use warm-up, and mostly we will have the situation without creating a database structure.
 We will cover this and other topics in next chapters.
 
+- [ ] Clarify the performance tests we've used.
 ------------------------------------------------------------------------------------------------------------------------
 <h6>CHAPTER 4: WHERE'S MY RESOURCES, LEBOWSKI?</h6>
 
