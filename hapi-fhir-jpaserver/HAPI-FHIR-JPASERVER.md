@@ -453,6 +453,14 @@ Actually, it increases the build time in few seconds, but every cloud has a silv
 | 4    |     |      |      |      |              |              |
 | 5    |     |      |      |      |              |              |
 
+- [ ] Migrate to Postgres 14
+
+The final fight is migration from Postgres 13.3 to [Postgres 14.0](https://www.postgresql.org/docs/release/14.0/) due to having a lot of performance tunings, such as:
+- Numerous performance improvements have been made for parallel queries, heavily-concurrent workloads, partitioned tables, logical replication, and vacuuming;
+- B-tree index updates are managed more efficiently, reducing index bloat; 
+- VACUUM automatically becomes more aggressive, and skips inessential cleanup, if the database starts to approach a transaction ID wraparound condition.
+
+
 - [ ] Try to build it with GraalVM
 
 | Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  | Boot-up time |
