@@ -387,7 +387,7 @@ Actually, it increases the build time in few seconds, but every cloud has a silv
 
 ------------------------------------------------------------------------------------------------------------------------
 
-<h6>BONUS: GRAALVM.</h6>
+<h6>BONUS: HA HEY, THIS IS A PRIVATE RESIDENCE MAN.</h6>
 
 - [ ] JDK 11 vs JDK 17
 
