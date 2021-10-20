@@ -54,7 +54,9 @@ And in a world where every millisecond may costs you a huge profit, the performa
 <h6>CHAPTER 3: IT REALLY TIED THE ROOM TOGETHER.</h6>
 After a few months of investigations and data preparations for HFJS, we get the vision of possible resources consumption.
 So, we stopped on the next setup, in my honest opinion, this is the minimum requirement for HAPI FHIR.
-`OS Linux (amd64) OS ImageOracle Linux Server 8.2 Cores 4, RAM 16000Mi`.
+`OS Linux (amd64) OS ImageOracle Linux Server 8.2 Cores 4, RAM 16000Mi`. 
+
+For compile and build processes we are using `JDK 11, Gradle 7.2.`
 
 The basic configuration for HFJSS had been tuned a bit, mostly tuning affected pools and workers, some searching, validation, and reindexing settings.
 If you are not a lot familiar with hikari pool tuning, there is a [great article](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing) about pool sizing. Long story short,
@@ -386,6 +388,8 @@ Actually, it increases the build time in few seconds, but every cloud has a silv
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>BONUS: GRAALVM.</h6>
+
+- [ ] JDK 11 vs JDK 17
 
 - [ ] Try to build it with GraalVM
 
