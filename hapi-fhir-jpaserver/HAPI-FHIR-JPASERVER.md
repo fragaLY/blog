@@ -230,7 +230,39 @@ The average time to boot up the service depends on if it's the first start becau
 For sure, on production, we will use warm-up, and mostly we will have the situation without creating a database structure.
 We will cover this and other topics in next chapters.
 
-- [ ] Clarify the performance tests we've used.
+To my mind, I ought to share with you some use cases that we will cover with performance tests. You can find that most of all there are READ operations, and that is correct.
+The user will do these operations most of all, and we should follow his/her behavior.
+
+Outpatient practice (ambulatory):
+
+| #  | Scenario step          | Assumed FHIR data operation |
+| :---------------------: | :--------------------- | :-------------------------- |
+| 1 | Login              |             |
+| 2 | As a doctor, I want to open my patient’s medical card with general information page with diagnoses | Get  Patient resource, get several (10) Condition resources for this patient |
+| 3 | As a doctor, I want to look through titles and dates of all available to me medical records (sections) for my patient for all the time | |
+| 4 | As a doctor, I want to open some of them and read (e.g. General blood analysis 12.09.2003, Renal ultrasound 18.02.2014, General blood analysis 22.06.2020). Alternative flow: As a doctor, I want to scroll and look through all sections in my patient's card | Simultaneously get 10 DiagnosticReports by IDs, including all references recursively (_include:recurse=*) |
+| 5 | As a doctor, I want to create a new medical record (section) of today’s visit and save it | Create DiagnosticReport with subject = this patient and 10 Observations in a result array |
+| 6 | As a doctor, I want to close current patient and see a list of patients again as described in (2) | See (2) |
+| 7 | Repeat (2) - (7) every 15-30 minutes for each patient | |
+| 8 | Logout |  |
+
+Inpatient practice (hospital):
+
+| #  | Scenario step          | Assumed FHIR data operation |
+| :---------------------: | :--------------------- | :-------------------------- |
+| 1 | Login              |             |
+| 2 | As a doctor, I want to see my list of patients, that are in my responsibility today: patients that are now in my hospital in my department and assigned to me | Find all Patients, that have EpisodeOfCare with period including [some date] AND [some] managingOrganization |
+| 3 | As a doctor, I want to open my patient’s medical card with general information page | Get Patient resource, get several (5-20) resources for this patient, like AllergyIntolerance, Condition, RelatedPerson, Immunization |
+| 4 | As a doctor, I want to look through titles and dates of all available to me medical records (sections) for my patient for all the time | Select all Compositions with subject = this patient (in average, 50, can be 5-200) |
+| 5 | As a doctor, I want to open some of them and read (e.g. General blood analysis 12.09.2003, Renal ultrasound 18.02.2014, General blood analysis 22.12.2021) | For each of 3 opened medical records: Get Composition, in it’s section for all entryes select DiagnosticReport, in it’s result for all references select all (1-25) Observations |
+| 6 | As a doctor, I want to look through dates and diagnoses of all hospitalizations of my patient | Find all EpisodeOfCare that was for this Patient |
+| 7 | As a doctor, I want to open some hospitalizations (medical forms) and read all sections in them (e.g. Acute appendicitis 21.04.2017-25.04.2017, Pneumonia 13.09.2019-28.09.2019) | For each hospitalization (EpisodeOfCare) – find  Composition that in event in detail contains a reference to current EpisodeOfCare. For that Composition for all sections (5-20) in it’s entryes select all (1-25) Observations |
+| 8 | As a doctor, I want to open a medical form for current hospitalization and read all sections | The same as (7) |
+| 9 | As a doctor, I want to create a new section in this medical form with a daily medical record of my examination | Create Composition with subject = this patient and 10-30 Observations as entryes in it’s section |
+| 10 | As a doctor, I want to close current patient and see a list of patients again as described in (2) | See (2) |
+| 11 | Repeat (2) - (7) every 15-30 minutes for each patient |  |
+| 12 | Logout |  |
+
 ------------------------------------------------------------------------------------------------------------------------
 <h6>CHAPTER 4: WHERE'S MY RESOURCES, LEBOWSKI?</h6>
 
