@@ -280,7 +280,7 @@ And now, show me the numbers, dude!
 | 4    |     |      |      |      |              |
 | 5    |     |      |      |      |              |
 
-- Shenandoah
+- SHENANDOAH GC
 
 | Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
 | :--- | :---| :----| :----| :----| :------------|
@@ -302,7 +302,7 @@ And now, show me the numbers, dude!
 | 4    |     |      |      |      |              |
 | 5    |     |      |      |      |              |
 
-- Shenandoah
+- ZGC
 
 | Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
 | :--- | :---| :----| :----| :----| :------------|
@@ -312,7 +312,7 @@ And now, show me the numbers, dude!
 | 4    |     |      |      |      |              |
 | 5    |     |      |      |      |              |
 
-- ZGC
+- SHENANDOAH GC
 
 | Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
 | :--- | :---| :----| :----| :----| :------------|
@@ -344,7 +344,7 @@ And now, show me the numbers, dude!
 | 4    |     |      |      |      |              |
 | 5    |     |      |      |      |              |
 
-- Shenandoah
+- SHENANDOAH GC
 
 | Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
 | :--- | :---| :----| :----| :----| :------------|
