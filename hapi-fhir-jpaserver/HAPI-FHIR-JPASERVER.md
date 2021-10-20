@@ -280,9 +280,29 @@ And now, show me the numbers, dude!
 | 4    |     |      |      |      |              |
 | 5    |     |      |      |      |              |
 
+- Shenandoah
+
+| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
+| :--- | :---| :----| :----| :----| :------------|
+| 1    |     |      |      |      |              |
+| 2    |     |      |      |      |              |
+| 3    |     |      |      |      |              |
+| 4    |     |      |      |      |              |
+| 5    |     |      |      |      |              |
+
 <h2>Jetty</h6>
 
 - G1
+
+| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
+| :--- | :---| :----| :----| :----| :------------|
+| 1    |     |      |      |      |              |
+| 2    |     |      |      |      |              |
+| 3    |     |      |      |      |              |
+| 4    |     |      |      |      |              |
+| 5    |     |      |      |      |              |
+
+- Shenandoah
 
 | Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
 | :--- | :---| :----| :----| :----| :------------|
@@ -323,12 +343,25 @@ And now, show me the numbers, dude!
 | 3    |     |      |      |      |              |
 | 4    |     |      |      |      |              |
 | 5    |     |      |      |      |              |
+
+- Shenandoah
+
+| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
+| :--- | :---| :----| :----| :----| :------------|
+| 1    |     |      |      |      |              |
+| 2    |     |      |      |      |              |
+| 3    |     |      |      |      |              |
+| 4    |     |      |      |      |              |
+| 5    |     |      |      |      |              |
+
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>CHAPTER 6: WHERE'S MY BOOT-UP TIME, LEBOWSKI?</h6>
 
 All the steps that we can find in the table below were described in chapter 4.
 Now we will take a look at boot-up metrics on different embedded web servers.
+
+- [ ] Add overhead of using the wrapper for starter
 
 | Step | Tomcat   | Jetty    | Undertow |
 | :--- | :------- | :------- | :------- | 
@@ -348,7 +381,6 @@ Actually, it increases the build time in few seconds, but every cloud has a silv
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>CHAPTER 7: I CAN'T BE WORRYING ABOUT THAT SH1T. LIFE GOES ON, MAN.</h6>
-
 
 Thank you.
 
