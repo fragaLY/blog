@@ -382,6 +382,11 @@ Actually, it increases the build time in few seconds, but every cloud has a silv
 
 <h6>CHAPTER 7: I CAN'T BE WORRYING ABOUT THAT SH1T. LIFE GOES ON, MAN.</h6>
 
+
+<h6>BONUS: GRAALVM.</h6>
+
+- [ ] Try to build it with GraalVM
+
 Thank you.
 
 If you have any question, feel free to contact me direct in linkedin or via email.
