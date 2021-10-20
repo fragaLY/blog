@@ -56,7 +56,8 @@ After a few months of investigations and data preparations for HFJS, we get the 
 So, we stopped on the next setup, in my honest opinion, this is the minimum requirement for HAPI FHIR.
 `OS Linux (amd64) OS ImageOracle Linux Server 8.2 Cores 4, RAM 16000Mi`. 
 
-For compile and build processes we are using `JDK 11, Gradle 7.2.`
+For compile and build processes we are using `JDK 11, Gradle 7.2.` We've took a useful for us parts of HFJSS, such as `ca.uhn.hapi.fhir:hapi-fhir-base, ca.uhn.hapi.fhir:hapi-fhir-jpaserver-base, ca.uhn.hapi.fhir:hapi-fhir-validation, ca.uhn.hapi.fhir:hapi-fhir-structures-r4, ca.uhn.hapi.fhir:hapi-fhir-validation-resources-r4`.
+And we build our own theme park, with blackjack and hO_okers.
 
 The basic configuration for HFJSS had been tuned a bit, mostly tuning affected pools and workers, some searching, validation, and reindexing settings.
 If you are not a lot familiar with hikari pool tuning, there is a [great article](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing) about pool sizing. Long story short,
@@ -363,7 +364,7 @@ And now, show me the numbers, dude!
 All the steps that we can find in the table below were described in chapter 4.
 Now we will take a look at boot-up metrics on different embedded web servers.
 
-- [ ] Add overhead of using the wrapper for starter
+Due to the fact, that we are using fewer libraries than the default HFJS starter it decreases the boot time up to 2 times.
 
 | Step | Tomcat   | Jetty    | Undertow |
 | :--- | :------- | :------- | :------- | 
@@ -384,14 +385,51 @@ Actually, it increases the build time in few seconds, but every cloud has a silv
 
 <h6>CHAPTER 7: I CAN'T BE WORRYING ABOUT THAT SH1T. LIFE GOES ON, MAN.</h6>
 
-
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>BONUS: HA HEY, THIS IS A PRIVATE RESIDENCE MAN.</h6>
 
 - [ ] JDK 11 vs JDK 17
 
+- G1
+
+| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  | Boot-up time |
+| :--- | :---| :----| :----| :----| :------------| :------------|
+| 1    |     |      |      |      |              |              |
+| 2    |     |      |      |      |              |              |
+| 3    |     |      |      |      |              |              |
+| 4    |     |      |      |      |              |              |
+| 5    |     |      |      |      |              |              |
+
+- ZGC
+
+| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  | Boot-up time |
+| :--- | :---| :----| :----| :----| :------------| :------------|
+| 1    |     |      |      |      |              |              |
+| 2    |     |      |      |      |              |              |
+| 3    |     |      |      |      |              |              |
+| 4    |     |      |      |      |              |              |
+| 5    |     |      |      |      |              |              |
+
+- SHENANDOAH GC
+
+| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  | Boot-up time |
+| :--- | :---| :----| :----| :----| :------------| :------------|
+| 1    |     |      |      |      |              |              |
+| 2    |     |      |      |      |              |              |
+| 3    |     |      |      |      |              |              |
+| 4    |     |      |      |      |              |              |
+| 5    |     |      |      |      |              |              |
+
 - [ ] Try to build it with GraalVM
+
+| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  | Boot-up time |
+| :--- | :---| :----| :----| :----| :------------| :------------|
+| 1    |     |      |      |      |              |              |
+| 2    |     |      |      |      |              |              |
+| 3    |     |      |      |      |              |              |
+| 4    |     |      |      |      |              |              |
+| 5    |     |      |      |      |              |              |
 
 Thank you.
 
