@@ -304,13 +304,9 @@ Please, take a look at abbreviations I will use in the next tables:
 
 - G1
 
-| Step | TPS | RTOT |HPS |ATOT | NODE | JVM  | POSTGRES  | HIKARI | TPWD |
-| :--- | :---| :----|:----|:----|:----| :----| :----| :------------| : ---|
-| 1    |  <img src="static/1step/g1/tomcat/tps.png" width="200" height="100"> |<img src="static/1step/g1/tomcat/rtot.png" width="200" height="100">|<img src="static/1step/g1/tomcat/hps.png" width="200" height="100">)|<img src="static/1step/g1/tomcat/atot.png" width="200" height="100">|<img src="static/1step/g1/tomcat/node.png" width="200" height="100">|<img src="static/1step/g1/tomcat/jvm.png" width="200" height="100">|<img src="static/1step/g1/tomcat/postgres-1.png" width="200" height="100"> <img src="static/1step/g1/tomcat/postgres-2.png" width="200" height="100">|<img src="static/1step/g1/tomcat/hikari.png" width="200" height="100">|460800|
-| 2    |     |      |     |     |     |      |      |              ||
-| 3    |     |      |     |     |     |      |      |              ||
-| 4    |     |      |     |     |     |      |      |              ||
-| 5    |     |      |     |     |     |      |      |              ||
+| Step | TPS | RTOT |
+| :--- | :---| :----|
+| 1    |  <img src="static/1step/g1/tomcat/tps.png" width="200" height="100"> |<img src="static/1step/g1/tomcat/rtot.png" width="200" height="100">|
 
 - ZGC
 
