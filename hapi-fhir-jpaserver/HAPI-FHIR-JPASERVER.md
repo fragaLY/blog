@@ -417,7 +417,9 @@ Due to the fact, that we are using fewer libraries than the default HFJS starter
 | 4    |          |          |          |
 | 5    |          |          |          |
 
-Moreover, to decrease the boot-up time we added [spring-indexer](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-scanning-index).
+Moreover, to decrease the boot-up time we've tried to add [spring-indexer](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-scanning-index).
+Nevertheless, the spring-indexer is not compatible with hapi-fhir.
+In spite of this, I would like to share the benefits it could bring to your projects.
 While classpath scanning is very fast, it is possible to improve the startup performance of large applications by creating a static list of candidates at compilation time.
 In this mode, all modules that are targets of component scanning must use this mechanism.
 It creates `META-INF/spring.components` were all the beans described.
