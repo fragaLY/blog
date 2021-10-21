@@ -306,7 +306,7 @@ Please, take a look at abbreviations I will use in the next tables:
 
 | Step | TPS | RTOT |HPS |ATOT | NODE | JVM  | POSTGRES  | HIKARI | TPWD |
 | :--- | :---| :----|:----|:----|:----| :----| :----| :------------| : ---|
-| 1    |  <img src="static/1step/g1/tomcat/tps.png" width="200" height="200"> |![](./static/1step/g1/tomcat/rtot.png)|![](./static/1step/g1/tomcat/hps.png)|![](./static/1step/g1/tomcat/atot.png)|![](./static/1step/g1/tomcat/node.png)|![](./static/1step/g1/tomcat/jvm.png)|![](./static/1step/g1/tomcat/postgres-1.png)![](./static/1step/g1/tomcat/postgres-2.png)|![](./static/1step/g1/tomcat/hikari.png)|460800|
+| 1    | ![](./static/1step/g1/tomcat/tps.png)|![](./static/1step/g1/tomcat/rtot.png)|![](./static/1step/g1/tomcat/hps.png)|![](./static/1step/g1/tomcat/atot.png)|![](./static/1step/g1/tomcat/node.png)|![](./static/1step/g1/tomcat/jvm.png)|![](./static/1step/g1/tomcat/postgres-1.png)|![](./static/1step/g1/tomcat/postgres-2.png)|![](./static/1step/g1/tomcat/hikari.png)|460800|
 | 2    |     |      |     |     |     |      |      |              ||
 | 3    |     |      |     |     |     |      |      |              ||
 | 4    |     |      |     |     |     |      |      |              ||
