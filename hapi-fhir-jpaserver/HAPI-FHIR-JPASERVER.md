@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------------
 
-_Please be asure that you are familiar with [license](https://www.gnu.org/licenses/agpl-3.0.en.html)._
+_Please be assured that you are familiar with the [license](https://www.gnu.org/licenses/agpl-3.0.en.html)._
 
 ------------------------------------------------------------------------------------------------------------------------
 
