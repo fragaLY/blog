@@ -1,5 +1,9 @@
 ------------------------------------------------------------------------------------------------------------------------
 
+_Please be asure that you are familiar with [license](https://www.gnu.org/licenses/agpl-3.0.en.html)._
+
+------------------------------------------------------------------------------------------------------------------------
+
 <h6>CHAPTER 1: HEY, NICE MARMOT.</h6> 
 Firstly, I would like to bring you some brief information about the HAPI FHIR.
 
