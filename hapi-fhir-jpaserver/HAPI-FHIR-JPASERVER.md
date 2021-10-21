@@ -41,7 +41,7 @@ This project is a fully contained FHIR server, supporting all standard operation
 It bundles an embedded instance of the H2 Java Database so that the server can run without depending on any external database, but it can also be configured to use an installation of Oracle, Postgres, etc.
 
 Long story short, this is the representation of [HAPI JPA Server architecture](https://hapifhir.io/hapi-fhir/docs/server_jpa/architecture.html):
-![](./static/hapi-fhir-jpa-architecture.png)
+![](static/1step/g1/tomcat/50k-tomcat-g1-hapi-fhir-jpa-architecture.png)
 
 To dive deeper in the topic, you can follow the next links:
 - [Database Schema](https://hapifhir.io/hapi-fhir/docs/server_jpa/schema.html)
@@ -293,17 +293,24 @@ Let's assume that the average institution has the biggest load from 8:00 till 17
 As a result, we will have ~40 business hours per week. The next metrics will be presented for a typical business day (transactions per working day, TPWD in future) and RPS as well.
 And now, show me the numbers, dude!
 
+Please, take a look at abbreviations I will use in the next tables:
+
+- TPS - TRANSACTIONS PER SECOND
+- RTOT - RESPONSE TIMES OVER TIME
+- HPS - HITS PER SECOND
+- ATOT - ACTIVE THREADS OVER TIME
+
 <h2>Tomcat</h6>
 
 - G1
 
-| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
-| :--- | :---| :----| :----| :----| :------------|
-| 1    |     |      |      |      |              |
-| 2    |     |      |      |      |              |
-| 3    |     |      |      |      |              |
-| 4    |     |      |      |      |              |
-| 5    |     |      |      |      |              |
+| Step | TPS | RTOT |HPS |ATOT | NODE | JVM  | POSTGRES  | HIKARI | TPWD |
+| :--- | :---| :----|:----|:----|:----| :----| :----| :------------| : ---|
+| 1    | ![](./static/1step/g1/tomcat/tps.png)|![](./static/1step/g1/tomcat/rtot.png)|![](./static/1step/g1/tomcat/hps.png)|![](./static/1step/g1/tomcat/atot.png)|![](./static/1step/g1/tomcat/node.png)|![](./static/1step/g1/tomcat/jvm.png)|![](./static/1step/g1/tomcat/postgres-1.png)![](./static/1step/g1/tomcat/postgres-2.png)|![](./static/1step/g1/tomcat/hikari.png)|460800|
+| 2    |     |      |     |     |     |      |      |              ||
+| 3    |     |      |     |     |     |      |      |              ||
+| 4    |     |      |     |     |     |      |      |              ||
+| 5    |     |      |     |     |     |      |      |              ||
 
 - ZGC
 
@@ -400,7 +407,7 @@ Due to the fact, that we are using fewer libraries than the default HFJS starter
 
 | Step | Tomcat   | Jetty    | Undertow |
 | :--- | :------- | :------- | :------- | 
-| 1    | 48.974s  |          |          |
+| 1    | 79.514s  |          |          |
 | 2    |          |          |          |
 | 3    |          |          |          |
 | 4    |          |          |          |
