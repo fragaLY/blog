@@ -411,7 +411,7 @@ Due to the fact, that we are using fewer libraries than the default HFJS starter
 
 | Step | Tomcat   | Jetty    | Undertow |
 | :---:| :------: | :------: | :------: | 
-| 1    | ~ 80s    |   ~45s   |          |
+| 1    | ~ 80s    |   ~45s   |  ~ 40s   |
 | 2    |          |          |          |
 | 3    |          |          |          |
 | 4    |          |          |          |
