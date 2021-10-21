@@ -307,94 +307,94 @@ Please, take a look at abbreviations I will use in the next tables:
 | Step | TPWD  |TPS | RTOT |HPS  |ATOT | NODE| JVM  | HIKARI       | POSTGRES |
 | :--- | :-----|:---| :----|:----|:----|:----| :----| :------------|:---------|
 | 1    | 460800|<img src="static/1step/g1/tomcat/tps.png" width="200" height="100"> |<img src="static/1step/g1/tomcat/rtot.png" width="200" height="100">|<img src="static/1step/g1/tomcat/hps.png" width="200" height="100">|<img src="static/1step/g1/tomcat/atot.png" width="200" height="100">|<img src="static/1step/g1/tomcat/node.png" width="200" height="100">|<img src="static/1step/g1/tomcat/jvm.png" width="200" height="100">|<img src="static/1step/g1/tomcat/hikari.png" width="200" height="100">|<img src="static/1step/g1/tomcat/postgres-1.png" width="200" height="100"> <img src="static/1step/g1/tomcat/postgres-2.png" width="200" height="100">|
-| 2    | 460800|<img src="static/2step/g1/tomcat/tps.png" width="200" height="100"> |<img src="static/2step/g1/tomcat/rtot.png" width="200" height="100">|<img src="static/2step/g1/tomcat/hps.png" width="200" height="100">|<img src="static/2step/g1/tomcat/atot.png" width="200" height="100">|<img src="static/2step/g1/tomcat/node.png" width="200" height="100">|<img src="static/2step/g1/tomcat/jvm.png" width="200" height="100">|<img src="static/2step/g1/tomcat/hikari.png" width="200" height="100">|<img src="static/2step/g1/tomcat/postgres-1.png" width="200" height="100"> <img src="static/2step/g1/tomcat/postgres-2.png" width="200" height="100">|
-| 3    | 460800|<img src="static/3step/g1/tomcat/tps.png" width="200" height="100"> |<img src="static/3step/g1/tomcat/rtot.png" width="200" height="100">|<img src="static/3step/g1/tomcat/hps.png" width="200" height="100">|<img src="static/3step/g1/tomcat/atot.png" width="200" height="100">|<img src="static/3step/g1/tomcat/node.png" width="200" height="100">|<img src="static/3step/g1/tomcat/jvm.png" width="200" height="100">|<img src="static/3step/g1/tomcat/hikari.png" width="200" height="100">|<img src="static/3step/g1/tomcat/postgres-1.png" width="200" height="100"> <img src="static/3step/g1/tomcat/postgres-2.png" width="200" height="100">|
-| 4    | 460800|<img src="static/4step/g1/tomcat/tps.png" width="200" height="100"> |<img src="static/4step/g1/tomcat/rtot.png" width="200" height="100">|<img src="static/4step/g1/tomcat/hps.png" width="200" height="100">|<img src="static/4step/g1/tomcat/atot.png" width="200" height="100">|<img src="static/4step/g1/tomcat/node.png" width="200" height="100">|<img src="static/4step/g1/tomcat/jvm.png" width="200" height="100">|<img src="static/4step/g1/tomcat/hikari.png" width="200" height="100">|<img src="static/4step/g1/tomcat/postgres-1.png" width="200" height="100"> <img src="static/4step/g1/tomcat/postgres-2.png" width="200" height="100">|
-| 5    | 460800|<img src="static/5step/g1/tomcat/tps.png" width="200" height="100"> |<img src="static/5step/g1/tomcat/rtot.png" width="200" height="100">|<img src="static/5step/g1/tomcat/hps.png" width="200" height="100">|<img src="static/5step/g1/tomcat/atot.png" width="200" height="100">|<img src="static/5step/g1/tomcat/node.png" width="200" height="100">|<img src="static/5step/g1/tomcat/jvm.png" width="200" height="100">|<img src="static/5step/g1/tomcat/hikari.png" width="200" height="100">|<img src="static/5step/g1/tomcat/postgres-1.png" width="200" height="100"> <img src="static/5step/g1/tomcat/postgres-2.png" width="200" height="100">|
+| 2    | TBD|<img src="static/2step/g1/tomcat/tps.png" width="200" height="100"> |<img src="static/2step/g1/tomcat/rtot.png" width="200" height="100">|<img src="static/2step/g1/tomcat/hps.png" width="200" height="100">|<img src="static/2step/g1/tomcat/atot.png" width="200" height="100">|<img src="static/2step/g1/tomcat/node.png" width="200" height="100">|<img src="static/2step/g1/tomcat/jvm.png" width="200" height="100">|<img src="static/2step/g1/tomcat/hikari.png" width="200" height="100">|<img src="static/2step/g1/tomcat/postgres-1.png" width="200" height="100"> <img src="static/2step/g1/tomcat/postgres-2.png" width="200" height="100">|
+| 3    | TDB|<img src="static/3step/g1/tomcat/tps.png" width="200" height="100"> |<img src="static/3step/g1/tomcat/rtot.png" width="200" height="100">|<img src="static/3step/g1/tomcat/hps.png" width="200" height="100">|<img src="static/3step/g1/tomcat/atot.png" width="200" height="100">|<img src="static/3step/g1/tomcat/node.png" width="200" height="100">|<img src="static/3step/g1/tomcat/jvm.png" width="200" height="100">|<img src="static/3step/g1/tomcat/hikari.png" width="200" height="100">|<img src="static/3step/g1/tomcat/postgres-1.png" width="200" height="100"> <img src="static/3step/g1/tomcat/postgres-2.png" width="200" height="100">|
+| 4    | TBD|<img src="static/4step/g1/tomcat/tps.png" width="200" height="100"> |<img src="static/4step/g1/tomcat/rtot.png" width="200" height="100">|<img src="static/4step/g1/tomcat/hps.png" width="200" height="100">|<img src="static/4step/g1/tomcat/atot.png" width="200" height="100">|<img src="static/4step/g1/tomcat/node.png" width="200" height="100">|<img src="static/4step/g1/tomcat/jvm.png" width="200" height="100">|<img src="static/4step/g1/tomcat/hikari.png" width="200" height="100">|<img src="static/4step/g1/tomcat/postgres-1.png" width="200" height="100"> <img src="static/4step/g1/tomcat/postgres-2.png" width="200" height="100">|
+| 5    | TBD|<img src="static/5step/g1/tomcat/tps.png" width="200" height="100"> |<img src="static/5step/g1/tomcat/rtot.png" width="200" height="100">|<img src="static/5step/g1/tomcat/hps.png" width="200" height="100">|<img src="static/5step/g1/tomcat/atot.png" width="200" height="100">|<img src="static/5step/g1/tomcat/node.png" width="200" height="100">|<img src="static/5step/g1/tomcat/jvm.png" width="200" height="100">|<img src="static/5step/g1/tomcat/hikari.png" width="200" height="100">|<img src="static/5step/g1/tomcat/postgres-1.png" width="200" height="100"> <img src="static/5step/g1/tomcat/postgres-2.png" width="200" height="100">|
 
 - ZGC
 
-| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
-| :--- | :---| :----| :----| :----| :------------|
-| 1    |     |      |      |      |              |
-| 2    |     |      |      |      |              |
-| 3    |     |      |      |      |              |
-| 4    |     |      |      |      |              |
-| 5    |     |      |      |      |              |
+| Step | TPWD  |TPS | RTOT |HPS  |ATOT | NODE| JVM  | HIKARI       | POSTGRES |
+| :--- | :-----|:---| :----|:----|:----|:----| :----| :------------|:---------|
+| 1    | TBD|<img src="static/1step/zgc/tomcat/tps.png" width="200" height="100"> |<img src="static/1step/zgc/tomcat/rtot.png" width="200" height="100">|<img src="static/1step/zgc/tomcat/hps.png" width="200" height="100">|<img src="static/1step/zgc/tomcat/atot.png" width="200" height="100">|<img src="static/1step/zgc/tomcat/node.png" width="200" height="100">|<img src="static/1step/zgc/tomcat/jvm.png" width="200" height="100">|<img src="static/1step/zgc/tomcat/hikari.png" width="200" height="100">|<img src="static/1step/zgc/tomcat/postgres-1.png" width="200" height="100"> <img src="static/1step/zgc/tomcat/postgres-2.png" width="200" height="100">|
+| 2    | TBD|<img src="static/2step/zgc/tomcat/tps.png" width="200" height="100"> |<img src="static/2step/zgc/tomcat/rtot.png" width="200" height="100">|<img src="static/2step/zgc/tomcat/hps.png" width="200" height="100">|<img src="static/2step/zgc/tomcat/atot.png" width="200" height="100">|<img src="static/2step/zgc/tomcat/node.png" width="200" height="100">|<img src="static/2step/zgc/tomcat/jvm.png" width="200" height="100">|<img src="static/2step/zgc/tomcat/hikari.png" width="200" height="100">|<img src="static/2step/zgc/tomcat/postgres-1.png" width="200" height="100"> <img src="static/2step/zgc/tomcat/postgres-2.png" width="200" height="100">|
+| 3    | TDB|<img src="static/3step/zgc/tomcat/tps.png" width="200" height="100"> |<img src="static/3step/zgc/tomcat/rtot.png" width="200" height="100">|<img src="static/3step/zgc/tomcat/hps.png" width="200" height="100">|<img src="static/3step/zgc/tomcat/atot.png" width="200" height="100">|<img src="static/3step/zgc/tomcat/node.png" width="200" height="100">|<img src="static/3step/zgc/tomcat/jvm.png" width="200" height="100">|<img src="static/3step/zgc/tomcat/hikari.png" width="200" height="100">|<img src="static/3step/zgc/tomcat/postgres-1.png" width="200" height="100"> <img src="static/3step/zgc/tomcat/postgres-2.png" width="200" height="100">|
+| 4    | TBD|<img src="static/4step/zgc/tomcat/tps.png" width="200" height="100"> |<img src="static/4step/zgc/tomcat/rtot.png" width="200" height="100">|<img src="static/4step/zgc/tomcat/hps.png" width="200" height="100">|<img src="static/4step/zgc/tomcat/atot.png" width="200" height="100">|<img src="static/4step/zgc/tomcat/node.png" width="200" height="100">|<img src="static/4step/zgc/tomcat/jvm.png" width="200" height="100">|<img src="static/4step/zgc/tomcat/hikari.png" width="200" height="100">|<img src="static/4step/zgc/tomcat/postgres-1.png" width="200" height="100"> <img src="static/4step/zgc/tomcat/postgres-2.png" width="200" height="100">|
+| 5    | TBD|<img src="static/5step/zgc/tomcat/tps.png" width="200" height="100"> |<img src="static/5step/zgc/tomcat/rtot.png" width="200" height="100">|<img src="static/5step/zgc/tomcat/hps.png" width="200" height="100">|<img src="static/5step/zgc/tomcat/atot.png" width="200" height="100">|<img src="static/5step/zgc/tomcat/node.png" width="200" height="100">|<img src="static/5step/zgc/tomcat/jvm.png" width="200" height="100">|<img src="static/5step/zgc/tomcat/hikari.png" width="200" height="100">|<img src="static/5step/zgc/tomcat/postgres-1.png" width="200" height="100"> <img src="static/5step/zgc/tomcat/postgres-2.png" width="200" height="100">|
 
 - SHENANDOAH GC
 
-| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
-| :--- | :---| :----| :----| :----| :------------|
-| 1    |     |      |      |      |              |
-| 2    |     |      |      |      |              |
-| 3    |     |      |      |      |              |
-| 4    |     |      |      |      |              |
-| 5    |     |      |      |      |              |
+| Step | TPWD  |TPS | RTOT |HPS  |ATOT | NODE| JVM  | HIKARI       | POSTGRES |
+| :--- | :-----|:---| :----|:----|:----|:----| :----| :------------|:---------|
+| 1    | TBD|<img src="static/1step/shenandoah/tomcat/tps.png" width="200" height="100"> |<img src="static/1step/shenandoah/tomcat/rtot.png" width="200" height="100">|<img src="static/1step/shenandoah/tomcat/hps.png" width="200" height="100">|<img src="static/1step/shenandoah/tomcat/atot.png" width="200" height="100">|<img src="static/1step/shenandoah/tomcat/node.png" width="200" height="100">|<img src="static/1step/shenandoah/tomcat/jvm.png" width="200" height="100">|<img src="static/1step/shenandoah/tomcat/hikari.png" width="200" height="100">|<img src="static/1step/shenandoah/tomcat/postgres-1.png" width="200" height="100"> <img src="static/1step/shenandoah/tomcat/postgres-2.png" width="200" height="100">|
+| 2    | TBD|<img src="static/2step/shenandoah/tomcat/tps.png" width="200" height="100"> |<img src="static/2step/shenandoah/tomcat/rtot.png" width="200" height="100">|<img src="static/2step/shenandoah/tomcat/hps.png" width="200" height="100">|<img src="static/2step/shenandoah/tomcat/atot.png" width="200" height="100">|<img src="static/2step/shenandoah/tomcat/node.png" width="200" height="100">|<img src="static/2step/shenandoah/tomcat/jvm.png" width="200" height="100">|<img src="static/2step/shenandoah/tomcat/hikari.png" width="200" height="100">|<img src="static/2step/shenandoah/tomcat/postgres-1.png" width="200" height="100"> <img src="static/2step/shenandoah/tomcat/postgres-2.png" width="200" height="100">|
+| 3    | TDB|<img src="static/3step/shenandoah/tomcat/tps.png" width="200" height="100"> |<img src="static/3step/shenandoah/tomcat/rtot.png" width="200" height="100">|<img src="static/3step/shenandoah/tomcat/hps.png" width="200" height="100">|<img src="static/3step/shenandoah/tomcat/atot.png" width="200" height="100">|<img src="static/3step/shenandoah/tomcat/node.png" width="200" height="100">|<img src="static/3step/shenandoah/tomcat/jvm.png" width="200" height="100">|<img src="static/3step/shenandoah/tomcat/hikari.png" width="200" height="100">|<img src="static/3step/shenandoah/tomcat/postgres-1.png" width="200" height="100"> <img src="static/3step/shenandoah/tomcat/postgres-2.png" width="200" height="100">|
+| 4    | TBD|<img src="static/4step/shenandoah/tomcat/tps.png" width="200" height="100"> |<img src="static/4step/shenandoah/tomcat/rtot.png" width="200" height="100">|<img src="static/4step/shenandoah/tomcat/hps.png" width="200" height="100">|<img src="static/4step/shenandoah/tomcat/atot.png" width="200" height="100">|<img src="static/4step/shenandoah/tomcat/node.png" width="200" height="100">|<img src="static/4step/shenandoah/tomcat/jvm.png" width="200" height="100">|<img src="static/4step/shenandoah/tomcat/hikari.png" width="200" height="100">|<img src="static/4step/shenandoah/tomcat/postgres-1.png" width="200" height="100"> <img src="static/4step/shenandoah/tomcat/postgres-2.png" width="200" height="100">|
+| 5    | TBD|<img src="static/5step/shenandoah/tomcat/tps.png" width="200" height="100"> |<img src="static/5step/shenandoah/tomcat/rtot.png" width="200" height="100">|<img src="static/5step/shenandoah/tomcat/hps.png" width="200" height="100">|<img src="static/5step/shenandoah/tomcat/atot.png" width="200" height="100">|<img src="static/5step/shenandoah/tomcat/node.png" width="200" height="100">|<img src="static/5step/shenandoah/tomcat/jvm.png" width="200" height="100">|<img src="static/5step/shenandoah/tomcat/hikari.png" width="200" height="100">|<img src="static/5step/shenandoah/tomcat/postgres-1.png" width="200" height="100"> <img src="static/5step/shenandoah/tomcat/postgres-2.png" width="200" height="100">|
 
 <h2>Jetty</h6>
 
 - G1
 
-| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
-| :--- | :---| :----| :----| :----| :------------|
-| 1    |     |      |      |      |              |
-| 2    |     |      |      |      |              |
-| 3    |     |      |      |      |              |
-| 4    |     |      |      |      |              |
-| 5    |     |      |      |      |              |
+| Step | TPWD  |TPS | RTOT |HPS  |ATOT | NODE| JVM  | HIKARI       | POSTGRES |
+| :--- | :-----|:---| :----|:----|:----|:----| :----| :------------|:---------|
+| 1    | TBD|<img src="static/1step/g1/jetty/tps.png" width="200" height="100"> |<img src="static/1step/g1/jetty/rtot.png" width="200" height="100">|<img src="static/1step/g1/jetty/hps.png" width="200" height="100">|<img src="static/1step/g1/jetty/atot.png" width="200" height="100">|<img src="static/1step/g1/jetty/node.png" width="200" height="100">|<img src="static/1step/g1/jetty/jvm.png" width="200" height="100">|<img src="static/1step/g1/jetty/hikari.png" width="200" height="100">|<img src="static/1step/g1/jetty/postgres-1.png" width="200" height="100"> <img src="static/1step/g1/jetty/postgres-2.png" width="200" height="100">|
+| 2    | TBD|<img src="static/2step/g1/jetty/tps.png" width="200" height="100"> |<img src="static/2step/g1/jetty/rtot.png" width="200" height="100">|<img src="static/2step/g1/jetty/hps.png" width="200" height="100">|<img src="static/2step/g1/jetty/atot.png" width="200" height="100">|<img src="static/2step/g1/jetty/node.png" width="200" height="100">|<img src="static/2step/g1/jetty/jvm.png" width="200" height="100">|<img src="static/2step/g1/jetty/hikari.png" width="200" height="100">|<img src="static/2step/g1/jetty/postgres-1.png" width="200" height="100"> <img src="static/2step/g1/jetty/postgres-2.png" width="200" height="100">|
+| 3    | TDB|<img src="static/3step/g1/jetty/tps.png" width="200" height="100"> |<img src="static/3step/g1/jetty/rtot.png" width="200" height="100">|<img src="static/3step/g1/jetty/hps.png" width="200" height="100">|<img src="static/3step/g1/jetty/atot.png" width="200" height="100">|<img src="static/3step/g1/jetty/node.png" width="200" height="100">|<img src="static/3step/g1/jetty/jvm.png" width="200" height="100">|<img src="static/3step/g1/jetty/hikari.png" width="200" height="100">|<img src="static/3step/g1/jetty/postgres-1.png" width="200" height="100"> <img src="static/3step/g1/jetty/postgres-2.png" width="200" height="100">|
+| 4    | TBD|<img src="static/4step/g1/jetty/tps.png" width="200" height="100"> |<img src="static/4step/g1/jetty/rtot.png" width="200" height="100">|<img src="static/4step/g1/jetty/hps.png" width="200" height="100">|<img src="static/4step/g1/jetty/atot.png" width="200" height="100">|<img src="static/4step/g1/jetty/node.png" width="200" height="100">|<img src="static/4step/g1/jetty/jvm.png" width="200" height="100">|<img src="static/4step/g1/jetty/hikari.png" width="200" height="100">|<img src="static/4step/g1/jetty/postgres-1.png" width="200" height="100"> <img src="static/4step/g1/jetty/postgres-2.png" width="200" height="100">|
+| 5    | TBD|<img src="static/5step/g1/jetty/tps.png" width="200" height="100"> |<img src="static/5step/g1/jetty/rtot.png" width="200" height="100">|<img src="static/5step/g1/jetty/hps.png" width="200" height="100">|<img src="static/5step/g1/jetty/atot.png" width="200" height="100">|<img src="static/5step/g1/jetty/node.png" width="200" height="100">|<img src="static/5step/g1/jetty/jvm.png" width="200" height="100">|<img src="static/5step/g1/jetty/hikari.png" width="200" height="100">|<img src="static/5step/g1/jetty/postgres-1.png" width="200" height="100"> <img src="static/5step/g1/jetty/postgres-2.png" width="200" height="100">|
 
 - ZGC
 
-| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
-| :--- | :---| :----| :----| :----| :------------|
-| 1    |     |      |      |      |              |
-| 2    |     |      |      |      |              |
-| 3    |     |      |      |      |              |
-| 4    |     |      |      |      |              |
-| 5    |     |      |      |      |              |
+| Step | TPWD  |TPS | RTOT |HPS  |ATOT | NODE| JVM  | HIKARI       | POSTGRES |
+| :--- | :-----|:---| :----|:----|:----|:----| :----| :------------|:---------|
+| 1    | TBD|<img src="static/1step/zgc/jetty/tps.png" width="200" height="100"> |<img src="static/1step/zgc/jetty/rtot.png" width="200" height="100">|<img src="static/1step/zgc/jetty/hps.png" width="200" height="100">|<img src="static/1step/zgc/jetty/atot.png" width="200" height="100">|<img src="static/1step/zgc/jetty/node.png" width="200" height="100">|<img src="static/1step/zgc/jetty/jvm.png" width="200" height="100">|<img src="static/1step/zgc/jetty/hikari.png" width="200" height="100">|<img src="static/1step/zgc/jetty/postgres-1.png" width="200" height="100"> <img src="static/1step/zgc/jetty/postgres-2.png" width="200" height="100">|
+| 2    | TBD|<img src="static/2step/zgc/jetty/tps.png" width="200" height="100"> |<img src="static/2step/zgc/jetty/rtot.png" width="200" height="100">|<img src="static/2step/zgc/jetty/hps.png" width="200" height="100">|<img src="static/2step/zgc/jetty/atot.png" width="200" height="100">|<img src="static/2step/zgc/jetty/node.png" width="200" height="100">|<img src="static/2step/zgc/jetty/jvm.png" width="200" height="100">|<img src="static/2step/zgc/jetty/hikari.png" width="200" height="100">|<img src="static/2step/zgc/jetty/postgres-1.png" width="200" height="100"> <img src="static/2step/zgc/jetty/postgres-2.png" width="200" height="100">|
+| 3    | TDB|<img src="static/3step/zgc/jetty/tps.png" width="200" height="100"> |<img src="static/3step/zgc/jetty/rtot.png" width="200" height="100">|<img src="static/3step/zgc/jetty/hps.png" width="200" height="100">|<img src="static/3step/zgc/jetty/atot.png" width="200" height="100">|<img src="static/3step/zgc/jetty/node.png" width="200" height="100">|<img src="static/3step/zgc/jetty/jvm.png" width="200" height="100">|<img src="static/3step/zgc/jetty/hikari.png" width="200" height="100">|<img src="static/3step/zgc/jetty/postgres-1.png" width="200" height="100"> <img src="static/3step/zgc/jetty/postgres-2.png" width="200" height="100">|
+| 4    | TBD|<img src="static/4step/zgc/jetty/tps.png" width="200" height="100"> |<img src="static/4step/zgc/jetty/rtot.png" width="200" height="100">|<img src="static/4step/zgc/jetty/hps.png" width="200" height="100">|<img src="static/4step/zgc/jetty/atot.png" width="200" height="100">|<img src="static/4step/zgc/jetty/node.png" width="200" height="100">|<img src="static/4step/zgc/jetty/jvm.png" width="200" height="100">|<img src="static/4step/zgc/jetty/hikari.png" width="200" height="100">|<img src="static/4step/zgc/jetty/postgres-1.png" width="200" height="100"> <img src="static/4step/zgc/jetty/postgres-2.png" width="200" height="100">|
+| 5    | TBD|<img src="static/5step/zgc/jetty/tps.png" width="200" height="100"> |<img src="static/5step/zgc/jetty/rtot.png" width="200" height="100">|<img src="static/5step/zgc/jetty/hps.png" width="200" height="100">|<img src="static/5step/zgc/jetty/atot.png" width="200" height="100">|<img src="static/5step/zgc/jetty/node.png" width="200" height="100">|<img src="static/5step/zgc/jetty/jvm.png" width="200" height="100">|<img src="static/5step/zgc/jetty/hikari.png" width="200" height="100">|<img src="static/5step/zgc/jetty/postgres-1.png" width="200" height="100"> <img src="static/5step/zgc/jetty/postgres-2.png" width="200" height="100">|
 
 - SHENANDOAH GC
 
-| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
-| :--- | :---| :----| :----| :----| :------------|
-| 1    |     |      |      |      |              |
-| 2    |     |      |      |      |              |
-| 3    |     |      |      |      |              |
-| 4    |     |      |      |      |              |
-| 5    |     |      |      |      |              |
+| Step | TPWD  |TPS | RTOT |HPS  |ATOT | NODE| JVM  | HIKARI       | POSTGRES |
+| :--- | :-----|:---| :----|:----|:----|:----| :----| :------------|:---------|
+| 1    | TBD|<img src="static/1step/shenandoah/jetty/tps.png" width="200" height="100"> |<img src="static/1step/shenandoah/jetty/rtot.png" width="200" height="100">|<img src="static/1step/shenandoah/jetty/hps.png" width="200" height="100">|<img src="static/1step/shenandoah/jetty/atot.png" width="200" height="100">|<img src="static/1step/shenandoah/jetty/node.png" width="200" height="100">|<img src="static/1step/shenandoah/jetty/jvm.png" width="200" height="100">|<img src="static/1step/shenandoah/jetty/hikari.png" width="200" height="100">|<img src="static/1step/shenandoah/jetty/postgres-1.png" width="200" height="100"> <img src="static/1step/shenandoah/jetty/postgres-2.png" width="200" height="100">|
+| 2    | TBD|<img src="static/2step/shenandoah/jetty/tps.png" width="200" height="100"> |<img src="static/2step/shenandoah/jetty/rtot.png" width="200" height="100">|<img src="static/2step/shenandoah/jetty/hps.png" width="200" height="100">|<img src="static/2step/shenandoah/jetty/atot.png" width="200" height="100">|<img src="static/2step/shenandoah/jetty/node.png" width="200" height="100">|<img src="static/2step/shenandoah/jetty/jvm.png" width="200" height="100">|<img src="static/2step/shenandoah/jetty/hikari.png" width="200" height="100">|<img src="static/2step/shenandoah/jetty/postgres-1.png" width="200" height="100"> <img src="static/2step/shenandoah/jetty/postgres-2.png" width="200" height="100">|
+| 3    | TDB|<img src="static/3step/shenandoah/jetty/tps.png" width="200" height="100"> |<img src="static/3step/shenandoah/jetty/rtot.png" width="200" height="100">|<img src="static/3step/shenandoah/jetty/hps.png" width="200" height="100">|<img src="static/3step/shenandoah/jetty/atot.png" width="200" height="100">|<img src="static/3step/shenandoah/jetty/node.png" width="200" height="100">|<img src="static/3step/shenandoah/jetty/jvm.png" width="200" height="100">|<img src="static/3step/shenandoah/jetty/hikari.png" width="200" height="100">|<img src="static/3step/shenandoah/jetty/postgres-1.png" width="200" height="100"> <img src="static/3step/shenandoah/jetty/postgres-2.png" width="200" height="100">|
+| 4    | TBD|<img src="static/4step/shenandoah/jetty/tps.png" width="200" height="100"> |<img src="static/4step/shenandoah/jetty/rtot.png" width="200" height="100">|<img src="static/4step/shenandoah/jetty/hps.png" width="200" height="100">|<img src="static/4step/shenandoah/jetty/atot.png" width="200" height="100">|<img src="static/4step/shenandoah/jetty/node.png" width="200" height="100">|<img src="static/4step/shenandoah/jetty/jvm.png" width="200" height="100">|<img src="static/4step/shenandoah/jetty/hikari.png" width="200" height="100">|<img src="static/4step/shenandoah/jetty/postgres-1.png" width="200" height="100"> <img src="static/4step/shenandoah/jetty/postgres-2.png" width="200" height="100">|
+| 5    | TBD|<img src="static/5step/shenandoah/jetty/tps.png" width="200" height="100"> |<img src="static/5step/shenandoah/jetty/rtot.png" width="200" height="100">|<img src="static/5step/shenandoah/jetty/hps.png" width="200" height="100">|<img src="static/5step/shenandoah/jetty/atot.png" width="200" height="100">|<img src="static/5step/shenandoah/jetty/node.png" width="200" height="100">|<img src="static/5step/shenandoah/jetty/jvm.png" width="200" height="100">|<img src="static/5step/shenandoah/jetty/hikari.png" width="200" height="100">|<img src="static/5step/shenandoah/jetty/postgres-1.png" width="200" height="100"> <img src="static/5step/shenandoah/jetty/postgres-2.png" width="200" height="100">|
 
 <h2>Undertow</h6>
 
 - G1
 
-| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
-| :--- | :---| :----| :----| :----| :------------|
-| 1    |     |      |      |      |              |
-| 2    |     |      |      |      |              |
-| 3    |     |      |      |      |              |
-| 4    |     |      |      |      |              |
-| 5    |     |      |      |      |              |
+| Step | TPWD  |TPS | RTOT |HPS  |ATOT | NODE| JVM  | HIKARI       | POSTGRES |
+| :--- | :-----|:---| :----|:----|:----|:----| :----| :------------|:---------|
+| 1    | TBD|<img src="static/1step/g1/undertow/tps.png" width="200" height="100"> |<img src="static/1step/g1/undertow/rtot.png" width="200" height="100">|<img src="static/1step/g1/undertow/hps.png" width="200" height="100">|<img src="static/1step/g1/undertow/atot.png" width="200" height="100">|<img src="static/1step/g1/undertow/node.png" width="200" height="100">|<img src="static/1step/g1/undertow/jvm.png" width="200" height="100">|<img src="static/1step/g1/undertow/hikari.png" width="200" height="100">|<img src="static/1step/g1/undertow/postgres-1.png" width="200" height="100"> <img src="static/1step/g1/undertow/postgres-2.png" width="200" height="100">|
+| 2    | TBD|<img src="static/2step/g1/undertow/tps.png" width="200" height="100"> |<img src="static/2step/g1/undertow/rtot.png" width="200" height="100">|<img src="static/2step/g1/undertow/hps.png" width="200" height="100">|<img src="static/2step/g1/undertow/atot.png" width="200" height="100">|<img src="static/2step/g1/undertow/node.png" width="200" height="100">|<img src="static/2step/g1/undertow/jvm.png" width="200" height="100">|<img src="static/2step/g1/undertow/hikari.png" width="200" height="100">|<img src="static/2step/g1/undertow/postgres-1.png" width="200" height="100"> <img src="static/2step/g1/undertow/postgres-2.png" width="200" height="100">|
+| 3    | TDB|<img src="static/3step/g1/undertow/tps.png" width="200" height="100"> |<img src="static/3step/g1/undertow/rtot.png" width="200" height="100">|<img src="static/3step/g1/undertow/hps.png" width="200" height="100">|<img src="static/3step/g1/undertow/atot.png" width="200" height="100">|<img src="static/3step/g1/undertow/node.png" width="200" height="100">|<img src="static/3step/g1/undertow/jvm.png" width="200" height="100">|<img src="static/3step/g1/undertow/hikari.png" width="200" height="100">|<img src="static/3step/g1/undertow/postgres-1.png" width="200" height="100"> <img src="static/3step/g1/undertow/postgres-2.png" width="200" height="100">|
+| 4    | TBD|<img src="static/4step/g1/undertow/tps.png" width="200" height="100"> |<img src="static/4step/g1/undertow/rtot.png" width="200" height="100">|<img src="static/4step/g1/undertow/hps.png" width="200" height="100">|<img src="static/4step/g1/undertow/atot.png" width="200" height="100">|<img src="static/4step/g1/undertow/node.png" width="200" height="100">|<img src="static/4step/g1/undertow/jvm.png" width="200" height="100">|<img src="static/4step/g1/undertow/hikari.png" width="200" height="100">|<img src="static/4step/g1/undertow/postgres-1.png" width="200" height="100"> <img src="static/4step/g1/undertow/postgres-2.png" width="200" height="100">|
+| 5    | TBD|<img src="static/5step/g1/undertow/tps.png" width="200" height="100"> |<img src="static/5step/g1/undertow/rtot.png" width="200" height="100">|<img src="static/5step/g1/undertow/hps.png" width="200" height="100">|<img src="static/5step/g1/undertow/atot.png" width="200" height="100">|<img src="static/5step/g1/undertow/node.png" width="200" height="100">|<img src="static/5step/g1/undertow/jvm.png" width="200" height="100">|<img src="static/5step/g1/undertow/hikari.png" width="200" height="100">|<img src="static/5step/g1/undertow/postgres-1.png" width="200" height="100"> <img src="static/5step/g1/undertow/postgres-2.png" width="200" height="100">|
 
 - ZGC
 
-| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
-| :--- | :---| :----| :----| :----| :------------|
-| 1    |     |      |      |      |              |
-| 2    |     |      |      |      |              |
-| 3    |     |      |      |      |              |
-| 4    |     |      |      |      |              |
-| 5    |     |      |      |      |              |
+| Step | TPWD  |TPS | RTOT |HPS  |ATOT | NODE| JVM  | HIKARI       | POSTGRES |
+| :--- | :-----|:---| :----|:----|:----|:----| :----| :------------|:---------|
+| 1    | TBD|<img src="static/1step/zgc/undertow/tps.png" width="200" height="100"> |<img src="static/1step/zgc/undertow/rtot.png" width="200" height="100">|<img src="static/1step/zgc/undertow/hps.png" width="200" height="100">|<img src="static/1step/zgc/undertow/atot.png" width="200" height="100">|<img src="static/1step/zgc/undertow/node.png" width="200" height="100">|<img src="static/1step/zgc/undertow/jvm.png" width="200" height="100">|<img src="static/1step/zgc/undertow/hikari.png" width="200" height="100">|<img src="static/1step/zgc/undertow/postgres-1.png" width="200" height="100"> <img src="static/1step/zgc/undertow/postgres-2.png" width="200" height="100">|
+| 2    | TBD|<img src="static/2step/zgc/undertow/tps.png" width="200" height="100"> |<img src="static/2step/zgc/undertow/rtot.png" width="200" height="100">|<img src="static/2step/zgc/undertow/hps.png" width="200" height="100">|<img src="static/2step/zgc/undertow/atot.png" width="200" height="100">|<img src="static/2step/zgc/undertow/node.png" width="200" height="100">|<img src="static/2step/zgc/undertow/jvm.png" width="200" height="100">|<img src="static/2step/zgc/undertow/hikari.png" width="200" height="100">|<img src="static/2step/zgc/undertow/postgres-1.png" width="200" height="100"> <img src="static/2step/zgc/undertow/postgres-2.png" width="200" height="100">|
+| 3    | TDB|<img src="static/3step/zgc/undertow/tps.png" width="200" height="100"> |<img src="static/3step/zgc/undertow/rtot.png" width="200" height="100">|<img src="static/3step/zgc/undertow/hps.png" width="200" height="100">|<img src="static/3step/zgc/undertow/atot.png" width="200" height="100">|<img src="static/3step/zgc/undertow/node.png" width="200" height="100">|<img src="static/3step/zgc/undertow/jvm.png" width="200" height="100">|<img src="static/3step/zgc/undertow/hikari.png" width="200" height="100">|<img src="static/3step/zgc/undertow/postgres-1.png" width="200" height="100"> <img src="static/3step/zgc/undertow/postgres-2.png" width="200" height="100">|
+| 4    | TBD|<img src="static/4step/zgc/undertow/tps.png" width="200" height="100"> |<img src="static/4step/zgc/undertow/rtot.png" width="200" height="100">|<img src="static/4step/zgc/undertow/hps.png" width="200" height="100">|<img src="static/4step/zgc/undertow/atot.png" width="200" height="100">|<img src="static/4step/zgc/undertow/node.png" width="200" height="100">|<img src="static/4step/zgc/undertow/jvm.png" width="200" height="100">|<img src="static/4step/zgc/undertow/hikari.png" width="200" height="100">|<img src="static/4step/zgc/undertow/postgres-1.png" width="200" height="100"> <img src="static/4step/zgc/undertow/postgres-2.png" width="200" height="100">|
+| 5    | TBD|<img src="static/5step/zgc/undertow/tps.png" width="200" height="100"> |<img src="static/5step/zgc/undertow/rtot.png" width="200" height="100">|<img src="static/5step/zgc/undertow/hps.png" width="200" height="100">|<img src="static/5step/zgc/undertow/atot.png" width="200" height="100">|<img src="static/5step/zgc/undertow/node.png" width="200" height="100">|<img src="static/5step/zgc/undertow/jvm.png" width="200" height="100">|<img src="static/5step/zgc/undertow/hikari.png" width="200" height="100">|<img src="static/5step/zgc/undertow/postgres-1.png" width="200" height="100"> <img src="static/5step/zgc/undertow/postgres-2.png" width="200" height="100">|
 
 - SHENANDOAH GC
 
-| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  |
-| :--- | :---| :----| :----| :----| :------------|
-| 1    |     |      |      |      |              |
-| 2    |     |      |      |      |              |
-| 3    |     |      |      |      |              |
-| 4    |     |      |      |      |              |
-| 5    |     |      |      |      |              |
+| Step | TPWD  |TPS | RTOT |HPS  |ATOT | NODE| JVM  | HIKARI       | POSTGRES |
+| :--- | :-----|:---| :----|:----|:----|:----| :----| :------------|:---------|
+| 1    | TBD|<img src="static/1step/shenandoah/undertow/tps.png" width="200" height="100"> |<img src="static/1step/shenandoah/undertow/rtot.png" width="200" height="100">|<img src="static/1step/shenandoah/undertow/hps.png" width="200" height="100">|<img src="static/1step/shenandoah/undertow/atot.png" width="200" height="100">|<img src="static/1step/shenandoah/undertow/node.png" width="200" height="100">|<img src="static/1step/shenandoah/undertow/jvm.png" width="200" height="100">|<img src="static/1step/shenandoah/undertow/hikari.png" width="200" height="100">|<img src="static/1step/shenandoah/undertow/postgres-1.png" width="200" height="100"> <img src="static/1step/shenandoah/undertow/postgres-2.png" width="200" height="100">|
+| 2    | TBD|<img src="static/2step/shenandoah/undertow/tps.png" width="200" height="100"> |<img src="static/2step/shenandoah/undertow/rtot.png" width="200" height="100">|<img src="static/2step/shenandoah/undertow/hps.png" width="200" height="100">|<img src="static/2step/shenandoah/undertow/atot.png" width="200" height="100">|<img src="static/2step/shenandoah/undertow/node.png" width="200" height="100">|<img src="static/2step/shenandoah/undertow/jvm.png" width="200" height="100">|<img src="static/2step/shenandoah/undertow/hikari.png" width="200" height="100">|<img src="static/2step/shenandoah/undertow/postgres-1.png" width="200" height="100"> <img src="static/2step/shenandoah/undertow/postgres-2.png" width="200" height="100">|
+| 3    | TDB|<img src="static/3step/shenandoah/undertow/tps.png" width="200" height="100"> |<img src="static/3step/shenandoah/undertow/rtot.png" width="200" height="100">|<img src="static/3step/shenandoah/undertow/hps.png" width="200" height="100">|<img src="static/3step/shenandoah/undertow/atot.png" width="200" height="100">|<img src="static/3step/shenandoah/undertow/node.png" width="200" height="100">|<img src="static/3step/shenandoah/undertow/jvm.png" width="200" height="100">|<img src="static/3step/shenandoah/undertow/hikari.png" width="200" height="100">|<img src="static/3step/shenandoah/undertow/postgres-1.png" width="200" height="100"> <img src="static/3step/shenandoah/undertow/postgres-2.png" width="200" height="100">|
+| 4    | TBD|<img src="static/4step/shenandoah/undertow/tps.png" width="200" height="100"> |<img src="static/4step/shenandoah/undertow/rtot.png" width="200" height="100">|<img src="static/4step/shenandoah/undertow/hps.png" width="200" height="100">|<img src="static/4step/shenandoah/undertow/atot.png" width="200" height="100">|<img src="static/4step/shenandoah/undertow/node.png" width="200" height="100">|<img src="static/4step/shenandoah/undertow/jvm.png" width="200" height="100">|<img src="static/4step/shenandoah/undertow/hikari.png" width="200" height="100">|<img src="static/4step/shenandoah/undertow/postgres-1.png" width="200" height="100"> <img src="static/4step/shenandoah/undertow/postgres-2.png" width="200" height="100">|
+| 5    | TBD|<img src="static/5step/shenandoah/undertow/tps.png" width="200" height="100"> |<img src="static/5step/shenandoah/undertow/rtot.png" width="200" height="100">|<img src="static/5step/shenandoah/undertow/hps.png" width="200" height="100">|<img src="static/5step/shenandoah/undertow/atot.png" width="200" height="100">|<img src="static/5step/shenandoah/undertow/node.png" width="200" height="100">|<img src="static/5step/shenandoah/undertow/jvm.png" width="200" height="100">|<img src="static/5step/shenandoah/undertow/hikari.png" width="200" height="100">|<img src="static/5step/shenandoah/undertow/postgres-1.png" width="200" height="100"> <img src="static/5step/shenandoah/undertow/postgres-2.png" width="200" height="100">|
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -406,8 +406,8 @@ Now we will take a look at boot-up metrics on different embedded web servers.
 Due to the fact, that we are using fewer libraries than the default HFJS starter it decreases the boot time up to 2 times.
 
 | Step | Tomcat   | Jetty    | Undertow |
-| :--- | :------- | :------- | :------- | 
-| 1    | 79.514s  |          |          |
+| :---:| :------: | :------: | :------: | 
+| 1    | ~ 80s    |          |          |
 | 2    |          |          |          |
 | 3    |          |          |          |
 | 4    |          |          |          |
@@ -430,53 +430,35 @@ Actually, it increases the build time in few seconds, but every cloud has a silv
 
 - [ ] JDK 11 vs JDK 17
 
-- G1
+| Step | GC           | TPWD  |TPS | RTOT |HPS  |ATOT | NODE| JVM  | HIKARI       | POSTGRES |
+| :--- |:-------------| :-----|:---| :----|:----|:----|:----| :----| :------------|:---------|
+| 5    | G1           | TBD|<img src="static/jdk17/g1/tps.png" width="200" height="100"> |<img src="static/jdk17/g1/rtot.png" width="200" height="100">|<img src="static/jdk17/g1/hps.png" width="200" height="100">|<img src="static/jdk17/g1/atot.png" width="200" height="100">|<img src="static/jdk17/g1/node.png" width="200" height="100">|<img src="static/jdk17/g1/jvm.png" width="200" height="100">|<img src="static/jdk17/g1/hikari.png" width="200" height="100">|<img src="static/jdk17/g1/postgres-1.png" width="200" height="100"> <img src="static/jdk17/g1/postgres-2.png" width="200" height="100">|
+| 5    | ZGC          | TBD|<img src="static/jdk17/zgc/tps.png" width="200" height="100"> |<img src="static/jdk17/zgc/rtot.png" width="200" height="100">|<img src="static/jdk17/zgc/hps.png" width="200" height="100">|<img src="static/jdk17/zgc/atot.png" width="200" height="100">|<img src="static/jdk17/zgc/node.png" width="200" height="100">|<img src="static/jdk17/zgc/jvm.png" width="200" height="100">|<img src="static/jdk17/zgc/hikari.png" width="200" height="100">|<img src="static/jdk17/zgc/postgres-1.png" width="200" height="100"> <img src="static/jdk17/zgc/postgres-2.png" width="200" height="100">|
+| 5    | SHENANDOAH   | TBD|<img src="static/jdk17/shenandoah/tps.png" width="200" height="100"> |<img src="static/jdk17/shenandoah/rtot.png" width="200" height="100">|<img src="static/jdk17/shenandoah/hps.png" width="200" height="100">|<img src="static/jdk17/shenandoah/atot.png" width="200" height="100">|<img src="static/jdk17/shenandoah/node.png" width="200" height="100">|<img src="static/jdk17/shenandoah/jvm.png" width="200" height="100">|<img src="static/jdk17/shenandoah/hikari.png" width="200" height="100">|<img src="static/jdk17/shenandoah/postgres-1.png" width="200" height="100"> <img src="static/jdk17/shenandoah/postgres-2.png" width="200" height="100">|
 
-| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  | Boot-up time |
-| :--- | :---| :----| :----| :----| :------------| :------------|
-| 1    |     |      |      |      |              |              |
-| 2    |     |      |      |      |              |              |
-| 3    |     |      |      |      |              |              |
-| 4    |     |      |      |      |              |              |
-| 5    |     |      |      |      |              |              |
+- [ ] Compare JDK 11 and JDK 17
+- [ ] Migrate to POSTGRES 14
 
-- ZGC
-
-| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  | Boot-up time |
-| :--- | :---| :----| :----| :----| :------------| :------------|
-| 1    |     |      |      |      |              |              |
-| 2    |     |      |      |      |              |              |
-| 3    |     |      |      |      |              |              |
-| 4    |     |      |      |      |              |              |
-| 5    |     |      |      |      |              |              |
-
-- SHENANDOAH GC
-
-| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  | Boot-up time |
-| :--- | :---| :----| :----| :----| :------------| :------------|
-| 1    |     |      |      |      |              |              |
-| 2    |     |      |      |      |              |              |
-| 3    |     |      |      |      |              |              |
-| 4    |     |      |      |      |              |              |
-| 5    |     |      |      |      |              |              |
-
-- [ ] Migrate to Postgres 14
-
-The final fight is migration from Postgres 13.3 to [Postgres 14.0](https://www.postgresql.org/docs/release/14.0/) due to having a lot of performance tunings, such as:
+  The final fight is migration from Postgres 13.3 to [Postgres 14.0](https://www.postgresql.org/docs/release/14.0/) due to having a lot of performance tunings, such as:
 - Numerous performance improvements have been made for parallel queries, heavily-concurrent workloads, partitioned tables, logical replication, and vacuuming;
-- B-tree index updates are managed more efficiently, reducing index bloat; 
+- B-tree index updates are managed more efficiently, reducing index bloat;
 - VACUUM automatically becomes more aggressive, and skips inessential cleanup, if the database starts to approach a transaction ID wraparound condition.
 
+| Step | GC           | TPWD  |TPS | RTOT |HPS  |ATOT | NODE| JVM  | HIKARI       | POSTGRES |
+| :--- |:-------------| :-----|:---| :----|:----|:----|:----| :----| :------------|:---------|
+| 5    | TBD          | TBD|<img src="static/postgres14/tps.png" width="200" height="100"> |<img src="static/postgres14/rtot.png" width="200" height="100">|<img src="static/postgres14/hps.png" width="200" height="100">|<img src="static/postgres14/atot.png" width="200" height="100">|<img src="static/postgres14/node.png" width="200" height="100">|<img src="static/postgres14/jvm.png" width="200" height="100">|<img src="static/postgres14/hikari.png" width="200" height="100">|<img src="static/postgres14/postgres-1.png" width="200" height="100"> <img src="static/postgres14/postgres-2.png" width="200" height="100">|
+
+- [ ] Compare POSTGRES 13 and POSTGRES 14
 
 - [ ] Try to build it with GraalVM
 
-| Step | RPS | TPWD | RAM  | CPU  | JVM Metrics  | Boot-up time |
-| :--- | :---| :----| :----| :----| :------------| :------------|
-| 1    |     |      |      |      |              |              |
-| 2    |     |      |      |      |              |              |
-| 3    |     |      |      |      |              |              |
-| 4    |     |      |      |      |              |              |
-| 5    |     |      |      |      |              |              |
+| Step | GC           | TPWD  |TPS | RTOT |HPS  |ATOT | NODE| JVM  | HIKARI       | POSTGRES |
+| :--- |:-------------| :-----|:---| :----|:----|:----|:----| :----| :------------|:---------|
+| 5    |              | TBD   |<img src="static/graalvm/tps.png" width="200" height="100"> |<img src="static/graalvm/rtot.png" width="200" height="100">|<img src="static/graalvm/hps.png" width="200" height="100">|<img src="static/graalvm/atot.png" width="200" height="100">|<img src="static/graalvm/node.png" width="200" height="100">|<img src="static/graalvm/jvm.png" width="200" height="100">|<img src="static/graalvm/hikari.png" width="200" height="100">|<img src="static/graalvm/postgres-1.png" width="200" height="100"> <img src="static/graalvm/postgres-2.png" width="200" height="100">|
+
+- [ ] Compare JDK best choice and GRAALVM
+
+- [ ] Most comfortable setup for application
 
 Thank you.
 
