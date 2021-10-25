@@ -313,12 +313,6 @@ Please, take a look at abbreviations I will use in the next tables:
 |:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
 |1   |432000                      | 15                    |~80                     | ~44           |~0.400  |~8,5          |~32                 |~1,93         |~241              |~15        |~105 (24 runnable, 40 waiting, 54 timed-waiting)|6 active, 22 idle|38 usage, 62 creation           |max: 516, avg: 247               |max: 56,98, avg: 19,39ms               |
 
-- SHENANDOAH GC
-
-|Step|TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
-|:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|1   |                      |                    |                    |            |  |            |                 |         |              |        ||| | | |
-
 <h2>Jetty</h6>
 
 - G1
@@ -331,13 +325,7 @@ Please, take a look at abbreviations I will use in the next tables:
 
 |Step|TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
 |:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|1   |                      |                    |                    |            |  |            |                 |         |              |        ||| | | |
-
-- SHENANDOAH GC
-
-|Step|TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
-|:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|1   |                      |                    |                    |            |  |            |                 |         |              |        ||| | | |
+|1   |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
 
 <h2>Undertow</h6>
 
@@ -351,13 +339,7 @@ Please, take a look at abbreviations I will use in the next tables:
 
 |Step|TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
 |:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|1   |                      |                    |                    |            |  |            |                 |         |              |        ||| | | |
-
-- SHENANDOAH GC
-
-|Step|TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
-|:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|1   |                      |                    |                    |            |  |            |                 |         |              |        ||| | | |
+|1   |576000                      | 18                    |~50                     | ~43           |~0.250  |~3,5          |~31                 |~3,83         |~256              |~10        |~89 (27 runnable, 38 waiting, 42 timed-waiting) |7 active, 15 idle|13 usage, 20 creation           |max: 684, avg: 350               |max: 120,63, avg: 33,09ms              |
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -370,7 +352,7 @@ Due to the fact, that we are using fewer libraries than the default HFJS starter
 
 | Step | Tomcat   | Jetty    | Undertow |
 | :---:| :------: | :------: | :------: | 
-| 1    | ~ 70s    |   ~45s   |  ~ 40s   |
+| 1    | ~ 65s    |   ~49s   |  ~ 45s   |
 | 2    |          |          |          |
 | 3    |          |          |          |
 | 4    |          |          |          |
@@ -399,6 +381,13 @@ Actually, it increases the build time in few seconds, but every cloud has a silv
 | :---- |:------| :-----|:---| :---------|:----|:----|:---------| :--------------| :------------|:----------------|:-------------------| :-----------|:--------------|
 | 11    |       | |  |       |  |  |   |              |           |            |                |          |  |            |
 | 17    |       | |  |       |  |  |   |              |           |            |                |          |  |            |
+
+- [ ] Compare with Shenandoah
+
+| JDK   |GC TYPE| TPWD  |TPS | RTOT (ms) |HPS  |ATOT | NODE CPU | NODE RAM (GiB) | JVM RATE MAX | JVM HEAP (GiB)  | JVM NON-HEAP (Mib) | JVM CPU (%) | THREADS (MAX) |
+| :---- |:------| :-----|:---| :---------|:----|:----|:---------| :--------------| :------------|:----------------|:-------------------| :-----------|:--------------|
+| TBD   |TBD    | |  |       |  |  |   |              |           |            |                |          |  |            |
+| TBD   |TBD    | |  |       |  |  |   |              |           |            |                |          |  |            |
 
 - [ ] Compare POSTGRES 13 with POSTGRES 14
 
