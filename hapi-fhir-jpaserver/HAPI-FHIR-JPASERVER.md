@@ -311,7 +311,7 @@ Please, take a look at abbreviations I will use in the next tables:
 
 |Step|TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
 |:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|1   |460800                      | 16                    |~100                    | ~35           |~0.400  |~5            |~31                 |~3,20         |~275              |~20        |~94 (25 runnable, 40 waiting, 45 timed-waiting) |9 active, 15 idle|38 usage, 62 creation           |max: 475, avg: 185               |max: 50,76, avg: 14,04ms               |
+|1   |432000                      | 15                    |~80                     | ~44           |~0.400  |~8,5          |~32                 |~1,93         |~241              |~15        |~105 (24 runnable, 40 waiting, 54 timed-waiting)|6 active, 22 idle|38 usage, 62 creation           |max: 516, avg: 247               |max: 56,98, avg: 19,39ms               |
 
 - SHENANDOAH GC
 
