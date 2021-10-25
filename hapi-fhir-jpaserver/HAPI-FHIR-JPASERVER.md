@@ -389,14 +389,12 @@ The dataset same for step 5.
 |13.3      |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
 |14.?      |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
 
-- [ ] Try to build it with GraalVM
+- [ ] Compare JDK best choice and GRAALVM
 
 |APP TYPE  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
 |:---------|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
 |SB        |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
 |GRAALVM   |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
-
-- [ ] Compare JDK best choice and GRAALVM
 
 - [ ] Most comfortable setup for application
 
