@@ -62,7 +62,16 @@ So, we stopped on the next setup, in my honest opinion, this is the minimum requ
 
 For compile and build processes we are using `JDK 11, Gradle 7.2.` We've took a useful for us parts of HFJSS, such as `ca.uhn.hapi.fhir:hapi-fhir-base, ca.uhn.hapi.fhir:hapi-fhir-jpaserver-base, ca.uhn.hapi.fhir:hapi-fhir-validation, ca.uhn.hapi.fhir:hapi-fhir-structures-r4, ca.uhn.hapi.fhir:hapi-fhir-validation-resources-r4`.
 And we build our own theme park, with blackjack and hO_okers.
-
+The versions of used libs:
+```properties
+hapi_fhir_version=5.5.2
+logback_version=0.1.5
+hikari_version=5.0.0
+micrometer_version=1.7.5
+spring_version=2.5.6
+spring_cloud_version=2020.0.4
+spring_dependency_management_version=1.0.11.RELEASE
+```
 The basic configuration for HFJSS had been tuned a bit, mostly tuning affected pools and workers, some searching, validation, and reindexing settings.
 If you are not a lot familiar with hikari pool tuning, there is a [great article](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing) about pool sizing. Long story short,
 The `application.yaml` file with basic settings that could be useful for you has the next structure:
