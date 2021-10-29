@@ -305,7 +305,7 @@ Please, take a look at abbreviations I will use in the next tables:
 
 |GC  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
 |:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|G1  |460800                      | 16                    |~100                    | ~35           |~0.400  |~5            |~31                 |~3,20         |~275              |~20        |~94 (25 runnable, 40 waiting, 45 timed-waiting) |9 active, 15 idle|38 usage, 62 creation           |max: 475, avg: 185               |max: 50,76, avg: 14,04                 |
+|G1  |460800                      | 16                    |~100                    | ~35           |~0.360  |~3,36         |~31                 |~2,23         |~256              |~14        |~94 (22 runnable, 40 waiting, 45 timed-waiting) |5 active, 16 idle|35 usage, 45 creation           |max: 499, avg: 248               |max: 308,66, avg: 23,85                |
 |ZGC |432000                      | 15                    |~80                     | ~44           |~0.400  |~8,5          |~32                 |~1,93         |~241              |~15        |~105 (24 runnable, 40 waiting, 54 timed-waiting)|6 active, 22 idle|38 usage, 62 creation           |max: 516, avg: 247               |max: 56,98, avg: 19,39                 |
 
 - Step 2
@@ -359,7 +359,7 @@ Due to the fact, that we are using fewer libraries than the default HFJS starter
 | Step | Tomcat   | Jetty    | Undertow |
 | :---:| :------: | :------: | :------: |
 | 1    | ~ 65s    |   ~49s   |  ~ 45s   |
-| 2    | ~ 95s    |   ~64s   |  ~ 61s   |
+| 2    | ~ 72s    |   ~64s   |  ~ 61s   |
 | 3    |          |          |          |
 | 4    |          |          |          |
 | 5    |          |          |          |
