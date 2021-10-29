@@ -359,7 +359,7 @@ Due to the fact, that we are using fewer libraries than the default HFJS starter
 | Step | Tomcat   | Jetty    | Undertow |
 | :---:| :------: | :------: | :------: |
 | 1    | ~ 65s    |   ~49s   |  ~ 45s   |
-| 2    | ~ 72s    |   ~64s   |  ~ 61s   |
+| 2    | ~ 72s    |   ~55s   |  ~ 61s   |
 | 3    |          |          |          |
 | 4    |          |          |          |
 | 5    |          |          |          |
