@@ -346,15 +346,15 @@ Please, take a look at abbreviations I will use in the next tables:
 
 |GC  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
 |:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|G1  |576000                      | 18                    |~50                     | ~43           |~0.250  |~3,5          |~31                 |~3,83         |~256              |~10        |~89 (27 runnable, 38 waiting, 42 timed-waiting) |7 active, 15 idle|13 usage, 20 creation           |max: 684, avg: 350               |max: 120,63, avg: 33,09                |
-|ZGC |432000                      | 15                    |~50                     | ~40           |~0.325  |~8,5          |~32                 |~1,52         |~242              |~15        |~83 (29 runnable, 25 waiting, 39 timed-waiting) |8 active, 16 idle|23 usage, 103 creation          |max: 566, avg: 258               |max: 100,76, avg: 31,24                |
+|G1  |576000                      |18                     |~50                     | ~43           |~0.250  |~3,5          |~31                 |~3,83         |~256              |~10        |~89 (27 runnable, 38 waiting, 42 timed-waiting) |7 active, 15 idle|13 usage, 20 creation           |max: 684, avg: 350               |max: 120,63, avg: 33,09                |
+|ZGC |432000                      |15                     |~50                     | ~40           |~0.325  |~8,5          |~32                 |~1,52         |~242              |~15        |~83 (29 runnable, 25 waiting, 39 timed-waiting) |8 active, 16 idle|23 usage, 103 creation          |max: 566, avg: 258               |max: 100,76, avg: 31,24                |
 
 - Step 2
 
 |GC  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
 |:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|G1  |                      |                     |~                     | ~           |~  |~          |~                 |~         |~              |~       |~ ||||  |
-|ZGC |460800                      | 16                    |~40                     | ~41           |~0.430  |~8,95         |~31                 |~3,19         |~263              |~19        |~85 (27 runnable, 25 waiting, 39 timed-waiting) |8 active, 14 idle|18 usage, 38 creation           |max: 480, avg: 241               |max: 51,11, avg: 18,04                 |
+|G1  |460800                      |16                     |~80                     |~40            |~0,360  |~3,46         |~31                 |~1,88         |~256              |~12        |~86 (24 runnable, 26 waiting, 39 timed-waiting) |8 active, 19 idle|21 usage, 52 creation           |max: 502, avg: 250               |max: 56,18, avg: 19,52                 |
+|ZGC |460800                      |16                     |~40                     |~41            |~0.430  |~8,95         |~31                 |~3,19         |~263              |~19        |~85 (27 runnable, 25 waiting, 39 timed-waiting) |8 active, 14 idle|18 usage, 38 creation           |max: 480, avg: 241               |max: 51,11, avg: 18,04                 |
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -368,7 +368,7 @@ Due to the fact, that we are using fewer libraries than the default HFJS starter
 | Step | Tomcat   | Jetty    | Undertow |
 | :---:| :------: | :------: | :------: |
 | 1    | ~ 65s    |   ~49s   |  ~ 45s   |
-| 2    | ~ 72s    |   ~55s   |  ~ 61s   |
+| 2    | ~ 72s    |   ~55s   |  ~ 54s   |
 | 3    |          |          |          |
 | 4    |          |          |          |
 | 5    |          |          |          |
