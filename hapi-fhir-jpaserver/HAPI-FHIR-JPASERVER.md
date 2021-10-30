@@ -337,7 +337,7 @@ Please, take a look at abbreviations I will use in the next tables:
 
 |GC  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
 |:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|G1  |                      |                     |~                     | ~           |~  |~          |~                 |~         |~              |~       |~ ||||  |
+|G1  |460800                      |16                     |~80                     |~40            |~0,41   |~6,01         |~31                 |~4,01         |~256              |~17        |~98 (21 runnable, 23 waiting, 56 timed-waiting) |7 active, 19 idle|18 usage, 125 creation          |max: 486, avg: 310               |max: 72,13, avg: 26,78                 |
 |ZGC |403200                      |14                     |~60                     |~36            |~0,480  |~8,65         |~31                 |~2,00         |~242              |~23        |~87 (22 runnable, 23 waiting, 45 timed-waiting) |5 active, 13 idle|22 usage, 46 creation           |max: 606, avg: 284               |max: 116,36, avg: 43,25                |
 
 <h2>Undertow</h2>
