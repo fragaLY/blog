@@ -74,7 +74,8 @@ spring_dependency_management_version=1.0.11.RELEASE
 ```
 The basic configuration for HFJSS had been tuned a bit, mostly tuning affected pools and workers, some searching, validation, and reindexing settings.
 If you are not a lot familiar with hikari pool tuning, there is a [great article](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing) about pool sizing. Long story short,
-The `application.yaml` file with basic settings that could be useful for you has the next structure:
+The `application.yaml` file with basic settings that could be useful for you has the next structure.
+It will be tuned soon.
 
 ``` yaml
 server:
@@ -291,7 +292,7 @@ The `Resources` we've used are the next (all the multipliers for resources that 
 | Procedure         | x3         | 150_000  | 300_000    | 750_000    | 1_500_000  | 3_000_000   |
 | Episode Of Care   | x2         | 100_000  | 200_000    | 500_000    | 1_000_000  | 2_000_000   |
 | Composition       | x2         | 100_000  | 200_000    | 500_000    | 1_000_000  | 2_000_000   |
-| DB dump size (GiB)| `N/A`      | 6,5      | 15         | 43         | 100        | 230         |
+| DB dump size (GiB)| `N/A`      | 6,5      | 15         | 24         | ???        | ???         |
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -315,68 +316,58 @@ Please, take a look at abbreviations I will use in the next tables:
 |GC  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
 |:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
 |G1  |460800                      | 16                    |~100                    | ~35           |~0.400  |~5            |~31                 |~3,20         |~275              |~20        |~94 (25 runnable, 40 waiting, 45 timed-waiting) |9 active, 15 idle|38 usage, 62 creation           |max: 475, avg: 185               |max: 50,76, avg: 14,04                 |
-|ZGC |432000                      | 15                    |~80                     | ~44           |~0.400  |~8,5          |~32                 |~1,93         |~241              |~15        |~105 (24 runnable, 40 waiting, 54 timed-waiting)|6 active, 22 idle|38 usage, 62 creation           |max: 516, avg: 247               |max: 56,98, avg: 19,39                 |
 
 - Step 2
 
 |GC  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
 |:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
 |G1  |403200                      | 14                    |~100                    | ~35           |~0.360  |~3,36         |~31                 |~2,23         |~256              |~14        |~94 (22 runnable, 40 waiting, 45 timed-waiting) |5 active, 16 idle|35 usage, 45 creation           |max: 499, avg: 248               |max: 308,66, avg: 23,85                |
-|ZGC |432000                      | 15                    |~60                     | ~54           |~0.390  |~8,50         |~33                 |~1,63         |~245              |~17        |~97 (26 runnable, 40 waiting, 47 timed-waiting) |9 active, 18 idle|25 usage, 36 creation           |max: 432, avg: 250               |max: 50,63, avg: 25,78                 |
 
 - Step 3
 
 |GC  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
 |:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|G1  |403200                      | 21                    |~200                    | ~54           |~0.600  |~2,48         |~26                 |~2,14         |~257              |~14        |~104 (22 runnable, 54 waiting, 40 timed-waiting)|7 active, 19 idle|75 usage, 38 creation           |max: 499, avg: 248               |max: 714,86, avg: 63,26                |
-|ZGC |432000                      | 15                    |~60                     | ~54           |~0.390  |~8,50         |~33                 |~1,63         |~245              |~17        |~97 (26 runnable, 40 waiting, 47 timed-waiting) |9 active, 18 idle|25 usage, 36 creation           |max: 432, avg: 250               |max: 50,63, avg: 25,78                 |
+|G1  |604800                      | 21                    |~200                    | ~54           |~0.600  |~2,48         |~26                 |~2,14         |~257              |~14        |~104 (22 runnable, 54 waiting, 40 timed-waiting)|7 active, 19 idle|75 usage, 38 creation           |max: 499, avg: 248               |max: 714,86, avg: 63,26                |
 
 <h2>Jetty</h2>
 
 - Step 1
 
-|GC  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
-|:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|G1  |460800                      |16                     |~100                    |~40            |~0,300  |~6            |~32                 |~4,52         |~258              |~11        |~95 (23 runnable, 23 waiting, 54 timed-waiting) |8 active, 16 idle|22 usage, 53 creation           |max: 498, avg: 237               |max: 64,50, avg: 18,45                 |
-|ZGC |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
+|TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
+|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
+|460800                      |16                     |~100                    |~40            |~0,300  |~6            |~32                 |~4,52         |~258              |~11        |~95 (23 runnable, 23 waiting, 54 timed-waiting) |8 active, 16 idle|22 usage, 53 creation           |max: 498, avg: 237               |max: 64,50, avg: 18,45                 |
 
 - Step 2
 
-|GC  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
-|:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|G1  |460800                      |16                     |~80                     |~40            |~0,41   |~6,01         |~31                 |~4,01         |~256              |~17        |~98 (21 runnable, 23 waiting, 56 timed-waiting) |7 active, 19 idle|18 usage, 125 creation          |max: 486, avg: 310               |max: 72,13, avg: 26,78                 |
-|ZGC |403200                      |14                     |~60                     |~36            |~0,480  |~8,65         |~31                 |~2,00         |~242              |~23        |~87 (22 runnable, 23 waiting, 45 timed-waiting) |5 active, 13 idle|22 usage, 46 creation           |max: 606, avg: 284               |max: 116,36, avg: 43,25                |
+|TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
+|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
+|460800                      |16                     |~80                     |~40            |~0,41   |~6,01         |~31                 |~4,01         |~256              |~17        |~98 (21 runnable, 23 waiting, 56 timed-waiting) |7 active, 19 idle|18 usage, 125 creation          |max: 486, avg: 310               |max: 72,13, avg: 26,78                 |
 
 - Step 3
 
-|GC  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
-|:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|G1  |460800                      |16                     |~80                     |~40            |~0,400  |~5,69         |~32                 |~3,34         |~261              |~19        |~88 (24 runnable, 23 waiting, 48 timed-waiting) |6 active, 15 idle|18 usage, 125 creation          |max: 515, avg: 262               |max: 60,97, avg: 22,89                 |
-|ZGC |403200                      |14                     |~60                     |~36            |~0,480  |~8,65         |~31                 |~2,00         |~242              |~23        |~87 (22 runnable, 23 waiting, 45 timed-waiting) |5 active, 13 idle|22 usage, 46 creation           |max: 606, avg: 284               |max: 116,36, avg: 43,25                |
-
+|TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
+|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
+|460800                      |16                     |~80                     |~40            |~0,400  |~5,69         |~32                 |~3,34         |~261              |~19        |~88 (24 runnable, 23 waiting, 48 timed-waiting) |6 active, 15 idle|18 usage, 125 creation          |max: 515, avg: 262               |max: 60,97, avg: 22,89                 |
 
 <h2>Undertow</h2>
 
 - Step 1
 
-|GC  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
-|:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|G1  |576000                      |18                     |~50                     | ~43           |~0.250  |~3,5          |~31                 |~3,83         |~256              |~10        |~89 (27 runnable, 38 waiting, 42 timed-waiting) |7 active, 15 idle|13 usage, 20 creation           |max: 684, avg: 350               |max: 120,63, avg: 33,09                |
-|ZGC |432000                      |15                     |~50                     | ~40           |~0.325  |~8,5          |~32                 |~1,52         |~242              |~15        |~83 (29 runnable, 25 waiting, 39 timed-waiting) |8 active, 16 idle|23 usage, 103 creation          |max: 566, avg: 258               |max: 100,76, avg: 31,24                |
+|TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
+|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
+|576000                      |18                     |~50                     | ~43           |~0.250  |~3,5          |~31                 |~3,83         |~256              |~10        |~89 (27 runnable, 38 waiting, 42 timed-waiting) |7 active, 15 idle|13 usage, 20 creation           |max: 684, avg: 350               |max: 120,63, avg: 33,09                |
 
 - Step 2
 
-|GC  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
-|:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|G1  |489600                      |17                     |~70                     |~50            |~0,360  |~3,46         |~31                 |~1,88         |~256              |~12        |~86 (24 runnable, 26 waiting, 39 timed-waiting) |8 active, 19 idle|21 usage, 52 creation           |max: 502, avg: 250               |max: 56,18, avg: 19,52                 |
-|ZGC |460800                      |16                     |~40                     |~41            |~0.430  |~8,95         |~31                 |~3,19         |~263              |~19        |~85 (27 runnable, 25 waiting, 39 timed-waiting) |8 active, 14 idle|18 usage, 38 creation           |max: 480, avg: 241               |max: 51,11, avg: 18,04                 |
+|TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
+|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
+|489600                      |17                     |~70                     |~50            |~0,360  |~3,46         |~31                 |~1,88         |~256              |~12        |~86 (24 runnable, 26 waiting, 39 timed-waiting) |8 active, 19 idle|21 usage, 52 creation           |max: 502, avg: 250               |max: 56,18, avg: 19,52                 |
 
 - Step 3
 
-|GC  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
-|:---|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|G1  |460800                      |16                     |~70                     |~45            |~0,250  |~6,51         |~31                 |~4,34         |~257              |~15        |~86 (27 runnable, 10 waiting, 17 timed-waiting) |6 active, 18 idle|103 usage, 55 creation          |max: 515, avg: 192               |max: 183,54, avg: 25,75                |
-|ZGC |460800                      |16                     |~40                     |~41            |~0.430  |~8,95         |~31                 |~3,19         |~263              |~19        |~85 (27 runnable, 25 waiting, 39 timed-waiting) |8 active, 14 idle|18 usage, 38 creation           |max: 480, avg: 241               |max: 51,11, avg: 18,04                 |
+|TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
+|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
+|460800                      |16                     |~70                     |~45            |~0,250  |~6,51         |~31                 |~4,34         |~257              |~15        |~86 (27 runnable, 10 waiting, 17 timed-waiting) |6 active, 18 idle|103 usage, 55 creation          |max: 515, avg: 192               |max: 183,54, avg: 25,75                |
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -391,7 +382,7 @@ Due to the fact, that we are using fewer libraries than the default HFJS starter
 | :---:| :------: | :------: | :------: |
 | 1    | ~ 65s    |   ~49s   |  ~ 45s   |
 | 2    | ~ 72s    |   ~55s   |  ~ 54s   |
-| 3    | ~ 45s    |   ~37s   |  ~ 39s   |
+| 3    | ~ 40s    |   ~37s   |  ~ 39s   |
 | 4    |          |          |          |
 | 5    |          |          |          |
 
@@ -419,8 +410,9 @@ Actually, it increases the build time in few seconds, but every cloud has a silv
 
 |JDK |GC TYPE   |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)| BOOT-UP TIME |
 |:---|:---------|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|:-------------|
-|TBD |TBD       |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |              |
+|TBD |G1        |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |              |
 |TBD |Shenandoah|432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |              |
+|TBD |ZGC       |460800                      |16                     |~40                     |~41            |~0.430  |~8,95         |~31                 |~3,19         |~263              |~19        |~85 (27 runnable, 25 waiting, 39 timed-waiting) |8 active, 14 idle|18 usage, 38 creation           |max: 480, avg: 241               |max: 51,11, avg: 18,04                 |
 
 ------------------------------------------------------------------------------------------------------------------------
 
