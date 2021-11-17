@@ -307,8 +307,6 @@ Let's assume that the average institution has the biggest load from 8:00 till 17
 As a result, we will have ~40 business hours per week. The next metrics will be presented for a typical business day (transactions per working day, TPWD in future) and RPS as well.
 And now, show me the numbers, dude!
 
-Please, take a look at abbreviations I will use in the next tables:
-
 <h2>Tomcat</h2>
 
 - Step 1
