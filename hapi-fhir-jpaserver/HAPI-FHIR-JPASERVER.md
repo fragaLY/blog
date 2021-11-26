@@ -4,6 +4,8 @@ _Please be assured that you are familiar with the [license](https://www.gnu.org/
 
 ------------------------------------------------------------------------------------------------------------------------
 
+![](./static/main.jpeg)
+
 <h6>CHAPTER 1: HEY, NICE MARMOT.</h6> 
 Firstly, I would like to bring you some brief information about the HAPI FHIR.
 
