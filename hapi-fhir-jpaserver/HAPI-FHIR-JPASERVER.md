@@ -60,7 +60,7 @@ After a few months of investigations and data preparations for HFJS, we get the 
 So, we stopped on the next setup, in my honest opinion, this is the minimum requirement for HAPI FHIR.
 `OS Linux (amd64) OS ImageOracle Linux Server 8.2 Cores 4, RAM 16000Mi`. 
 
-For compile and build processes we are using `JDK 11, Gradle 7.2.` We've took a useful for us parts of HFJSS, such as `ca.uhn.hapi.fhir:hapi-fhir-base, ca.uhn.hapi.fhir:hapi-fhir-jpaserver-base, ca.uhn.hapi.fhir:hapi-fhir-validation, ca.uhn.hapi.fhir:hapi-fhir-structures-r4, ca.uhn.hapi.fhir:hapi-fhir-validation-resources-r4`.
+For compile and build processes we are using `JDK 11, Gradle 7.3.` We've took a useful for us parts of HFJSS, such as `ca.uhn.hapi.fhir:hapi-fhir-base, ca.uhn.hapi.fhir:hapi-fhir-jpaserver-base, ca.uhn.hapi.fhir:hapi-fhir-validation, ca.uhn.hapi.fhir:hapi-fhir-structures-r4, ca.uhn.hapi.fhir:hapi-fhir-validation-resources-r4`.
 And we build our own theme park, with blackjack and hO_okers.
 The versions of used libs:
 ```properties
@@ -283,16 +283,16 @@ Inpatient practice (hospital):
 Moreover, it would be nice to provide you with some information regarding the datasets we've used.
 The `Resources` we've used are the next (all the multipliers for resources that related to `Patient` were gained from researching the institutions and organization):
 
-| Resource          | Multiplier | 1 step   | 2 step     | 3 step     | 4 step     | 5 step      |
-| :---------------- | :----------| :--------| :--------  | :--------  | :--------  | :--------   |
-| Patient           | x1         | 50_000   | 100_000    | 250_000    | 500_000    | 1_000_000   |
-| Observation       | x100       | 5_000_000| 10_000_000 | 25_000_000 | 50_000_000 | 100_000_000 |
-| Diagnostic Report | x10        | 500_000  | 1_000_000  | 2_500_000  | 5_000_000  | 10_000_000  |
-| Condition         | x10        | 500_000  | 1_000_000  | 2_500_000  | 5_000_000  | 10_000_000  |
-| Procedure         | x3         | 150_000  | 300_000    | 750_000    | 1_500_000  | 3_000_000   |
-| Episode Of Care   | x2         | 100_000  | 200_000    | 500_000    | 1_000_000  | 2_000_000   |
-| Composition       | x2         | 100_000  | 200_000    | 500_000    | 1_000_000  | 2_000_000   |
-| DB dump size (GiB)| `N/A`      | 6,5      | 15         | 24         | ???        | ???         |
+| Resource          | Multiplier | 1 step   | 2 step     | 3 step     | 4 step     |
+| :---------------- | :----------| :--------| :--------  | :--------  | :--------  |
+| Patient           | x1         | 50_000   | 100_000    | 250_000    | 500_000    |
+| Observation       | x100       | 5_000_000| 10_000_000 | 25_000_000 | 50_000_000 |
+| Diagnostic Report | x10        | 500_000  | 1_000_000  | 2_500_000  | 5_000_000  |
+| Condition         | x10        | 500_000  | 1_000_000  | 2_500_000  | 5_000_000  |
+| Procedure         | x3         | 150_000  | 300_000    | 750_000    | 1_500_000  |
+| Episode Of Care   | x2         | 100_000  | 200_000    | 500_000    | 1_000_000  |
+| Composition       | x2         | 100_000  | 200_000    | 500_000    | 1_000_000  |
+| DB dump size (GiB)| `N/A`      | 6,5      | 15         | 24         | 48         |
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -359,12 +359,17 @@ Actually, it increases the build time in few seconds, but every cloud has a silv
 
 <h6>CHAPTER 7: I CAN'T BE WORRYING ABOUT THAT SH1T. LIFE GOES ON, MAN.</h6>
 
+Now we are going to compare the performance using JDK 11 and JDK 17.
+The result are below.
+
 - [ ] JDK 11 vs JDK 17 on the latest step (5)
 
 |JDK  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)| BOOT-UP TIME |
 |:----|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|:-------------|
 |11   |576000                      | 18                    |~50                     | ~43           |~0.250  |~3,5          |~31                 |~3,83         |~256              |~10        |~89 (27 runnable, 38 waiting, 42 timed-waiting) |7 active, 15 idle|13 usage, 20 creation           |max: 684, avg: 350               |max: 120,63, avg: 33,09ms              |              |
 |17   |576000                      | 18                    |~50                     | ~43           |~0.250  |~3,5          |~31                 |~3,83         |~256              |~10        |~89 (27 runnable, 38 waiting, 42 timed-waiting) |7 active, 15 idle|13 usage, 20 creation           |max: 684, avg: 350               |max: 120,63, avg: 33,09ms              |              |
+
+Let's check the performance for different kinds of GC.
 
 - [ ] Compare with Shenandoah on the latest step (5)
 
@@ -393,7 +398,15 @@ The dataset same for step 5. The size of DB is ?TB. Pretty big.
 |13.3      |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
 |14.?      |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
 
+
+Final fight, now we will enable hibernate cache and fhir validation both for requests and response and compare final results.
+
 - [ ] Most comfortable setup for application
+
+Looking forward the investigations I would like recommend to use the next setup for service.0
+
+- [ ] JDK version, GC type, Embedded server, Postgres version, Postgres custom settings.
+- [ ] Spring Boot Application config
 
 Thank you.
 
