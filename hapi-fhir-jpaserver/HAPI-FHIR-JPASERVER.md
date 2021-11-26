@@ -393,7 +393,7 @@ Let's check the performance for different kinds of GC.
 - VACUUM automatically becomes more aggressive, and skips inessential cleanup, if the database starts to approach a transaction ID wraparound condition.
 
 The test is going to be started on the best JVM setup that we've already found.
-The dataset same for step 5. The size of DB is ?TB. Pretty big.
+The dataset same for step 4. The size of DB is 443TB. Pretty big.
 
 |POSTGRES  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
 |:---------|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
