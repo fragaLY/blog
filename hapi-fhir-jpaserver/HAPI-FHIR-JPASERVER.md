@@ -426,9 +426,9 @@ spring:
   main:
     banner-mode: off
   datasource:
-    url: 'jdbc:postgresql://localhost:5432/hapi-fhir'
-    username: postgres
-    password: 8bi4ut5gjshq4e1k
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     driverClassName: org.postgresql.Driver
     hikari:
       minimumIdle: 4
@@ -472,7 +472,7 @@ spring:
     sender:
       type: KAFKA
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
   thymeleaf:
     enabled: false
 
