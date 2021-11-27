@@ -405,7 +405,7 @@ The dataset same for step 4. The size of DB is 443TB. Pretty big.
 
 |JDK|GC|SERVER  |GRADLE|POSTGRES|POSRGRES VM RAM|POSRGRES VM CORE |POSTGRES VM SSD|JVM RAM|JVM CORE|
 |:--|:-|:-------|:-----|:-------|:--------------|:----------------|:--------------|:------|:-------|
-|17 |G1|Undertow|7.3   |?       |4 GiB          |2                |1 TB           |3 GiB  |2 core  |
+|17 |G1|Undertow|7.3   |14.1    |4 GiB          |2                |1 TB           |3 GiB  |2       |
 
 And ofc spring boot configuration:
 
