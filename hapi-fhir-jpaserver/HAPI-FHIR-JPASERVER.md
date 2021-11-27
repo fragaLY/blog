@@ -403,9 +403,11 @@ The dataset same for step 4. The size of DB is 443TB. Pretty big.
 
 - Most comfortable setup for application
 
-|JDK|GC|SERVER  |GRADLE|POSTGRES|POSRGRES VM RAM|POSRGRES VM CORE |POSTGRES SSD|JVM RAM|JVM CORE|
-|:--|:-|:-------|:-----|:-------|:--------------|:----------------|:-----------|:------|:-------|
-|17 |G1|Undertow|7.3   |?       |4 GiB          |2                |500 GB      |3 GiB  |2 core  |
+|JDK|GC|SERVER  |GRADLE|POSTGRES|POSRGRES VM RAM|POSRGRES VM CORE |POSTGRES VM SSD|JVM RAM|JVM CORE|
+|:--|:-|:-------|:-----|:-------|:--------------|:----------------|:--------------|:------|:-------|
+|17 |G1|Undertow|7.3   |?       |4 GiB          |2                |1 TB           |3 GiB  |2 core  |
+
+And ofc spring boot configuration:
 
 ``` yaml
 
