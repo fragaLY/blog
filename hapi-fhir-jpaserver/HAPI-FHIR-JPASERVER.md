@@ -334,7 +334,7 @@ And now, show me the numbers, dude!
 | 1  |576000                      |18                     |~50                     |~43            |~0.250  |~3,5          |~31                 |~3,83         |~256              |~10        |~89 (27 runnable, 38 waiting, 42 timed-waiting) |7 active, 15 idle|13 usage,  20 creation          |max: 684, avg: 350               |
 | 2  |489600                      |17                     |~70                     |~50            |~0,360  |~3,46         |~31                 |~1,88         |~256              |~12        |~86 (24 runnable, 26 waiting, 39 timed-waiting) |8 active, 19 idle|21 usage,  52 creation          |max: 502, avg: 250               |
 | 3  |460800                      |16                     |~70                     |~45            |~0,250  |~6,51         |~31                 |~4,34         |~257              |~15        |~86 (27 runnable, 10 waiting, 17 timed-waiting) |6 active, 18 idle|103 usage, 55 creation          |max: 515, avg: 192               |
-| 4  |460800                      |16                     |~80                     |~40            |~0,380  |~4,65         |~33                 |~2,57         |~251              |~28        |~87 (27 runnable, 26 waiting, 40 timed-waiting) |7 active, 16 idle|69 usage,  51 creation          |max: 523, avg: 307               |
+| 4  |460800                      |16                     |~80                     |~40            |~0,380  |~4,65         |~31                 |~2,57         |~251              |~28        |~87 (27 runnable, 26 waiting, 40 timed-waiting) |7 active, 16 idle|69 usage,  51 creation          |max: 523, avg: 307               |
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -367,7 +367,7 @@ The result are below.
 
 |JDK  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|
 |:----|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|
-|11   |460800                      |16                     |~80                     |~40            |~0,380  |~4,65         |~33                 |~2,57         |~251              |~28        |~87 (27 runnable, 26 waiting, 40 timed-waiting) |7 active, 16 idle|69 usage,  51 creation          |
+|11   |460800                      |16                     |~80                     |~40            |~0,380  |~4,65         |~31                 |~2,57         |~251              |~28        |~87 (27 runnable, 26 waiting, 40 timed-waiting) |7 active, 16 idle|69 usage,  51 creation          |
 |17   |576000                      |20                     |~100                    |~54            |~0,320  |~3,83         |~31                 |~2,24         |~242              |~17        |~86 (28 runnable, 26 waiting, 41 timed-waiting) |6 active, 16 idle|110 usage, 77 creation          |
 
 After comparing the results of JDK 11 and JDK17 we are decided to choose the latest one LTS version (JDK 17).
@@ -377,14 +377,11 @@ Let's check the performance for different kinds of GC.
 |GC TYPE   |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|
 |:---------|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|
 |G1        |576000                      |20                     |~100                    |~54            |~0,320  |~3,83         |~31                 |~2,24         |~242              |~17        |~86 (28 runnable, 26 waiting, 41 timed-waiting) |6 active, 16 idle|110 usage, 77 creation          |max: 488, avg: 243               |
-|Shenandoah|432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage,  165 creation         |max: 537, avg: 245               |
-|ZGC       |460800                      |16                     |~40                     |~41            |~0.430  |~8,95         |~31                 |~3,19         |~263              |~19        |~85 (27 runnable, 25 waiting, 39 timed-waiting) |8 active, 14 idle|18 usage,  38 creation          |max: 480, avg: 241               |
+|ZGC       |460800                      |16                     |~80                     |~40            |~0,350  |~3,09         |~32                 |~3,08         |~219              |~15        |~86 (25 runnable, 27 waiting, 43 timed-waiting) |5 active, 16 idle|80 usage,  53 creation          |max: 497, avg: 248               |
 
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>BONUS: HA HEY, THIS IS A PRIVATE RESIDENCE MAN.</h6>
-
-- [ ] Compare POSTGRES 13 with POSTGRES 14 on the latest step (5) with optimal application setup.
 
   The final fight is migration from Postgres 13.3 to [Postgres 14.0](https://www.postgresql.org/docs/release/14.0/) due to having a lot of performance tunings, such as:
 - Numerous performance improvements have been made for parallel queries, heavily-concurrent workloads, partitioned tables, logical replication, and vacuuming;
@@ -399,21 +396,22 @@ The dataset same for step 4. The size of DB is 443TB. Pretty big.
 |13.3      |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
 |14.?      |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
 
-- The latest one change, now we will enable hibernate cache and fhir validation both for requests and response and compare final results.
+- The latest one change, now we will enable hibernate cache and compare final results.
 
-|TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
-|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
+|WHEN  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
+|:-----|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
+|BEFORE|576000                      |20                     |~100                    |~54            |~0,320  |~3,83         |~31                 |~2,24         |~242              |~17        |~86 (28 runnable, 26 waiting, 41 timed-waiting) |6 active, 16 idle|110 usage, 77 creation          |max: 488, avg: 243               |                                       |
+|AFTER |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
 
 - Most comfortable setup for application
 
-|JDK|GC|SERVER  |GRADLE|POSTGRES|POSRGRES VM RAM|POSRGRES VM CPU |POSTGRES SSD|JVM RAM|JVM CPU|
-|:--|:-|:-------|:-----|:-------|:--------------|:---------------|:-----------|:------|:------|
-|17 |? |Undertow|7.3   |14.?    |?              |2               |500 GiB     |3 GiB  |2 core |
+|JDK|GC|SERVER  |GRADLE|POSTGRES|POSRGRES VM RAM|POSRGRES VM CORE |POSTGRES SSD|JVM RAM|JVM CORE|
+|:--|:-|:-------|:-----|:-------|:--------------|:----------------|:-----------|:------|:-------|
+|17 |G1|Undertow|7.3   |14.?    |4 GiB          |2                |500 GB      |3 GiB  |2 core  |
 
 - [ ] Spring Boot Application config
 
-<h3>In comparing with the basic setup, we optimize our costs 5 times.<h3>
+<h3>In comparing with the basic setup, we optimized our costs up to 5 times.<h3>
 
 Thank you.
 
