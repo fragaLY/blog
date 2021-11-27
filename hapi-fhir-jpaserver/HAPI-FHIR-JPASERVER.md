@@ -407,7 +407,198 @@ The dataset same for step 4. The size of DB is 443TB. Pretty big.
 |:--|:-|:-------|:-----|:-------|:--------------|:----------------|:-----------|:------|:-------|
 |17 |G1|Undertow|7.3   |?       |4 GiB          |2                |500 GB      |3 GiB  |2 core  |
 
-- [ ] Spring Boot Application config
+``` yaml
+
+server:
+  port: 8080
+  shutdown: graceful
+  undertow:
+    threads:
+      worker: 24
+      io: 3
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  application:
+    name: misp-hapi-fhir-service
+  main:
+    banner-mode: off
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/hapi-fhir'
+    username: postgres
+    password: 8bi4ut5gjshq4e1k
+    driverClassName: org.postgresql.Driver
+    hikari:
+      minimumIdle: 4
+      maximumPoolSize: 10
+      connection-timeout: 35000
+      pool-name: "mhfs-hikari-pool"
+      idle-timeout: 10000
+      max-lifetime: 30000
+      auto-commit: true
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+        show_sql: false
+        hbm2ddl.auto: update
+        cache:
+          use_query_cache: false
+          use_second_level_cache: false
+          use_structured_entries: false
+          use_minimal_puts: false
+        search:
+          enabled: false
+          backend:
+            type: lucene
+            analysis:
+              configurer: ca.uhn.fhir.jpa.search.HapiLuceneAnalysisConfigurer
+            directory:
+              type: local-filesystem
+              root: target/lucenefiles
+            lucene_version: lucene_current
+  batch:
+    job:
+      enabled: false
+  zipkin:
+    sender:
+      type: KAFKA
+  kafka:
+    bootstrap-servers: localhost:9092
+  thymeleaf:
+    enabled: false
+
+hapi:
+  fhir:
+    base_path: "/*"
+    defer_indexing_for_codesystems_of_size: 101
+    supported_resource_types:
+      - Patient
+      - Observation
+      - Organization
+      - Encounter
+      - Condition
+      - Composition
+      - EpisodeOfCare
+      - Medication
+      - MedicationAdministration
+      - MedicationRequest
+      - Immunization
+      - DiagnosticReport
+      - Procedure
+      - Bundle
+      - Goal
+      - CarePlan
+      - Practitioner
+      - Claim
+      - ExplanationOfBenefit
+      - ValueSet
+      - CodeSystem
+      - StructureDefinition
+      - ImagingStudy
+      - List
+    allow_external_references: true
+    client_id_strategy: ANY
+    allow_cascading_deletes: false
+    allow_contains_searches: false
+    allow_multiple_delete: false
+    delete_enable: false
+    allow_override_default_search_params: false
+    allow_placeholder_references: true
+    auto_create_placeholder_reference_targets: true
+    default_encoding: JSON
+    default_pretty_print: true
+    default_page_size: 20
+    empi_enabled: false
+    enable_index_missing_fields: true
+    enforce_referential_integrity_on_delete: true
+    enforce_referential_integrity_on_write: true
+    etag_support_enabled: true
+    expunge_enabled: false
+    fhir_version: R4
+    fhir_path_interceptor_enabled: false
+    filter_search_enabled: true
+    graphql_enabled: false
+    binary_storage_enabled: false
+    last-n-enabled: false
+    mark-resources-for-reindexing-upon-search-parameter-change: false
+    max_binary_size: 104857600
+    max_page_size: 200
+    bulk_export_enabled: false
+    retain_cached_searches_mins: 60
+    reuse_cached_search_results_millis: 60000
+    partitioning:
+      enabled: false
+      cross_partition_reference_mode: true
+      multitenancy_enabled: true
+      partitioning_include_in_search_hashes: true
+    persistenceUnitName: "HAPI_PERSISTENCE_UNIT"
+    cors:
+      enabled: false
+      allow_credentials: true
+      allowed_origin:
+        - '*'
+    expunge-thread-count: 2
+    reindex-thread-count: 2
+    search-total-mode: ESTIMATED
+    search-coord-core-pool-size: 20
+    search-coord-max-pool-size: 100
+    search-coord-queue-capacity: 20
+    status-based-reindexing-disabled: true
+    normalized_quantity_search_level: NORMALIZED_QUANTITY_SEARCH_SUPPORTED
+    enable_index_contained_resource: false
+    validation:
+      enabled: true
+      requests_enabled: true
+      responses_enabled: false
+    logger:
+      enabled: true
+      name: "fhirtest.access"
+      error_format: "[HAPI FHIR ERROR] - ${requestVerb} ${requestUrl}"
+      format: "Path[${servletPath}] Source[${requestHeader.x-forwarded-for}] Operation[${operationType} ${operationName} ${idOrResourceName}] UA[${requestHeader.user-agent}] Params[${requestParameters}] ResponseEncoding[${responseEncodingNoDefault}] Operation[${operationType} ${operationName} ${idOrResourceName}] UA[${requestHeader.user-agent}] Params[${requestParameters}] ResponseEncoding[${responseEncodingNoDefault}]"
+      log_exceptions: true
+    elasticsearch:
+      enabled: false
+
+management:
+  server:
+    port: 8081
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+    db:
+      enabled: true
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
+      show-components: never
+      show-details: never
+      group:
+        readiness:
+          include: readinessState, db
+    metrics.enabled: true
+    prometheus.enabled: true
+  endpoints.web.exposure.include: "*"
+  metrics.export.prometheus.enabled: true
+
+logging.level:
+  ROOT: info
+  com.epam.charity: info
+  org.springframework: info
+
+```
 
 <h3>In comparing with the basic setup, we optimized our costs up to 5 times.<h3>
 
