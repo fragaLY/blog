@@ -602,7 +602,7 @@ logging.level:
 
 ```
 
-<h3>In comparing with the basic setup, we optimized our costs up to 5 times.<h3>
+:1st_place_medal: <h3>In comparing with the basic setup, we optimized our costs up to 5 times.<h3>
 
 Thank you.
 
