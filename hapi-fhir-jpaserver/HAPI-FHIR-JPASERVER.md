@@ -602,7 +602,10 @@ logging.level:
 
 ```
 
-:1st_place_medal: <h3>In comparing with the basic setup, we optimized our costs up to 5 times.<h3>
+In comparing with the basic setup, we have the next benefits:
+- :1st_place_medal: Optimized our costs up to 5 times.
+- :2nd_place_medal: Decreased boot-up time in 2 times.
+- :3rd_place_medal:	Improved performance in 2 times.
 
 Thank you.
 
