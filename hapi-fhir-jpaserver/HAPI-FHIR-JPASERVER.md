@@ -382,8 +382,9 @@ Let's check the performance for different kinds of GC.
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>BONUS: HA HEY, THIS IS A PRIVATE RESIDENCE MAN.</h6>
+Suggestions for improvements:
 
-  The final fight is migration from Postgres 13.3 to [Postgres 14.1](https://www.postgresql.org/docs/14/release-14-1.html) due to having a lot of performance tunings, such as:
+  The final fight could be the migration from Postgres 13.3 to [Postgres 14.1](https://www.postgresql.org/docs/14/release-14-1.html) due to having a lot of performance tunings, such as:
 - Numerous performance improvements have been made for parallel queries, heavily-concurrent workloads, partitioned tables, logical replication, and vacuuming;
 - B-tree index updates are managed more efficiently, reducing index bloat;
 - VACUUM automatically becomes more aggressive, and skips inessential cleanup, if the database starts to approach a transaction ID wraparound condition;
@@ -392,14 +393,6 @@ Let's check the performance for different kinds of GC.
 - Avoid O(N^2) behavior in some list-manipulation operations;
 - Add more defensive checks around B-tree posting list splits;
 - Fix memory leak in HMAC hash calculations.
-
-The test is going to be started on the best JVM setup that we've already found.
-The dataset same for step 4. The size of DB is 443TB. Pretty big.
-
-|POSTGRES  |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|POSTGRES TOTAL DURATION OF QUERIES (ms)|
-|:---------|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|:--------------------------------------|
-|13.3      |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
-|14.1      |432000                      |15                     |~80                     |~36            |~0,400  |~8,5          |~32                 |~3,96         |~242              |~12        |~98 (21 runnable, 23 waiting, 57 timed-waiting) |6 active, 23 idle|31 usage, 165 creation          |max: 537, avg: 245               |max: 60,58, avg: 18,86                 |
 
 - Most comfortable setup for application
 
@@ -603,7 +596,7 @@ logging.level:
 ```
 
 In comparing with the basic setup, we have the next benefits:
-- :1st_place_medal: Optimized our costs up to 5 times.
+- :1st_place_medal: Optimized our costs up to 4 times.
 - :2nd_place_medal: Decreased boot-up time in 2 times.
 - :3rd_place_medal:	Improved performance in 2 times.
 
