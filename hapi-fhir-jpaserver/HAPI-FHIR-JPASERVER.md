@@ -6,6 +6,8 @@ _Please be assured that you are familiar with the [license](https://www.gnu.org/
 
 ![](./static/main.jpeg)
 
+:desktop_computer:  <a href="https://community-z.com/events/tech-talk-epm-chrt-performance-investigations-hapi-fhir-jpa-server-tuning/talks/16553">TECH TALK RECODING</a>
+
 <h6>CHAPTER 1: HEY, NICE MARMOT.</h6> 
 Firstly, I would like to bring you some brief information about the HAPI FHIR.
 
