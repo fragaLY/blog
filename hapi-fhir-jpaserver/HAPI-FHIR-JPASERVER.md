@@ -58,15 +58,33 @@ To dive deeper in the topic, you can follow the next links:
 In spite of all the benefits that HFJS brings to us, there are a lot of trade-offs.
 And in a world where every millisecond may costs you a huge profit, the performance, boot-up time, and resources consumption have a great impact.
 
+*Pros and Cons of choosing hapi-fhir-jpa-server-starter*
+
+PROS:
+- Out of the box solution;
+- Open-source and supported by community;
+- Automated schema creation.
+
+CONS:
+- Out of the box solution: Hard to understand the sources and database schema;
+- Low performance;
+- Huge boot-up time;
+- Vast resources consumption;
+- Is not flexible: Not able to be tuned in different application layers; Not able to support spring-indexer and resilience4j.
+
 ------------------------------------------------------------------------------------------------------------------------
 <h6>CHAPTER 3: IT REALLY TIED THE ROOM TOGETHER.</h6>
 After a few months of investigations and data preparations for HFJS, we get the vision of possible resources consumption.
-So, we stopped on the next setup, in my honest opinion, this is the minimum requirement for HAPI FHIR.
-`OS Linux (amd64) OS ImageOracle Linux Server 8.2 Cores 4, RAM 16000Mi`. 
+Before tuning our configuration that could be stable without facing OOM both on JVM and PostgreSQL is the next:
 
-For compile and build processes we are using `JDK 11, Gradle 7.3.` We've took a useful for us parts of HFJSS, such as `ca.uhn.hapi.fhir:hapi-fhir-base, ca.uhn.hapi.fhir:hapi-fhir-jpaserver-base, ca.uhn.hapi.fhir:hapi-fhir-validation, ca.uhn.hapi.fhir:hapi-fhir-structures-r4, ca.uhn.hapi.fhir:hapi-fhir-validation-resources-r4`.
-And we build our own theme park, with blackjack and hO_okers.
+|JDK|GC|Server|Gradle|POSTGRES|POSTGRES VM RAM|POSTGRES VM CORE|POSTGRES VM SSD|JVM RAM|JVM CORE|
+|:--|:-|:-----|:-----|:-------|:--------------|:---------------|:--------------|:------|:-------|
+|11 |G1|Tomcat|7.1   |13.4    |32 GiB         |8               |2 TB           |16 GiB |4       |
+
+For compile and build processes we are using `JDK 11, Gradle 7.3.` We've took a useful for us parts of HFJSS, such as `hapi-fhir-base, hapi-fhir-jpaserver-base, hapi-fhir-validation, hapi-fhir-structures-r4, hapi-fhir-validation-resources-r4`.
+And we build our own theme park, with blackjack.
 The versions of used libs:
+
 ```properties
 hapi_fhir_version=5.5.2
 logback_version=0.1.5
@@ -75,6 +93,7 @@ micrometer_version=1.7.5
 spring_version=2.5.6
 spring_cloud_version=2020.0.4
 spring_dependency_management_version=1.0.11.RELEASE
+
 ```
 The basic configuration for HFJSS had been tuned a bit, mostly tuning affected pools and workers, some searching, validation, and reindexing settings.
 If you are not a lot familiar with hikari pool tuning, there is a [great article](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing) about pool sizing. Long story short,
@@ -285,18 +304,8 @@ Inpatient practice (hospital):
 <h6>CHAPTER 4: WHERE'S MY RESOURCES, LEBOWSKI?</h6>
 
 Moreover, it would be nice to provide you with some information regarding the datasets we've used.
-The `Resources` we've used are the next (all the multipliers for resources that related to `Patient` were gained from researching the institutions and organization):
-
-| Resource          | Multiplier | 1 step   | 2 step     | 3 step     | 4 step     |
-| :---------------- | :----------| :--------| :--------  | :--------  | :--------  |
-| Patient           | x1         | 50_000   | 100_000    | 250_000    | 500_000    |
-| Observation       | x100       | 5_000_000| 10_000_000 | 25_000_000 | 50_000_000 |
-| Diagnostic Report | x10        | 500_000  | 1_000_000  | 2_500_000  | 5_000_000  |
-| Condition         | x10        | 500_000  | 1_000_000  | 2_500_000  | 5_000_000  |
-| Procedure         | x3         | 150_000  | 300_000    | 750_000    | 1_500_000  |
-| Episode Of Care   | x2         | 100_000  | 200_000    | 500_000    | 1_000_000  |
-| Composition       | x2         | 100_000  | 200_000    | 500_000    | 1_000_000  |
-| DB dump size (GiB)| `N/A`      | 6,5      | 15         | 24         | 38         |
+Due to the fact, that we are not going to disclose our ambitions and share some business ideas I will bring you the high-level information about the resources amount.
+We will take in use 4 steps with almost x2 scaling of resources amount in our database. These steps will be reminded on the next slides.
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -338,6 +347,14 @@ And now, show me the numbers, dude!
 | 3  |460800                      |16                     |~70                     |~45            |~0,250  |~6,51         |~31                 |~4,34         |~257              |~15        |~86 (27 runnable, 10 waiting, 17 timed-waiting) |6 active, 18 idle|103 usage, 55 creation          |max: 515, avg: 192               |
 | 4  |460800                      |16                     |~80                     |~40            |~0,380  |~4,65         |~31                 |~2,57         |~251              |~28        |~87 (27 runnable, 26 waiting, 40 timed-waiting) |7 active, 16 idle|69 usage,  51 creation          |max: 523, avg: 307               |
 
+Let's compare some metrics:
+
+![](./static/tpwd.png)
+![](./static/rt.png)
+![](./static/heap.png)
+![](./static/cpu.png)
+![](./static/threads.png)
+
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>CHAPTER 6: WHERE'S MY BOOT-UP TIME, LEBOWSKI?</h6>
@@ -359,9 +376,18 @@ It creates `META-INF/spring.components` were all the beans described.
 
 Actually, it increases the build time in few seconds, but every cloud has a silver lining.
 
+*IN UNDERTOW WE TRUST*
+
+Due to the fact of most stable results of:
+• Transactions Per Working Day
+• Response Time
+• Resources Consumption
+• Boot up time
+We chose the Undertow as the main embedded server for HAPI-FHIR server.
+
 ------------------------------------------------------------------------------------------------------------------------
 
-<h6>CHAPTER 7: I CAN'T BE WORRYING ABOUT THAT SH1T. LIFE GOES ON, MAN.</h6>
+<h6>CHAPTER 7: I CAN'T BE WORRYING ABOUT THAT. LIFE GOES ON, MAN.</h6>
 
 After all the tests we've already described we are going to use Undertow as the embedded server.
 Now we are going to compare the performance using JDK 11 and JDK 17.
@@ -373,8 +399,7 @@ The result are below.
 |17   |576000                      |20                     |~100                    |~54            |~0,320  |~3,83         |~31                 |~2,24         |~242              |~17        |~86 (28 runnable, 26 waiting, 41 timed-waiting) |6 active, 16 idle|110 usage, 77 creation          |
 
 After comparing the results of JDK 11 and JDK17 we are decided to choose the latest one LTS version (JDK 17).
-
-Let's check the performance for different kinds of GC.
+Let's check the performance for ZGC as well.
 
 |GC TYPE   |TRANSACTIONS PER WORKING DAY|TRANSACTIONS PER SECOND|RESPONSE TIMES OVER TIME|HITS PER SECOND|NODE CPU|NODE RAM (GiB)|JVM RATE (MAX ops/s)|JVM HEAP (GiB)|JVM NON-HEAP (Mib)|JVM CPU (%)|THREADS (MAX)                                   |HIKARI POOL (MAX)|HIKARI CONNECTIONS TIME (MAX ms)|POSTGRES STATEMENTS CALLS (ops/s)|
 |:---------|:---------------------------|:----------------------|:-----------------------|:--------------|:-------|:-------------|:-------------------|:-------------|:-----------------|:----------|:-----------------------------------------------|:----------------|:-------------------------------|:--------------------------------|
@@ -384,23 +409,26 @@ Let's check the performance for different kinds of GC.
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>BONUS: HA HEY, THIS IS A PRIVATE RESIDENCE MAN.</h6>
-Suggestions for improvements:
 
-  The final fight could be the migration from Postgres 13.3 to [Postgres 14.1](https://www.postgresql.org/docs/14/release-14-1.html) due to having a lot of performance tunings, such as:
+*Next steps*
+
+I. Migration from Postgres 13.4 to Postgres 14.1 due to having a lot of performance tunings, such as:
 - Numerous performance improvements have been made for parallel queries, heavily-concurrent workloads, partitioned tables, logical replication, and vacuuming;
 - B-tree index updates are managed more efficiently, reducing index bloat;
-- VACUUM automatically becomes more aggressive, and skips inessential cleanup, if the database starts to approach a transaction ID wraparound condition;
+- VACUUM automatically becomes more aggressive, and skips inessential clean-up, if the database starts to approach a transaction ID wraparound condition;
 - Ensure that parallel VACUUM doesn't miss any indexes;
 - Fix REINDEX CONCURRENTLY to preserve operator class parameters that were attached to the target index;
 - Avoid O(N^2) behavior in some list-manipulation operations;
-- Add more defensive checks around B-tree posting list splits;
-- Fix memory leak in HMAC hash calculations.
+- Add more defensive checks around B-tree posting list splits.
 
-- Most comfortable setup for application
+II. Enabling caching
 
-|JDK|GC|SERVER  |GRADLE|POSTGRES|POSRGRES VM RAM|POSRGRES VM CORE |POSTGRES VM SSD|JVM RAM|JVM CORE|
-|:--|:-|:-------|:-----|:-------|:--------------|:----------------|:--------------|:------|:-------|
-|17 |G1|Undertow|7.3   |14.1    |4 GiB          |2                |1 TB           |3 GiB  |2       |
+*Most comfortable setup for application*
+
+|TUNING|JDK|GC|SERVER  |GRADLE|POSTGRES|POSRGRES VM RAM|POSRGRES VM CORE |POSTGRES VM SSD|JVM RAM|JVM CORE|
+|:-----|:--|:-|:-------|:-----|:-------|:--------------|:----------------|:--------------|:------|:-------|
+|BEFORE|11 |G1|Tomcat  |7.1   |13.4    |32 GiB         |8                |2 TB           |16 GiB |4       |
+|AFTER |17 |G1|Undertow|7.3   |13.4    |4 GiB          |2                |500 GB         |3 GiB  |2       |
 
 And ofc spring boot configuration:
 
@@ -598,11 +626,13 @@ logging.level:
 ```
 
 In comparing with the basic setup, we have the next benefits:
-- :1st_place_medal: Optimized our costs up to 4 times.
+- :1st_place_medal: Optimized our costs up to 4 times. (Resources consumption on HAPI FHIR JPA SERVER decreased from 16GB RAM and 4 Cores to 3GB RAM and 2 Cores. As a result, we can deploy more instances for the same costs. PostgreSQL moved from 32GB RAM and 8 Cores to 4GiB RAM and 2 Cores.)
 - :2nd_place_medal: Decreased boot-up time in 2 times.
 - :3rd_place_medal:	Improved performance in 2 times.
 
 Thank you.
+
+Download the pdf version of this research.
 
 If you have any question, feel free to contact me direct in [linkedin](https://www.linkedin.com/in/vadzimkavalkou/).
 
