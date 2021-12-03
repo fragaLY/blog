@@ -632,7 +632,7 @@ In comparing with the basic setup, we have the next benefits:
 
 Thank you.
 
-Download the pdf version of this research.
+<a href="./static/hapi-fhir-performance-investigation.pdf" download>Download</a> the pdf version of this research.
 
 If you have any question, feel free to contact me direct in [linkedin](https://www.linkedin.com/in/vadzimkavalkou/).
 
