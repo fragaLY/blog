@@ -406,6 +406,14 @@ Let's check the performance for ZGC as well.
 |G1        |576000                      |20                     |~100                    |~54            |~0,320  |~3,83         |~31                 |~2,24         |~242              |~17        |~86 (28 runnable, 26 waiting, 41 timed-waiting) |6 active, 16 idle|110 usage, 77 creation          |max: 488, avg: 243               |
 |ZGC       |460800                      |16                     |~80                     |~40            |~0,350  |~3,09         |~32                 |~3,08         |~219              |~15        |~86 (25 runnable, 27 waiting, 43 timed-waiting) |5 active, 16 idle|80 usage,  53 creation          |max: 497, avg: 248               |
 
+PostgreSQL Tuning:
+
+
+|TUNING|min_wal_size/max_wal_size|max_worker_processes/max_parallel_workers|work_mem|checkpoint_timeout/checkpoint_completion_target|effective_cache_size|maintenance_work_mem|wal_buffers|random_page_cost|effective_io_concurrency|
+|:-----|:-------|:--|:-----|:--------|:------|:----|:---|:--|:--|
+|BEFORE|80MB/1GB|8/8|4MB   |5mib/0.9 |4GB    |64MB |-1  |4.0|1  |
+|AFTER |1GB/4GB |4/4|9830kB|30min/0.7|11520MB|960MB|16MB|1.1|200|
+
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>BONUS: HA HEY, THIS IS A PRIVATE RESIDENCE MAN.</h6>
