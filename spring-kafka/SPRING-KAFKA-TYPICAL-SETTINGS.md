@@ -169,7 +169,7 @@ Moreover, there is a :gear:	[gist](https://gist.github.com/fragaLY/f0a9a235c3e92
 
 If you have any question, feel free to contact me direct in [linkedin](https://www.linkedin.com/in/vadzimkavalkou/).
 
-Of course in the chapter naming is a typical quote and a joke. Remember, the asynchronous messaging is not a silver bullet, sometimes it doesn't fit your needs.
+Of course in the chapter naming is a typical quote and joke. Remember, the asynchronous messaging is not a silver bullet, sometimes it doesn't fit your needs.
 
 :gun: Sometimes you ought to follow the next quote:
 >"HEAVY IS GOOD, HEAVY IS RELIABLE. IF IT DOESN'T WORK YOU CAN ALWAYS HIT THEM WITH IT."
