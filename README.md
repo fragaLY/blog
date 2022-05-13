@@ -5,4 +5,5 @@ Familiar with <a href="https://reactjs.org/">ReactJS</a>, <a href="https://vuejs
 </h3>
 
 :white_check_mark: ['Hapi Fhir Dataset Performance Research'](hapi-fhir-jpaserver/HAPI-FHIR-JPASERVER.md) using hapi-jpaserver-starter;
+
 :white_check_mark: ['Kafka Common Settings](spring-kafka/SPRING-KAFKA-TYPICAL-SETTINGS.md) using Spring Framework;
