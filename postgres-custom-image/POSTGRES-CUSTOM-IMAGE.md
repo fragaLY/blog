@@ -8,11 +8,12 @@
 
 :mechanical_arm: Hi, folks,
 
-The very first step for creating the Postgres docker image with pre init data is preparing it.
-You could decrease the size of the database by removing unused data on it and running the `VACUUM FULL`.
+The very first step for creating the Postgres docker image with predefined data is preparing this data.
 
-After that create a dump using typical command:
+To prepare a data create a dump using typical command:
 `pg_dump --dbname=vts --file="/Users/USER_NAME/Desktop/{data_source}-{timestamp}-dump.sql" --column-inserts --create --if-exists `
+
+As a suggestion, you could decrease the size of the database by removing unused data on it and running the `VACUUM FULL`.
 
 Move dump into the same folder with `Dockerfile` and run the next command to create the image:
 `docker image build . -t postgres-custom:latest`
