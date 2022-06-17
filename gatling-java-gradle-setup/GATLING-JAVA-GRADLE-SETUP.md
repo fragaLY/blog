@@ -88,7 +88,7 @@ gatling {
 
 <b>Gatling configuration:</b>
 
-``` json
+``` conf
 gatling {
   core {
     runDescription = "A2B Gatling tests"
