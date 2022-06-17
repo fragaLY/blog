@@ -9,3 +9,5 @@ Familiar with <a href="https://reactjs.org/">ReactJS</a>, <a href="https://vuejs
 :white_check_mark: ['Kafka Common Settings'](spring-kafka/SPRING-KAFKA-TYPICAL-SETTINGS.md) using Spring Framework;
 
 :white_check_mark: ['Custom Postgres Image'](postgres-custom-image/POSTGRES-CUSTOM-IMAGE.md) using Docker;
+
+:white_check_mark: ['Gatling Setup'](gatling-java-gradle-setup/GATLING-JAVA-GRADLE-SETUP.md) using Java and Gradle;
