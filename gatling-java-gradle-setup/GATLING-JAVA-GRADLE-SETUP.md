@@ -209,6 +209,8 @@ gatling {
   }
 }
 
+```
+
 <b>Logback configuration</b>
 
 ``` xml
@@ -231,7 +233,6 @@ gatling {
 
 ```
 
-```
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>CHAPTER 3: SO DO US ALL A FAVOR BEFORE YOU CATCH A COLD.</h6>
