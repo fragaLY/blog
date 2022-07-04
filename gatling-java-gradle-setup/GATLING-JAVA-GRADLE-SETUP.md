@@ -75,7 +75,6 @@ gatling {
             '-XX:+ParallelRefProcEnabled',
             '-XX:MaxInlineLevel=20',
             '-XX:MaxTrivialSize=12',
-            '-XX:+ExitOnOutOfMemoryError',
             '-XX:+UseStringDeduplication',
             '-XX:+ExitOnOutOfMemoryError',
             '-XX:+OptimizeStringConcat',
