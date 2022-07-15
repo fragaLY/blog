@@ -1,9 +1,4 @@
 <h4 align="center">Hello, my name is Vadzim Kavalkou and this is my tech blog. You can find here some examples and researches related to software development.</h1>
-<h6 align="center">Chief Software Engineer in Advance Software Engineering Department at [EPAM Systems](http://epam.com/).
-T-shaped person with core knowledge in the JVM stack area.
-Proven practical experience in development with [Java](https://www.java.com/en/), [Kotlin](https://kotlinlang.org/), [Spring Framework](https://spring.io/projects/spring-boot), [JIB](https://github.com/GoogleContainerTools/jib), [Docker](https://www.docker.com/), [Open API](https://www.openapis.org/), [Gradle](https://gradle.org/), [Postgres](https://www.postgresql.org/), [Flyway](https://flywaydb.org/), [Liquibase](https://www.liquibase.org/).
-Familiar with [Flutter](https://flutter.dev/), [Kubernetes](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/), [GitHub Actions](https://github.com/features/actions), [Gitlab CI](https://docs.gitlab.com/ee/ci/), [JMeter](https://jmeter.apache.org/), [Gatling](https://gatling.io/), [GCP](https://cloud.google.com/gcp/).
-</h6>
 
 :white_check_mark: ['Hapi Fhir Dataset Performance Research'](hapi-fhir-jpaserver/HAPI-FHIR-JPASERVER.md) using hapi-jpaserver-starter;
 
