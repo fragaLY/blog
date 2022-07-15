@@ -8,4 +8,4 @@
 
 :white_check_mark: ['Gatling Setup'](gatling-java-gradle-setup/GATLING-JAVA-GRADLE-SETUP.md) using Java and Gradle;
 
-:white_check_mark: ['Comparing Spring Boot Web and Spring Boot Web Native'](spring-boot-web_vs_spring-boot-web-native/SPRING-BOOT-WEB_VS_SPRING-BOOT-WEB-NATIVE.md.md) using Java, Gradle, Gatling, Spring Boot, Spring Boot Native using Native Build tools and Build Pack;
+:white_check_mark: ['Comparing Spring Boot Web and Spring Boot Web Native'](spring-boot-web_vs_spring-boot-web-native/SPRING-BOOT-WEB_VS_SPRING-BOOT-WEB-NATIVE.md) using Java, Gradle, Gatling, Spring Boot, Spring Boot Native using Native Build tools and Build Pack;
