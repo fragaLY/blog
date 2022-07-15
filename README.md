@@ -1,7 +1,11 @@
 <h4 align="center">Hello, my name is Vadzim Kavalkou and this is my tech blog. You can find here some examples and researches related to software development.</h1>
-<h6 align="center">I'm a T-shaped person with core knowledge in the JVM stack area. 
-  Proven practical experience with development with <a href="https://www.java.com/en/">Java 6-17</a>, <a href="https://kotlinlang.org/">Kotlin</a>, <a href="https://spring.io/projects/spring-boot">Spring Boot</a>, <a href="https://github.com/GoogleContainerTools/jib">JIB</a>, <a href="https://www.docker.com/">Docker</a>, <a href="https://www.openapis.org/">Open API</a>, <a href="https://gradle.org/">Gradle</a>, <a href="https://www.postgresql.org/">Postgres</a>, <a href="https://flywaydb.org/">Flyway</a>, <a href="https://www.liquibase.org/">Liquibase</a>. 
-Familiar with <a href="https://reactjs.org/">ReactJS</a>, <a href="https://vuejs.org/">VueJS</a>, <a href="https://flutter.dev/">Flutter</a>, <a href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/">Kubernetes</a>, <a href="https://github.com/features/actions">GitHub Actions</a>/<a href="https://docs.gitlab.com/ee/ci/">Gitlab CI</a>, <a href="https://jmeter.apache.org/">JMeter</a> performance testing, <a href="https://cloud.google.com/gcp/?utm_source=google&utm_medium=cpc&utm_campaign=emea-emea-all-en-dr-bkws-all-all-trial-e-gcp-1010042&utm_content=text-ad-LE-any-DEV_c-CRE_502045654264-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20GCP%20~%20General%23v57-KWID_43700061596202457-kwd-6458750523-userloc_9062748&utm_term=KW_google%20cloud-NET_g-PLAC_&gclid=CjwKCAjwn6GGBhADEiwAruUcKgoRPVFjr_qpwinKXp5sXEZpaFTpAQpP1iPfH9yfmvQGrEji8807BBoCc4kQAvD_BwE&gclsrc=aw.ds">Google Cloud Development</a>, and Architecting.
+<h6 align="center">
+
+*  Chief Software Engineer in Advance Software Engineering Department at [EPAM Systems](http://epam.com/).
+*  T-shaped person with core knowledge in the JVM stack area.
+*  Proven practical experience in development with [Java](https://www.java.com/en/), [Kotlin](https://kotlinlang.org/), [Spring Framework](https://spring.io/projects/spring-boot), [JIB](https://github.com/GoogleContainerTools/jib), [Docker](https://www.docker.com/), [Open API](https://www.openapis.org/), [Gradle](https://gradle.org/), [Postgres](https://www.postgresql.org/), [Flyway](https://flywaydb.org/), [Liquibase](https://www.liquibase.org/).
+*  Familiar with [Flutter](https://flutter.dev/), [Kubernetes](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/), [GitHub Actions](https://github.com/features/actions), [Gitlab CI](https://docs.gitlab.com/ee/ci/), [JMeter](https://jmeter.apache.org/), [Gatling](https://gatling.io/), [GCP](https://cloud.google.com/gcp/).
+
 </h3>
 
 :white_check_mark: ['Hapi Fhir Dataset Performance Research'](hapi-fhir-jpaserver/HAPI-FHIR-JPASERVER.md) using hapi-jpaserver-starter;
@@ -11,3 +15,5 @@ Familiar with <a href="https://reactjs.org/">ReactJS</a>, <a href="https://vuejs
 :white_check_mark: ['Custom Postgres Image'](postgres-custom-image/POSTGRES-CUSTOM-IMAGE.md) using Docker;
 
 :white_check_mark: ['Gatling Setup'](gatling-java-gradle-setup/GATLING-JAVA-GRADLE-SETUP.md) using Java and Gradle;
+
+:white_check_mark: ['Comparing Spring Boot Web and Spring Boot Web Native'](spring-boot-web_vs_spring-boot-web-native/SPRING-BOOT-WEB_VS_SPRING-BOOT-WEB-NATIVE.md.md) using Java, Gradle, Gatling, Spring Boot, Spring Boot Native using Native Build tools and Build Pack;
