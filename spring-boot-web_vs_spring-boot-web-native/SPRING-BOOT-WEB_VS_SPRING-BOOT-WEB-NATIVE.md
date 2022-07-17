@@ -528,8 +528,206 @@ Move on.
 
 <h6>CHAPTER 5: MY MAMA ALWAYS SAID YOU'VE GOT TO PUT THE PAST BEHIND YOU BEFORE YOU CAN MOVE ON.</h6>
 
-SPRING BOOT WEB NATIVE SETTINGS AND CONFIGURATIONS.
-PERFORMANCE TESTS RESULTS.
+Hmm, seems the most interesting part is here. Not so stable without a major version of Spring Native.
+It was very interesting for me to understand it better and compare it with the previous solution.
+
+Soon, I will provide you with some high-level settings and configurations.
+First of all, I would to say you that Spring Native has a lot of limitations starting from choosing the server in use and ending with working with different types of Postgres types such as jsonb and tsrange.
+
+Some of the cases I tried to investigate in the Spring Native repository, some of them I solved, and in other cases I found workarounds. As [this one](https://github.com/spring-projects-experimental/spring-native/issues/1668).
+
+### STRONGLY RECOMMEND NOT TO USE SPRING NATIVE IN PRODUCTION AT THE MOMENT. IT COULD LEAD TO UNPREDICTABLE LOSSES.
+
+|JDK|GC|Gradle|Spring Boot|Spring AOT|
+|:--|:-|:-----|:----------|:---------|
+|17 |G1|7.5   |2.7.1      |0.12.1    |
+
+### Gradle Build Script
+
+``` groovy
+import org.springframework.aot.gradle.dsl.AotMode
+
+plugins {
+    id("java")
+    id("org.springframework.boot") version "2.7.1"
+    id("io.spring.dependency-management") version "1.0.12.RELEASE"
+    id("org.springframework.experimental.aot") version "0.12.1"
+    id("org.hibernate.orm")
+}
+
+group = 'by.vk'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    maven { url 'https://repo.spring.io/release' }
+    mavenCentral()
+}
+
+dependencies {
+    //region spring
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-actuator") {
+        exclude group: 'io.micrometer', module: 'micrometer-core'
+    }
+    //endregion
+    //region logback
+    implementation("ch.qos.logback.contrib:logback-jackson:0.1.5")
+    implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
+    //endregion
+    //region lombok
+    annotationProcessor("org.projectlombok:lombok")
+    implementation("org.projectlombok:lombok")
+    //endregion
+    //region postgres
+    runtimeOnly("org.postgresql:postgresql")
+    //endregion
+}
+
+bootBuildImage {
+    buildpacks = ["gcr.io/paketo-buildpacks/java-native-image:7.23.0"]
+    builder = "paketobuildpacks/builder:tiny"
+    environment = [
+            "BP_NATIVE_IMAGE": "true"
+    ]
+}
+
+springAot {
+    mode = AotMode.NATIVE
+    debugVerify = false
+    removeXmlSupport = true
+    removeSpelSupport = true
+    removeYamlSupport = false
+    removeJmxSupport = true
+    verify = true
+}
+
+hibernate {
+    enhance {
+        enableLazyInitialization = false
+        enableDirtyTracking = true
+        enableAssociationManagement = true
+        enableExtendedEnhancement = false
+    }
+}
+```
+
+And application.yml:
+
+``` yaml
+server:
+  compression:
+    enabled: true
+  tomcat:
+    threads:
+      max: 32
+      min-spare: 4
+
+spring:
+  main:
+    banner-mode: off
+  cache:
+    type: none
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: default
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: "jdbc:postgresql://postgres-a2b:5432/a2b?currentSchema=a2b" #for local solution replace 'postgres-a2b' with localhost and port '5432' to '5433'
+    username: "postgres"
+    password: "postgres"
+    hikari:
+      minimumIdle: 4 # default: same as maximumPoolSize
+      maximumPoolSize: 8 # cores * 2; default is 10
+      connection-timeout: 35000 #default 30000
+      pool-name: "hikari-pool"
+      idle-timeout: 10000 # default: 600000 (10 minutes)
+      max-lifetime: 35000 # default: 1800000 (30 minutes)
+      keepaliveTime: 30000 # default: 0 (disabled)
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        cache:
+          use_query_cache: false
+          use_second_level_cache: false
+          use_structured_entries: false
+          use_minimal_puts: false
+        default_schema: "a2b"
+        types:
+          print:
+            banner: false
+
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
+      show-components: never
+      show-details: never
+      group:
+        readiness:
+          include: readinessState, db
+    metrics.enabled: true
+    prometheus.enabled: true
+  endpoints.web.exposure.include: "*"
+  metrics.export.prometheus.enabled: true
+
+logging.level:
+  ROOT: info
+  by.vk.springbootwebnative: info
+  org.springframework: info
+```
+
+Let's build both solutions, and check its performance.
+
+* TOMCAT (other servers are not supported)
+
+``` yaml
+server:
+  compression:
+    enabled: true
+  tomcat:
+    threads:
+      max: 32
+      min-spare: 4
+
+```
+
+![](./static/native/global.png)
+
+![](./static/native/requests.png)
+
+![](./static/native/requests_per_second.png)
+
+![](./static/native/responses_per_second.png)
+
+![](./static/native/response_time_1.png)
+
+![](./static/native/response_time_all.png)
+
+![](./static/native/dive_docker_image.png)
+
+You could download the [Performance Tests Results](./static/native/native.zip) and check it on your own.
+
+Let's sum it:
+
+|TYPE              |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)| CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
+|:-----------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
+|BUILD PACK        |751           |144,79            |:white_check_mark: 0,285|:white_check_mark: 10201|374.566|47831|584             |310     |12,5    |64           |99              |
+|NATIVE BUILD TOOLS|:white_check_mark: 210|116,20    |0,310      |8759        |:white_check_mark: 414.785|:white_check_mark: 32175|:white_check_mark: 1829|:white_check_mark: 263|:white_check_mark: 8|:white_check_mark: 52|99              |
+
 
 ------------------------------------------------------------------------------------------------------------------------
 
