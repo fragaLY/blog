@@ -226,9 +226,31 @@ OK, now we have the dataset. The next step is the creation of test scenarios and
 ------------------------------------------------------------------------------------------------------------------------
 <h6>CHAPTER 3: RUN, GATLING, RUN!</h6>
 
-PERFORMANCE DESCRIPTION.
-TEST SCENARIOS DESCRIPTION.
-GATLING TESTS DESCRIPTION.
+Now is the time to provide some use cases and create test scenarios.
+
+### USE CASES
+
+| #    | Scenario step          | Assumed operation           |
+| :--: | :--------------------- | :-------------------------- |
+| 1    | As a user I would like to choose the country. | [GET] The list of available countries is presented. |
+| 2    | As a user I would like to choose the city. | [GET] The list of available cities is presented. |
+| 3    | As a user I would like to choose the origin. | [GET] The list of available origins is presented. |
+| 4    | As a user I would like to choose the destination. | [GET] The list of available destinations is presented.  |
+| 5    | As a user I would like to choose the date of transfer. | [GET] [NO LOAD] The future dates for the current month are presented. |
+| 6    | As a user I would like to see all available transfers from 'origin', to 'destination' for selected this date. | [GET] The list of available transfers by selected origin, destination, and date is presented. |
+| 7    | As a user I would like to book a transfer. | [POST] The transfer is booked in the system. |
+| 8    | As a user I would like to see all my transfers. | [GET] The list of all my transfers (COMPLETED, CANCELED, BOOKED) is presented. |
+| 9    | As a user I would like to view any owned transfer. | [GET] One of the transfers (COMPLETED, CANCELED, BOOKED) is retrieved. |
+| 10   | As a user I would like to edit any owned transfer in the future. | [PUT] Any (BOOKED) transfer description is updated. |
+| 11   | As a user I would like to cancel any owned transfer in the future. | [PUT] Any (BOOKED) transfer is canceled (CANCELED).  |
+| 12   | As a user I would like to complete any owned transfer in the past. | [PUT] Any (BOOKED) transfer is completed (COMPLETED).  |
+| 13   | As a user I would like to see my profile. | [GET] User is retrieved with her/his transfers data. |
+| 14   | As a user I would like to update my profile. | [PUT] User updates with her/his own data. |
+| 15   | Repeat (1) - (9) every 1 hours for each user. | |
+
+OK, nice job fellows. Seems like now we need to bring these scenarios to life. And there is a [Gatling](https://gatling.io/).
+
+The steps and settings for Gatling I've already provided in my previous post. Check [it](../gatling-java-gradle-setup/GATLING-JAVA-GRADLE-SETUP.md) up!
 
 ------------------------------------------------------------------------------------------------------------------------
 <h6>CHAPTER 4: MY MAMA ALWAYS SAID LIFE WAS LIKE A BOX OF BEAN DEFINITIONS. YOU NEVER KNOW WHAT YOU'RE GONNA GET.</h6>

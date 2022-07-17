@@ -40,7 +40,7 @@ Now just technical stuff regarding the preset of Gatling using Gradle.
 ``` gradle
 plugins {
     id "java"
-    id "io.gatling.gradle" version "3.7.6.3"
+    id "io.gatling.gradle" version "3.8.2"
 }
 
 group 'by.vk'
@@ -52,11 +52,11 @@ repositories {
 
 dependencies {
     //region gatling
-    implementation("io.gatling:gatling-core:3.7.6")
-    implementation("io.gatling:gatling-http:3.7.6")
-    implementation("io.gatling:gatling-app:3.7.6")
-    gatlingRuntimeOnly("io.gatling:gatling-charts:3.7.6")
-    gatlingRuntimeOnly("io.gatling.highcharts:gatling-charts-highcharts:3.7.6")
+    implementation("io.gatling:gatling-core:3.8.2")
+    implementation("io.gatling:gatling-http:3.8.2")
+    implementation("io.gatling:gatling-app:3.8.2")
+    gatlingRuntimeOnly("io.gatling:gatling-charts:3.8.2")
+    gatlingRuntimeOnly("io.gatling.highcharts:gatling-charts-highcharts:3.8.2")
     //endregion
 }
 
