@@ -252,11 +252,271 @@ OK, nice job fellows. Seems like now we need to bring these scenarios to life. A
 
 The steps and settings for Gatling I've already provided in my previous post. Check [it](../gatling-java-gradle-setup/GATLING-JAVA-GRADLE-SETUP.md) up!
 
+The machine I will do all the actions is the next:
+
+> Model Name: MacBook Pro
+
+> Model Identifier: MacBookPro16,2
+
+> Processor Name: Quad-Core Intel Core i7
+
+> Processor Speed: 2,3 GHz
+
+> Number of Processors: 1
+
+> Total Number of Cores: 4
+
+> L2 Cache (per Core): 512 KB
+
+> L3 Cache: 8 MB
+
+> Hyper-Threading Technology: Enabled
+
+> Memory:	32 GB
+
 ------------------------------------------------------------------------------------------------------------------------
 <h6>CHAPTER 4: MY MAMA ALWAYS SAID LIFE WAS LIKE A BOX OF BEAN DEFINITIONS. YOU NEVER KNOW WHAT YOU'RE GONNA GET.</h6>
 
-SPRING BOOT WEB SETTINGS AND CONFIGURATIONS.
-PERFORMANCE TESTS RESULTS.
+Good job,
+
+Now we need to create the application that we are going to test.
+
+The initial implementation will be on Spring Boot Web.
+The sources you could find [there](https://github.com/fragaLY/performance-researches/tree/master/spring-boot-web).
+
+The languages, frameworks, and tools I used.
+
+|JDK|GC|Gradle|Spring Boot|
+|:--|:-|:-----|:----------|
+|17 |G1|7.5   |2.7.1      |
+
+I will highlight some of the configurations here.
+
+### Gradle Build Script
+
+```groovy
+plugins {
+    id("java")
+    id("org.springframework.boot") version "2.7.1"
+    id("io.spring.dependency-management") version "1.0.12.RELEASE"
+    id("com.google.cloud.tools.jib") version "3.2.1"
+}
+
+group = 'by.vk'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //region spring
+    implementation("com.vladmihalcea:hibernate-types-55:2.16.3")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    implementation("org.springframework.boot:spring-boot-starter-undertow")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework:spring-context-indexer")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
+    //endregion
+    //region logback
+    implementation("ch.qos.logback.contrib:logback-jackson:0.1.5")
+    implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
+    //endregion
+    //region lombok
+    annotationProcessor("org.projectlombok:lombok")
+    implementation("org.projectlombok:lombok")
+    //endregion
+    //region postgres
+    runtimeOnly("org.postgresql:postgresql")
+    //endregion
+}
+
+jib {
+    to {
+        image = 'service-a2b:latest'
+    }
+    from {
+        image = "gcr.io/distroless/java17"
+    }
+    container {
+        jvmFlags = ['-noverify', '-XX:+UseContainerSupport', '-XX:MaxRAMPercentage=75.0', '-XX:InitialRAMPercentage=50.0', '-XX:+OptimizeStringConcat', '-XX:+UseStringDeduplication', '-XX:+ExitOnOutOfMemoryError', '-XX:+AlwaysActAsServerClassMachine', '-Xmx512m', '-Xms128m', '-XX:MaxMetaspaceSize=128m', '-XX:MaxDirectMemorySize=256m', '-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/opt/tmp/heapdump.bin']
+        ports = ['8080']
+        labels.set([maintainer: 'Vadzim Kavalkou <vadzim.kavalkou@gmail.com>', appname: 'a2b-service', version: '0.0.1-SNAPSHOT'])
+        creationTime = 'USE_CURRENT_TIMESTAMP'
+    }
+}
+```
+
+And application.yml, for sure.
+
+```yaml
+server:
+  compression:
+    enabled: true
+  undertow:
+    threads:
+      io: 4 # default: equals to cores count
+      worker: 8 # default: 8
+
+spring:
+  main:
+    banner-mode: off
+  cache:
+    type: none
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: "jdbc:postgresql://postgres-a2b:5432/a2b?currentSchema=a2b" #for local solution replace 'postgres-a2b' with localhost and port '5432' to '5433'
+    username: "postgres"
+    password: "postgres"
+    hikari:
+      minimumIdle: 4 # default: same as maximumPoolSize
+      maximumPoolSize: 8 # cores * 2; default is 10
+      connection-timeout: 35000 #default 30000
+      pool-name: "hikari-pool"
+      idle-timeout: 10000 # default: 600000 (10 minutes)
+      max-lifetime: 35000 # default: 1800000 (30 minutes)
+      keepaliveTime: 30000 # default: 0 (disabled)
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        cache:
+          use_query_cache: false
+          use_second_level_cache: false
+          use_structured_entries: false
+          use_minimal_puts: false
+        default_schema: "a2b"
+        types:
+          print:
+            banner: false
+
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
+      show-components: never
+      show-details: never
+      group:
+        readiness:
+          include: readinessState, db
+    metrics.enabled: true
+    prometheus.enabled: true
+  endpoints.web.exposure.include: "*"
+  metrics.export.prometheus.enabled: true
+
+logging.level:
+  ROOT: info
+  by.vk.springbootweb: info
+  org.springframework: info
+```
+
+As I already mentioned, I decided to check all possible embedded servers.
+So, I've build the *.jar file and launched it several times for different servers.
+After that, I've created the image using [JIB](https://github.com/GoogleContainerTools/jib) to be able to create images without Docker Engine and took the [distroless](https://github.com/GoogleContainerTools/distroless) as a base image due to the next benefits of it:
+>"Distroless" images contain only your application and its runtime dependencies. They do not contain package managers, shells or any other programs you would expect to find in a standard Linux distribution.
+
+Let's check the results.
+
+####  OVERALL
+
+|TYPE    |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|JVM HEAP (MB)|JVM NON-HEAP (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
+|:-------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:------------|:----------------|:----------|:------------|:---------------|
+|TOMCAT  |N/A           |N/A               |3,94       |8168        |418,715|:white_check_mark: 29289     |1568            |:white_check_mark: 365|94      |12         |226          |99              |
+|JETTY   |N/A           |N/A               |3,83       |10201       |421.816|54207                        |1592            |1137         |94               |14         |224          |99              |
+|UNDERTOW|:white_check_mark: 5|:white_check_mark: 49,70|:white_check_mark: 3,59|:white_check_mark: 10311|381.127|50977|:white_check_mark: 1611|658|94      |:white_check_mark: 11|:white_check_mark: 33|99|
+|UNDERTOW IN DOCKER|46  |280               |5,20       |10264       |:white_check_mark: 448.682|29998     |916             |756          |94               |15         |32           |99              |
+
+* TOMCAT
+
+``` yaml
+server:
+  compression:
+    enabled: true
+  tomcat:
+    accept-count: 100 # default: 100
+    threads:
+      max: 200 # default: 200
+      min-spare: 10 # default: 10
+
+```
+
+![](./static/web/tomcat.png)
+
+* JETTY
+
+``` yaml
+server:
+ compression:
+   enabled: true
+ jetty:
+   threads:
+     max: 200 # default: 200
+     min: 8 # default: 8
+
+```
+
+![](./static/web/jetty.png)
+
+
+* UNDERTOW
+
+``` yaml
+server:
+ compression:
+   enabled: true
+ undertow:
+   threads:
+     io: 4 # default: equals to cores count
+     worker: 8 # default: 8
+
+```
+
+Global information:
+
+![](./static/web/global.png)
+
+
+Requests:
+
+![](./static/web/requests.png)
+
+Requests per second:
+
+![](./static/web/requests_per_second.png)
+
+Responses per second:
+
+![](./static/web/responses_per_second.png)
+
+Response time for first minute:
+
+![](./static/web/response_time_1.png)
+
+Response time for all time:
+
+![](./static/web/response_time_all.png)
+
+Docker image investigation:
+
+![](./static/web/dive_docker_image.png)
+
+You could download the [Performance Tests Results](./static/web/web.zip) and check it on your own.
 
 ------------------------------------------------------------------------------------------------------------------------
 
