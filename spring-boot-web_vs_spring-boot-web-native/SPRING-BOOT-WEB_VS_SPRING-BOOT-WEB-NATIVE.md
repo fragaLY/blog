@@ -246,11 +246,11 @@ Now is the time to provide some use cases and create test scenarios.
 | 12   | As a user I would like to complete any owned transfer in the past. | [PUT] Any (BOOKED) transfer is completed (COMPLETED).  |
 | 13   | As a user I would like to see my profile. | [GET] User is retrieved with her/his transfers data. |
 | 14   | As a user I would like to update my profile. | [PUT] User updates with her/his own data. |
-| 15   | Repeat (1) - (9) every 1 hours for each user. | |
+| 15   | Repeat (1) - (9) 20 minutes for each user. | |
 
 OK, nice job fellows. Seems like now we need to bring these scenarios to life. And there is a [Gatling](https://gatling.io/).
 
-The steps and settings for Gatling I've already provided in my previous post. Check [it](../gatling-java-gradle-setup/GATLING-JAVA-GRADLE-SETUP.md) up!
+The steps and settings for Gatling I've already provided in my previous post. [Check it up!](../gatling-java-gradle-setup/GATLING-JAVA-GRADLE-SETUP.md)
 
 The machine I will do all the actions is the next:
 
