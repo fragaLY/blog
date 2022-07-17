@@ -746,8 +746,16 @@ OK, OK, OK. What do we have?
 |UNDERTOW          |:white_check_mark: 5             |:white_check_mark: 49,70             |3,59       |:white_check_mark: 10311       |381.127|50977                        |1611            |658     |11      |33           |99              |
 |UNDERTOW IN DOCKER|46            |280               |5,20       |10264       |:white_check_mark: 448.682|:white_check_mark: 29998                        |916             |840     |15      |:white_check_mark: 32           |99              |
 
-WHEN TO USE THE FIRST ONE.
-WHEN TO USE THE SECOND ONE.
+To be honest, it's hard to compare different approaches with different purposes. Hold on. The purpose is the only one - the profit.
+You could choose the approach that fits better for your business. You know your customers better than someone else. Even better in some cases than a customer. LOL.
+
+In case you need a faster boot-up time, you could prefer the native solutions. But as I said before I strongly recommend you not to bring it into production at the moment.
+If you decided to bring it in, please consider reviewing your CI/CD due to the fact that the delivery time will increase several times.
+If it's not applicable for you and you have to have time to market as less as possible, think about it twice.
+Nevertheless, the native build tools build provides not have such a big build time as the build pack and provides us with the best saturation point, RAM usage, and CPU utilization.
+And, of cuz, take a look at the boot-up time... 310 ms, Caaaaarl.
+
+In other cases, the solution with Undertow is pretty better and stable. To take the risk or not - is your decision. Chose your destiny.
 
 ------------------------------------------------------------------------------------------------------------------------
 
