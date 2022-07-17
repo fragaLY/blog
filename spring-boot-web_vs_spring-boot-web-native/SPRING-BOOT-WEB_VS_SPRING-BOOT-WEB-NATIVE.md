@@ -196,6 +196,10 @@ services:
 To connect via pgadmin follow [pgadmin](localhost:5050) enter "user@user.com" and "password".
 Create server and attach to host `docker inspect $(docker ps -aqf "name=postgres") | grep IPAddress`, port "5433", db "postgres" with "user" and "password" credentials.
 
+Now, let's imagine the number of entities in use. I decided to launch the application for one country with six cities. I love my country, it's about Belarus.
+So, in every city, we will have 20 points to be able to arrive or depart. I assume that every point has about 100 transfers.
+The target audience is 200_000 users. And every one of them has at least 2 transfers.
+
 |       UNIT      | AMOUNT |
 |:----------------|:-------|
 | Countries       | 1      |
