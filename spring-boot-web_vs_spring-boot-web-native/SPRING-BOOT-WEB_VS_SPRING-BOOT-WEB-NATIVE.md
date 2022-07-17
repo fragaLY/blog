@@ -761,7 +761,12 @@ In other cases, the solution with Undertow is pretty better and stable. To take 
 
 <h6>CHAPTER 7: MAMA ALWAYS SAID YOU CAN TELL A LOT ABOUT APPLICATIONS BY THEIR PERFORMANCE. WHERE THEY'VE BEEN, WHERE THEY'RE GOING.</h6>
 
+To sum up, honestly, it was a hard and interesting way to take a view on both solutions.
+I really enjoy the way Spring is moving on. It is going on to be faster in all meanings.
 
+Thank you, Spring Native team!
+Thank you whole the Spring Team!
+Long live Pivotal Software!
 
 ------------------------------------------------------------------------------------------------------------------------
 
