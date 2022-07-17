@@ -433,15 +433,6 @@ After that, I've created the image using [JIB](https://github.com/GoogleContaine
 
 Let's check the results.
 
-####  OVERALL
-
-|TYPE    |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|JVM HEAP (MB)|JVM NON-HEAP (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
-|:-------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:------------|:----------------|:----------|:------------|:---------------|
-|TOMCAT  |N/A           |N/A               |3,94       |8168        |418,715|:white_check_mark: 29289     |1568            |:white_check_mark: 365|94      |12         |226          |99              |
-|JETTY   |N/A           |N/A               |3,83       |10201       |421.816|54207                        |1592            |1137         |94               |14         |224          |99              |
-|UNDERTOW|:white_check_mark: 5|:white_check_mark: 49,70|:white_check_mark: 3,59|:white_check_mark: 10311|381.127|50977|:white_check_mark: 1611|658|94      |:white_check_mark: 11|:white_check_mark: 33|99|
-|UNDERTOW IN DOCKER|46  |280               |5,20       |10264       |:white_check_mark: 448.682|29998     |916             |756          |94               |15         |32           |99              |
-
 * TOMCAT
 
 ``` yaml
@@ -517,6 +508,21 @@ Docker image investigation:
 ![](./static/web/dive_docker_image.png)
 
 You could download the [Performance Tests Results](./static/web/web.zip) and check it on your own.
+
+Let's gather all the information:
+
+|TYPE    |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|JVM HEAP (MB)|JVM NON-HEAP (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
+|:-------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:------------|:----------------|:----------|:------------|:---------------|
+|TOMCAT  |N/A           |N/A               |3,94       |8168        |418,715|:white_check_mark: 29289     |1568            |:white_check_mark: 365|94      |12         |226          |99              |
+|JETTY   |N/A           |N/A               |3,83       |10201       |421.816|54207                        |1592            |1137         |94               |14         |224          |99              |
+|UNDERTOW|:white_check_mark: 5|:white_check_mark: 49,70|:white_check_mark: 3,59|:white_check_mark: 10311|381.127|50977|:white_check_mark: 1611|658|94      |:white_check_mark: 11|:white_check_mark: 33|99|
+|UNDERTOW IN DOCKER|46  |280               |5,20       |10264       |:white_check_mark: 448.682|29998     |916             |756          |94               |15         |32           |99              |
+
+As you can see, in most cases undertow seems pretty good and has the best saturation point.
+Nevertheless, the tomcat provides us with a better response time and JVM heap metrics.
+
+The metrics of the docker container we will compare a bit soon with the other solution.
+Move on.
 
 ------------------------------------------------------------------------------------------------------------------------
 
