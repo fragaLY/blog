@@ -30,9 +30,9 @@ No class lazy loading: everything shipped in the executables will be loaded in m
 There are some limitations around some aspects of Java applications that are not fully supported;
 The goal of this project is to incubate the support for Spring Native, an alternative to Spring JVM, and provide a native deployment option designed to be packaged in lightweight containers. In practice, the target is to support your Spring applications, almost unmodified, on this new platform.
 
-I will not dive deeper into AOT and GraalVM. This is out of the scope of this article.
+I will not dive deeper into AOT and [GraalVM](https://www.graalvm.org/). This is out of the scope of this article.
 
-So, what I am going to check? I would like to check the performance of applications using Tomcat, Jetty, Undertow, JIB-built image, and Native Application using both native build tools and build pack.
+So, what I am going to check? I would like to check the performance of applications using [Tomcat](https://tomcat.apache.org/), [Jetty](https://www.eclipse.org/jetty/), [Undertow](https://undertow.io/), [JIB](https://github.com/GoogleContainerTools/jib)-built image, and Native Application using both [native build tools](https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/#getting-started-native-build-tools) and [build packs](https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/#getting-started-buildpacks).
 
 Let's move forward.
 
