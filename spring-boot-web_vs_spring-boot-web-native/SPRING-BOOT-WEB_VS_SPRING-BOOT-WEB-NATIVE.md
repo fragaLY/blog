@@ -761,13 +761,19 @@ In other cases, the solution with Undertow is pretty better and stable. To take 
 
 <h6>CHAPTER 7: MAMA ALWAYS SAID YOU CAN TELL A LOT ABOUT APPLICATIONS BY THEIR PERFORMANCE. WHERE THEY'VE BEEN, WHERE THEY'RE GOING.</h6>
 
-SUM UP.
+
 
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>BONUS: LIEUTENANT DAN GOT ME INVESTED IN SOME KIND OF SPRING COMPANY.</h6>
 
-NEXT PRESENTATIONS ADD.
+This article is the first in my performance journey.
+
+Next, I will bring you details regarding the [Spring Reactive](https://spring.io/reactive) approaches, [Quarkus](https://quarkus.io/), [Micronaut](https://micronaut.io/), [Vert.x](https://vertx.io/), [Helidon](https://helidon.io/), and [Ktor](https://ktor.io/).
+I will try to build it as native as well.
+
+So, will be in touch.
+
 HAVE A NICE DAY.
 
 ------------------------------------------------------------------------------------------------------------------------
