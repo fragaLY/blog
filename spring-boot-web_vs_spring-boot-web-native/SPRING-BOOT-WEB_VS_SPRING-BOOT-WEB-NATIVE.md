@@ -757,6 +757,9 @@ And, of cuz, take a look at the boot-up time... 310 ms, Caaaaarl.
 
 In other cases, the solution with Undertow is pretty better and stable. To take the risk or not - is your decision. Chose your destiny.
 
+![](./static/sum-up.png)
+
+
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>CHAPTER 7: MAMA ALWAYS SAID YOU CAN TELL A LOT ABOUT APPLICATIONS BY THEIR PERFORMANCE. WHERE THEY'VE BEEN, WHERE THEY'RE GOING.</h6>
