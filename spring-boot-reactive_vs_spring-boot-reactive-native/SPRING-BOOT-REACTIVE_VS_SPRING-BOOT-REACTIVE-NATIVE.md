@@ -186,12 +186,9 @@ Let's gather all the information:
 |TYPE         |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|JVM HEAP (MB)|JVM NON-HEAP (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
 |:------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:------------|:----------------|:----------|:------------|:---------------|
 |JAR          |3,1           |40,6              |2,55       |10326       |1091,3 |10406                        |4391            |1730         |93               |8          |31           |90              |
-|JAR IN DOCKER|39            |271               |3,95       |?           |?      |?                            |?               |?            |?                |?          |?            |?               |
+|JAR IN DOCKER|39            |271               |3,95       |10258       |631.599|18955                        |2250            |790          |93               |29         |31           |37              |
 
-As you can see, in most cases undertow seems pretty good and has the best saturation point.
-Nevertheless, the tomcat provides us with a better response time and JVM heap metrics.
-
-The metrics of the docker container we will compare a bit soon with the other solution.
+As you can see, in most cases basic approach using jar launching seems pretty good and has the best saturation point.
 Move on.
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -253,7 +250,7 @@ Let's compare all the results including the WEB and WEB as Native.
 |REACTIVE        |BUILD PACK        |?             |?                 |?          |?           |              |       |     |?      |?                            |?               |?       |?       |?            |?               |
 |REACTIVE        |NATIVE BUILD TOOLS|?             |?                 |?          |?           |              |       |     |?      |?                            |?               |?       |?       |?            |?               |
 |REACTIVE        |JAR               |3,1           |40,6              |2,55       |10326       |1168782       |1079847|8    |1091,3 |10406                        |4391            |1823    |8       |31           |90              |
-|REACTIVE        |JAR IN DOCKER     |39            |271               |3,95       |?           |              |       |     |?      |?                            |?               |?       |?       |?            |?               |
+|REACTIVE        |JAR IN DOCKER     |39            |271               |3,95       |10258       |699180        |581761 |17   |631.599|18955                        |2250            |883     |29      |31           |37              |
 
 ------------------------------------------------------------------------------------------------------------------------
 
