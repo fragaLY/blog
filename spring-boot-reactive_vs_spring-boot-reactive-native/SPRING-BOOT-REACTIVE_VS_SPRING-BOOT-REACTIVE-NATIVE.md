@@ -207,7 +207,63 @@ Now it's a time to compare previous solution with native one.
 
 ``` groovy
 
-TBD
+import org.springframework.aot.gradle.dsl.AotMode
+
+plugins {
+    id 'org.springframework.boot' version '2.7.4'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'java'
+    id 'org.springframework.experimental.aot' version '0.12.1'
+}
+
+group = 'by.vk'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    maven { url 'https://repo.spring.io/release' }
+    mavenCentral()
+}
+
+dependencies {
+    //region spring
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-actuator") {
+        exclude group: 'io.micrometer', module: 'micrometer-core'
+    }
+    //endregion
+    //region logback
+    implementation("ch.qos.logback.contrib:logback-jackson:0.1.5")
+    implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
+    //endregion
+    //region lombok
+    annotationProcessor("org.projectlombok:lombok")
+    implementation("org.projectlombok:lombok")
+    //endregion
+    //region postgres
+    implementation("io.r2dbc:r2dbc-postgresql:0.8.13.RELEASE")
+    //endregion
+}
+
+
+bootBuildImage {
+    buildpacks = ["gcr.io/paketo-buildpacks/java-native-image:7.32.1"]
+    builder = "paketobuildpacks/builder:tiny"
+    environment = [
+            "BP_NATIVE_IMAGE": "true"
+    ]
+}
+
+springAot {
+    mode = AotMode.NATIVE
+    debugVerify = false
+    removeXmlSupport = true
+    removeSpelSupport = true
+    removeYamlSupport = false
+    removeJmxSupport = true
+    verify = true
+}
 
 ```
 
@@ -215,23 +271,79 @@ And application.yml:
 
 ``` yaml
 
-TBD
+server:
+  compression:
+    enabled: true
+
+spring:
+  main:
+    banner-mode: off
+    web-application-type: reactive
+  cache:
+    type: none
+  webflux:
+    base-path: "api/v1/"
+  r2dbc:
+    url: "r2dbc:postgresql://localhost:5433/a2b" #for in docker solution replace 'localhost' with 'postgres-a2b'
+    username: "postgres"
+    password: "postgres"
+    properties:
+      schema: "a2b"
+
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
+      show-components: never
+      show-details: never
+      group:
+        readiness:
+          include: readinessState, db
+    metrics.enabled: true
+    prometheus.enabled: true
+  endpoints.web.exposure.include: "*"
+  metrics.export.prometheus.enabled: true
+
+logging.level:
+  ROOT: info
+  by.vk.springbootreactive: info
+  org.springframework: info
 
 ```
 
 Let's build both solutions, and check its performance.
 
-* NATIVE
+* NATIVE BUILD TOOLS
 
-TBD
+![](./static/native/global.png)
+
+![](./static/native/requests.png)
+
+![](./static/native/requests_per_second.png)
+
+![](./static/native/responses_per_second.png)
+
+![](./static/native/response_time_1.png)
+
+![](./static/native/response_time_all.png)
+
+![](./static/native/dive_docker_image.png)
 
 You could download the [Performance Tests Results](./static/reactive/native.zip) and check it on your own.
+JFYI: The native solution uses Serial GC.
 
 Let's sum it:
 
 |TYPE              |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)| CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
 |:-----------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
-|BUILD PACK        |?             |?                 |?          |?           |?      |?                            |?               |?       |?       |?            |?               |
+|BUILD PACK        |1243          |114               |0.109      |?           |?      |?                            |?               |?       |?       |?            |?               |
 |NATIVE BUILD TOOLS|?             |?                 |?          |?           |?      |?                            |?               |?       |?       |?            |?               |
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -243,12 +355,12 @@ Let's compare all the results including the WEB and WEB as Native.
 
 |APPLICATION TYPE|BUILD TYPE        |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|TOTAL REQUESTS|OK     |KO(%)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)| CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
 |:---------------|:-----------------|:-------------|:-----------------|:----------|:-----------|:-------------|:------|:----|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
-|WEB             |BUILD PACK        |751           |144,79            |1,585      |10201       |              |       |     |374.566|47831                        |584             |310     |12,5    |64           |99              |
+|WEB             |BUILD PACK        |751           |144,79            |1,585      |10201       |453012        |339759 |25   |374.566|47831                        |584             |310     |12,5    |64           |99              |
 |WEB             |NATIVE BUILD TOOLS|210           |116,20            |0,310      |8759        |480763        |342782 |29   |414.785|32175                        |1829            |263     |8       |52           |99              |
 |WEB             |UNDERTOW          |5             |49,70             |3,59       |10311       |523756        |396071 |24   |381.127|50977                        |1611            |658     |11      |33           |99              |
 |WEB             |UNDERTOW IN DOCKER|46            |280               |5,20       |10264       |430673        |289692 |33   |448.682|29998                        |916             |840     |15      |32           |99              |
-|REACTIVE        |BUILD PACK        |?             |?                 |?          |?           |              |       |     |?      |?                            |?               |?       |?       |?            |?               |
-|REACTIVE        |NATIVE BUILD TOOLS|?             |?                 |?          |?           |              |       |     |?      |?                            |?               |?       |?       |?            |?               |
+|REACTIVE        |BUILD PACK        |1243          |129               |?          |?           |              |       |     |?      |?                            |?               |?       |?       |?            |?               |
+|REACTIVE        |NATIVE BUILD TOOLS|187           |71,7              |0,107      |?           |              |       |     |?      |?                            |?               |?       |?       |?            |?               |
 |REACTIVE        |JAR               |3,1           |40,6              |2,55       |10326       |1168782       |1079847|8    |1091,3 |10406                        |4391            |1823    |8       |31           |90              |
 |REACTIVE        |JAR IN DOCKER     |39            |271               |3,95       |10258       |699180        |581761 |17   |631.599|18955                        |2250            |883     |29      |31           |37              |
 
