@@ -385,6 +385,26 @@ Let's compare all the results including the WEB and WEB as Native.
 
 <h6>CHAPTER 7: NOBODY CALLS ME CHICKEN.</h6>
 
+So, let's compare Spring Reactive (as Native as well) and Spring Web (as Native as well).
+
+The two points for not choosing the Reactive Jar solution are:
+1. If you would like to have a better boot-up time, please consider to chose the native compilation.
+2. If you would like to have less resource consumption, please take a look at Native Build Tools for Web.
+
+In case you are going to have both of these properties at the top, please chose the Reactive Native Build Tools approach.
+
+The pros of using the Reactive approach instead of the Web one:
+- Less artifact size;
+- On average better boot-up time;
+- Handling 2,23 times more requests;
+- RPS is better 2,43 times;
+- Response time is less in 2,88 times;
+- Saturation point is higher in 2,3 times.
+
+Cons:
+
+- If you chose the Reactive Jar approach you could have RAM consumption increasing 3 times. In other cases, it's pretty similar and even sometimes better.
+
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>BONUS: GREAT VADZIM!</h6>
