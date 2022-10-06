@@ -24,7 +24,7 @@ And now I will concentrate my attention on performance comparing.
 Let's move forward.
 
 ------------------------------------------------------------------------------------------------------------------------
-<h6>CHAPTER 2: IF MY CALCULATIONS ARE CORRECT, WHEN THIS BABY HITS 5k REQUESTS PER SECONDS, YOU'RE GONNA SEE SOME SERIOUS SHIT.</h6>
+<h6>CHAPTER 2: IF MY CALCULATIONS ARE CORRECT, WHEN THIS BABY HITS 1k RESPONSES PER SECONDS, YOU'RE GONNA SEE SOME SERIOUS SHIT.</h6>
 
 Now we need to create the application that we are going to test.
 
