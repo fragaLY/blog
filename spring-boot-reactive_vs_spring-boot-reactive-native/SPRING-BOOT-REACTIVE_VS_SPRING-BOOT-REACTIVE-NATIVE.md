@@ -331,7 +331,7 @@ Commands to build:
 
 Than you can check the stats of you process. Firstly, we are going to find the pid:
 
-> ps aux | grep :8080
+> ps aux | grep :8080 (or you can find by name spring-boot-reactive-native)
 
 Then check it:
 
