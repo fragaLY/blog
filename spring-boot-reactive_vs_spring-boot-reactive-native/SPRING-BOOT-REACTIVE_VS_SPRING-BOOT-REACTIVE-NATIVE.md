@@ -329,6 +329,14 @@ Commands to build:
 
 > ./build/native/nativeCompile/spring-boot-reactive-native
 
+Than you can check the stats of you process. Firstly, we are going to find the pid:
+
+>>> ps aux | grep :8080
+
+Than check it:
+
+>> top -pid ${PID}
+
 * NATIVE BUILD TOOLS
 
 ![](./static/native/global.png)
@@ -345,7 +353,7 @@ Commands to build:
 
 ![](./static/native/dive_docker_image.png)
 
-You could download the [Performance Tests Results](./static/reactive/native.zip) and check it on your own.
+You could download the [Native Build Tools Performance Tests Results](./static/native/native.zip), [Build Pack Performance Tests Results](./static/native/native-in-docker.zip) and check it on your own.
 JFYI: The native solution uses Serial GC.
 
 Let's sum it:
@@ -353,7 +361,7 @@ Let's sum it:
 |TYPE              |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)| CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
 |:-----------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
 |BUILD PACK        |1243          |114               |0.109      |?           |?      |?                            |?               |?       |?       |?            |?               |
-|NATIVE BUILD TOOLS|?             |?                 |?          |?           |?      |?                            |?               |?       |?       |?            |?               |
+|NATIVE BUILD TOOLS|187           |71,7              |0,1        |10224       |1013549|12591                        |3038            |634     |32      |23           |70              |
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -362,16 +370,16 @@ Let's sum it:
 So what do we have?
 Let's compare all the results including the WEB and WEB as Native.
 
-|APPLICATION TYPE|BUILD TYPE        |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|TOTAL REQUESTS|OK     |KO(%)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)| CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
+|APPLICATION TYPE|BUILD TYPE        |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|TOTAL REQUESTS|OK     |KO(%)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|CPU (%) |THREADS (MAX)|POSTGRES CPU (%)|
 |:---------------|:-----------------|:-------------|:-----------------|:----------|:-----------|:-------------|:------|:----|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
 |WEB             |BUILD PACK        |751           |144,79            |1,585      |10201       |453012        |339759 |25   |374.566|47831                        |584             |310     |12,5    |64           |99              |
 |WEB             |NATIVE BUILD TOOLS|210           |116,20            |0,310      |8759        |480763        |342782 |29   |414.785|32175                        |1829            |263     |8       |52           |99              |
 |WEB             |UNDERTOW          |5             |49,70             |3,59       |10311       |523756        |396071 |24   |381.127|50977                        |1611            |658     |11      |33           |99              |
 |WEB             |UNDERTOW IN DOCKER|46            |280               |5,20       |10264       |430673        |289692 |33   |448.682|29998                        |916             |840     |15      |32           |99              |
 |REACTIVE        |BUILD PACK        |1243          |129               |?          |?           |              |       |     |?      |?                            |?               |?       |?       |?            |?               |
-|REACTIVE        |NATIVE BUILD TOOLS|187           |71,7              |0,107      |?           |              |       |     |?      |?                            |?               |?       |?       |?            |?               |
-|REACTIVE        |JAR               |3,1           |40,6              |2,55       |10326       |1168782       |1079847|8    |1091,3 |10406                        |4391            |1823    |8       |31           |90              |
-|REACTIVE        |JAR IN DOCKER     |39            |271               |3,95       |10258       |699180        |581761 |17   |631.599|18955                        |2250            |883     |29      |31           |37              |
+|REACTIVE        |NATIVE BUILD TOOLS|187           |71,7              |0,107      |10224       |1013549       |915094 |10   |934.147|12591                        |3038            |634     |32      |23           |70              |
+|REACTIVE        |JAR               |3,1           |40,6              |2,55       |10326       |1168782       |1079847|8    |1091,3 |10406                        |4391            |1823    |8       |31           |70              |
+|REACTIVE        |JAR IN DOCKER     |39            |271               |3,95       |10258       |699180        |581761 |17   |631.599|18955                        |2250            |883     |29      |31           |70              |
 
 ------------------------------------------------------------------------------------------------------------------------
 
