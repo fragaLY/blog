@@ -333,7 +333,7 @@ Than you can check the stats of you process. Firstly, we are going to find the p
 
 > ps aux | grep :8080
 
-Than check it:
+Then check it:
 
 > top -pid ${PID}
 
