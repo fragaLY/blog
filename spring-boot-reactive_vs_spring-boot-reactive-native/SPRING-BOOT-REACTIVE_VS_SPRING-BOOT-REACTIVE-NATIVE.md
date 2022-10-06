@@ -331,11 +331,11 @@ Commands to build:
 
 Than you can check the stats of you process. Firstly, we are going to find the pid:
 
->>> ps aux | grep :8080
+> ps aux | grep :8080
 
 Than check it:
 
->> top -pid ${PID}
+> top -pid ${PID}
 
 * NATIVE BUILD TOOLS
 
