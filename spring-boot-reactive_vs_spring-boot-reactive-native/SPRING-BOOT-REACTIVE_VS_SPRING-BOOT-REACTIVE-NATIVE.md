@@ -321,13 +321,13 @@ logging.level:
 Let's build both solutions, and check its performance.
 
 Commands to build:
->>> sdk use java 22.2.r17-grl
+> sdk use java 22.2.r17-grl
 
->>> ./gradlew clean nativeCompile --parallel
+> ./gradlew clean nativeCompile --parallel
 
->>> ./docker/docker-compose up
+> ./docker/docker-compose up
 
->>> ./build/native/nativeCompile/spring-boot-reactive-native
+> ./build/native/nativeCompile/spring-boot-reactive-native
 
 * NATIVE BUILD TOOLS
 
