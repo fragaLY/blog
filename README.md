@@ -11,3 +11,5 @@
 :white_check_mark: ['Comparing Spring Boot Web and Spring Boot Web as Native'](spring-boot-web_vs_spring-boot-web-native/SPRING-BOOT-WEB_VS_SPRING-BOOT-WEB-NATIVE.md) using Java, Gradle, Gatling, Spring Web, Spring Native using Native Build tools and Build Pack;
 
 :white_check_mark: ['Comparing Spring Reactive and Spring Reactive as Native'](spring-boot-reactive_vs_spring-boot-reactive-native/SPRING-BOOT-REACTIVE_VS_SPRING-BOOT-REACTIVE-NATIVE.md) using Java, Gradle, Gatling, Spring Reactive, Spring Data R2DBC, Spring Native using Native Build tools and Build Pack;
+
+:white_check_mark: ['Comparing Quarkus Reactive and Quarkus Reactive as Native'](quarkus-reactive_vs_quarkus-reactive-native/QUARKUS-REACTIVE_VS_QUARKUS-REACTIVE-NATIVE.md) using Java, Gradle, Gatling, Quarkus Reactive, Quarkus PG Reactive Client, Quarkus Native;
