@@ -226,6 +226,38 @@ Docker image investigation:
 
 You could download the [Jar Performance Tests Results](./static/reactive/jib/ubi/reactive-jib-ubi.zip) and check it on your own.
 
+* JIB with Distroless base image
+
+Global information:
+
+![](./static/reactive/jib/distroless/global.png)
+
+Requests:
+
+![](./static/reactive/jib/distroless/requests.png)
+
+Requests per second:
+
+![](./static/reactive/jib/distroless/requests_per_second.png)
+
+Responses per second:
+
+![](./static/reactive/jib/distroless/responses_per_second.png)
+
+Response time for first minute:
+
+![](./static/reactive/jib/distroless/response_time_1.png)
+
+Response time for all time:
+
+![](./static/reactive/jib/distroless/response_time_all.png)
+
+Docker image investigation:
+
+![](./static/reactive/jib/distroless/dive_docker_image.png)
+
+You could download the [Jar Performance Tests Results](./static/reactive/jib/distroless/reactive-jib-distroless.zip) and check it on your own.
+
 * Docker
 
 Global information:
@@ -329,7 +361,7 @@ Let's gather all the information:
 |FAST JAR     |4             |N/A               |0,987      |10246       |755.434|13686                        |1971            |999          |55               |9          |25           |99              |
 |UBER JAR     |8             |17,7              |1,884      |10258       |753.933|14111                        |2149            |934          |55               |5          |23           |99              |
 |JIB/ubi8     |16            |384               |1.151      |10244       |593.275|20170                        |1305            |999          |55               |8          |26           |70              |
-|JIB/distroless|             |                  |           |            |       |                             |                |             |                 |           |             |                |
+|JIB/distroless|14           |249               |1,088      |10202       |428.563|33060                        |1339            |915          |55               |15         |26           |93              |
 |DOCKER       |              |                  |           |            |       |                             |                |             |                 |           |             |                |
 |S2I          |              |                  |           |            |       |                             |                |             |                 |           |             |                |
 |BUILDPACK    |              |                  |           |            |       |                             |                |             |                 |           |             |                |
@@ -364,6 +396,7 @@ Let's compare all the results including the Spring Web, Spring Reactive and thei
 |QUARKUS  |REACTIVE        |FAST JAR          |4             |N/A               |0,987      |10246       |828711        |718773 |13   |755.434|13686                        |1971            |1054    |9       |25           |99              |
 |         |                |UBER JAR          |8             |17,7              |1,884      |10258       |826311        |716252 |13   |753.933|14111                        |2149            |989     |5       |23           |99              |
 |         |                |JIB WITH UBI      |16            |384               |1.151      |10244       |661502        |120360 |18   |593.275|20170                        |1305            |1054    |8       |26           |70              |
+|         |                |JIB WITH DISTROLESS|14           |249               |1.088      |10202       |473991        |343384 |28   |428.563|33060                        |1339            |970     |8       |26           |93              |
 
 ------------------------------------------------------------------------------------------------------------------------
 
