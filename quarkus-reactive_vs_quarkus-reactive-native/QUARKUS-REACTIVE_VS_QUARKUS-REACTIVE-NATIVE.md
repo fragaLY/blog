@@ -292,35 +292,9 @@ You could download the [Docker Performance Tests Results](./static/reactive/dock
 
 * S2I
 
-Global information:
+> No Openshift manifests were generated so no s2i process will be taking place.
 
-![](./static/reactive/S2I/global.png)
-
-Requests:
-
-![](./static/reactive/S2I/requests.png)
-
-Requests per second:
-
-![](./static/reactive/S2I/requests_per_second.png)
-
-Responses per second:
-
-![](./static/reactive/S2I/responses_per_second.png)
-
-Response time for first minute:
-
-![](./static/reactive/S2I/response_time_1.png)
-
-Response time for all time:
-
-![](./static/reactive/S2I/response_time_all.png)
-
-Docker image investigation:
-
-![](./static/reactive/S2I/dive_docker_image.png)
-
-You could download the [S2I Performance Tests Results](./static/reactive/S2I/reactive-s2i.zip) and check it on your own.
+So, if you have any setup on Openshift, you could try to check it on your own using my source and contribute my researches.
 
 * Buildpack
 
@@ -363,7 +337,6 @@ Let's gather all the information:
 |JIB/ubi8     |16            |384               |1.151      |10244       |593.275|20170                        |1305            |999          |55               |8          |26           |70              |
 |JIB/distroless|14           |249               |1.088      |10202       |428.563|33060                        |1339            |915          |55               |15         |26           |93              |
 |DOCKER       |39            |416               |0.948      |10238       |540.492|24206                        |1315            |207          |55               |18         |21           |53              |
-|S2I          |              |                  |           |            |       |                             |                |             |                 |           |             |                |
 |BUILDPACK    |              |                  |           |            |       |                             |                |             |                 |           |             |                |
 
 Move on.
