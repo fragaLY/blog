@@ -329,7 +329,7 @@ Let's gather all the information:
 |TYPE         |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|JVM HEAP (MB)|JVM NON-HEAP (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
 |:------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:------------|:----------------|:----------|:------------|:---------------|
 |FAST JAR     |4             |N/A               |0,987      |10246       |755.434|13686                        |1971            |999          |55               |9          |25           |99              |
-|UBER JAR     |10            |                  |           |            |       |                             |                |             |                 |           |             |                |
+|UBER JAR     |8             |17,7              |1,884      |10258       |753.933|14111                        |2149            |934          |55               |5          |23           |99              |
 |JIB          |              |                  |           |            |       |                             |                |             |                 |           |             |                |
 |DOCKER       |              |                  |           |            |       |                             |                |             |                 |           |             |                |
 |S2I          |              |                  |           |            |       |                             |                |             |                 |           |             |                |
@@ -363,11 +363,11 @@ Let's compare all the results including the Spring Web, Spring Reactive and thei
 |         |                |JAR IN DOCKER     |39            |271               |3,95       |10258       |699180        |581761 |17   |631.599|18955                        |2250            |883     |29      |31           |70              |
 |         |                |                  |              |                  |           |            |              |       |     |       |                             |                |        |        |             |                |
 |QUARKUS  |REACTIVE        |FAST JAR          |4             |N/A               |0,987      |10246       |828711        |718773 |13   |755.434|13686                        |1971            |1054    |9       |25           |99              |
-|         |                |UBER JAR          |10            |                  |           |            |              |       |     |       |                             |                |        |        |             |                |
+|         |                |UBER JAR          |8             |17,7              |1,884      |10258       |826311        |716252 |13   |753.933|14111                        |2149            |989     |5       |23           |99              |
 
 ------------------------------------------------------------------------------------------------------------------------
 
-<h6>CHAPTER 6: NOBODY CALLS ME CHICKEN.</h6>
+<h6>CHAPTER 6: NOW STARTS THE ALPHA DANCE.</h6>
 
 TBD
 
