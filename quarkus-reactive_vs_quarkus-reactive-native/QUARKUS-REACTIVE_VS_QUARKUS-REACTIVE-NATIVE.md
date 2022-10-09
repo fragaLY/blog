@@ -94,6 +94,8 @@ And application.yml, for sure.
 quarkus:
   banner:
     enabled: false
+  container-image:
+    build: true # set false for non image building procedure
   datasource:
     db-kind: postgresql
     username: postgres
@@ -106,7 +108,7 @@ quarkus:
 As I already mentioned, I decided to check all possible types of launching the application, such as jar, jar in docker, native executable, and in docker native solutions as well.
 
 In Quarkus you have [several ways](https://quarkus.io/guides/container-image) of building a docker image:
-- JIB;
+- JIB (both for UBI and Distroless images);
 - Docker;
 - S2I;
 - Buildpack.
@@ -127,7 +129,7 @@ So, in total I will have results for:
   using buildpack;
   - For the best-rated result of the native executable I will provide the results of compression using [UPX](https://quarkus.io/guides/upx) both for max and min compression.
 
-Hm, 16 approaches for only one framework.
+Hm, 17 approaches for only one framework. Nice one.
 
 Just do it.
 
@@ -190,43 +192,39 @@ Response time for all time:
 
 ![](./static/reactive/jar/uber/response_time_all.png)
 
-Docker image investigation:
-
-![](./static/reactive/jar/uber/dive_docker_image.png)
-
 You could download the [Jar Performance Tests Results](./static/reactive/jar/uber/reactive-uber-jar.zip) and check it on your own.
 
-* JIB
+* JIB with default UBI base image
 
 Global information:
 
-![](./static/reactive/jib/global.png)
+![](./static/reactive/jib/ubi/global.png)
 
 Requests:
 
-![](./static/reactive/jib/requests.png)
+![](./static/reactive/jib/ubi/requests.png)
 
 Requests per second:
 
-![](./static/reactive/jib/requests_per_second.png)
+![](./static/reactive/jib/ubi/requests_per_second.png)
 
 Responses per second:
 
-![](./static/reactive/jib/responses_per_second.png)
+![](./static/reactive/jib/ubi/responses_per_second.png)
 
 Response time for first minute:
 
-![](./static/reactive/jib/response_time_1.png)
+![](./static/reactive/jib/ubi/response_time_1.png)
 
 Response time for all time:
 
-![](./static/reactive/jib/response_time_all.png)
+![](./static/reactive/jib/ubi/response_time_all.png)
 
 Docker image investigation:
 
-![](./static/reactive/jib/dive_docker_image.png)
+![](./static/reactive/jib/ubi/dive_docker_image.png)
 
-You could download the [Jar Performance Tests Results](./static/reactive/jib/reactive-jib.zip) and check it on your own.
+You could download the [Jar Performance Tests Results](./static/reactive/jib/ubi/reactive-jib-ubi.zip) and check it on your own.
 
 * Docker
 
@@ -330,7 +328,8 @@ Let's gather all the information:
 |:------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:------------|:----------------|:----------|:------------|:---------------|
 |FAST JAR     |4             |N/A               |0,987      |10246       |755.434|13686                        |1971            |999          |55               |9          |25           |99              |
 |UBER JAR     |8             |17,7              |1,884      |10258       |753.933|14111                        |2149            |934          |55               |5          |23           |99              |
-|JIB          |              |                  |           |            |       |                             |                |             |                 |           |             |                |
+|JIB/ubi8     |16            |384               |1.151      |10244       |593.275|20170                        |1305            |999          |55               |8          |26           |70              |
+|JIB/distroless|             |                  |           |            |       |                             |                |             |                 |           |             |                |
 |DOCKER       |              |                  |           |            |       |                             |                |             |                 |           |             |                |
 |S2I          |              |                  |           |            |       |                             |                |             |                 |           |             |                |
 |BUILDPACK    |              |                  |           |            |       |                             |                |             |                 |           |             |                |
@@ -364,6 +363,7 @@ Let's compare all the results including the Spring Web, Spring Reactive and thei
 |         |                |                  |              |                  |           |            |              |       |     |       |                             |                |        |        |             |                |
 |QUARKUS  |REACTIVE        |FAST JAR          |4             |N/A               |0,987      |10246       |828711        |718773 |13   |755.434|13686                        |1971            |1054    |9       |25           |99              |
 |         |                |UBER JAR          |8             |17,7              |1,884      |10258       |826311        |716252 |13   |753.933|14111                        |2149            |989     |5       |23           |99              |
+|         |                |JIB WITH UBI      |16            |384               |1.151      |10244       |661502        |120360 |18   |593.275|20170                        |1305            |1054    |8       |26           |70              |
 
 ------------------------------------------------------------------------------------------------------------------------
 
