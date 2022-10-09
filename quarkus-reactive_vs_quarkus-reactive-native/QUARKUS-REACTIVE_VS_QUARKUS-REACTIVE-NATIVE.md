@@ -164,7 +164,7 @@ Response time for all time:
 
 ![](./static/reactive/jar/fast/response_time_all.png)
 
-You could download the [Jar Performance Tests Results](./static/reactive/jar/fast/reactive-fast-jar.zip) and check it on your own.
+You could download the [FAST JAR Performance Tests Results](./static/reactive/jar/fast/reactive-fast-jar.zip) and check it on your own.
 
 * UBER JAR
 
@@ -192,7 +192,7 @@ Response time for all time:
 
 ![](./static/reactive/jar/uber/response_time_all.png)
 
-You could download the [Jar Performance Tests Results](./static/reactive/jar/uber/reactive-uber-jar.zip) and check it on your own.
+You could download the [UBER JAR Performance Tests Results](./static/reactive/jar/uber/reactive-uber-jar.zip) and check it on your own.
 
 * JIB with default UBI base image
 
@@ -224,7 +224,7 @@ Docker image investigation:
 
 ![](./static/reactive/jib/ubi/dive_docker_image.png)
 
-You could download the [Jar Performance Tests Results](./static/reactive/jib/ubi/reactive-jib-ubi.zip) and check it on your own.
+You could download the [UBI Performance Tests Results](./static/reactive/jib/ubi/reactive-jib-ubi.zip) and check it on your own.
 
 * JIB with Distroless base image
 
@@ -256,7 +256,7 @@ Docker image investigation:
 
 ![](./static/reactive/jib/distroless/dive_docker_image.png)
 
-You could download the [Jar Performance Tests Results](./static/reactive/jib/distroless/reactive-jib-distroless.zip) and check it on your own.
+You could download the [Distroless Performance Tests Results](./static/reactive/jib/distroless/reactive-jib-distroless.zip) and check it on your own.
 
 * Docker
 
@@ -288,7 +288,7 @@ Docker image investigation:
 
 ![](./static/reactive/docker/dive_docker_image.png)
 
-You could download the [Jar Performance Tests Results](./static/reactive/docker/reactive-docker.zip) and check it on your own.
+You could download the [Docker Performance Tests Results](./static/reactive/docker/reactive-docker.zip) and check it on your own.
 
 * S2I
 
@@ -320,7 +320,7 @@ Docker image investigation:
 
 ![](./static/reactive/S2I/dive_docker_image.png)
 
-You could download the [Jar Performance Tests Results](./static/reactive/S2I/reactive-s2i.zip) and check it on your own.
+You could download the [S2I Performance Tests Results](./static/reactive/S2I/reactive-s2i.zip) and check it on your own.
 
 * Buildpack
 
@@ -352,7 +352,7 @@ Docker image investigation:
 
 ![](./static/reactive/buildpack/dive_docker_image.png)
 
-You could download the [Jar Performance Tests Results](./static/reactive/buildpack/reactive-s2i.zip) and check it on your own.
+You could download the [Buildpack Performance Tests Results](./static/reactive/buildpack/reactive-s2i.zip) and check it on your own.
 
 Let's gather all the information:
 
