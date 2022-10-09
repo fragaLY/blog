@@ -117,7 +117,7 @@ And a bit more of building the native executable, especially as a part of the do
 And I am going to check all of these cases.
 
 So, in total I will have results for:
-  - Typical *.jar and 4 different images that had been built with JIB, Docker, S2I, and Buildpack;
+  - Typical fast and uber jars and 4 different images that had been built with JIB, Docker, S2I, and Buildpack;
   - Fully static native executable (non-ready for production),
   Linux executable without GraalVM,
   using the container-image extensions,
@@ -129,7 +129,7 @@ So, in total I will have results for:
   using buildpack;
   - For the best-rated result of the native executable I will provide the results of compression using [UPX](https://quarkus.io/guides/upx) both for max and min compression.
 
-Hm, 15 approaches for only one framework.
+Hm, 16 approaches for only one framework.
 
 Just do it.
 
@@ -138,37 +138,69 @@ Just do it.
 
 There are results of non-native solutions.
 
-* JAR
+* FAST JAR
 
 Global information:
 
-![](./static/reactive/jar/global.png)
+![](./static/reactive/jar/fast/global.png)
 
 Requests:
 
-![](./static/reactive/jar/requests.png)
+![](./static/reactive/jar/fast/requests.png)
 
 Requests per second:
 
-![](./static/reactive/jar/requests_per_second.png)
+![](./static/reactive/jar/fast/requests_per_second.png)
 
 Responses per second:
 
-![](./static/reactive/jar/responses_per_second.png)
+![](./static/reactive/jar/fast/responses_per_second.png)
 
 Response time for first minute:
 
-![](./static/reactive/jar/response_time_1.png)
+![](./static/reactive/jar/fast/response_time_1.png)
 
 Response time for all time:
 
-![](./static/reactive/jar/response_time_all.png)
+![](./static/reactive/jar/fast/response_time_all.png)
 
 Docker image investigation:
 
-![](./static/reactive/jar/dive_docker_image.png)
+![](./static/reactive/jar/fast/dive_docker_image.png)
 
 You could download the [Jar Performance Tests Results](./static/reactive/jar/reactive-jar.zip) and check it on your own.
+
+* UBER JAR
+
+Global information:
+
+![](./static/reactive/jar/uber/global.png)
+
+Requests:
+
+![](./static/reactive/jar/uber/requests.png)
+
+Requests per second:
+
+![](./static/reactive/jar/uber/requests_per_second.png)
+
+Responses per second:
+
+![](./static/reactive/jar/uber/responses_per_second.png)
+
+Response time for first minute:
+
+![](./static/reactive/jar/uber/response_time_1.png)
+
+Response time for all time:
+
+![](./static/reactive/jar/uber/response_time_all.png)
+
+Docker image investigation:
+
+![](./static/reactive/jar/uber/dive_docker_image.png)
+
+You could download the [Jar Performance Tests Results](./static/reactive/jar/uber/reactive-uber-jar.zip) and check it on your own.
 
 * JIB
 
@@ -302,7 +334,8 @@ Let's gather all the information:
 
 |TYPE         |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|JVM HEAP (MB)|JVM NON-HEAP (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
 |:------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:------------|:----------------|:----------|:------------|:---------------|
-|JAR          |              |                  |           |            |       |                             |                |             |                 |           |             |                |
+|FAST JAR     |              |                  |           |            |       |                             |                |             |                 |           |             |                |
+|UBER JAR     |              |                  |           |            |       |                             |                |             |                 |           |             |                |
 |JIB          |              |                  |           |            |       |                             |                |             |                 |           |             |                |
 |DOCKER       |              |                  |           |            |       |                             |                |             |                 |           |             |                |
 |S2I          |              |                  |           |            |       |                             |                |             |                 |           |             |                |
