@@ -162,11 +162,7 @@ Response time for all time:
 
 ![](./static/reactive/jar/fast/response_time_all.png)
 
-Docker image investigation:
-
-![](./static/reactive/jar/fast/dive_docker_image.png)
-
-You could download the [Jar Performance Tests Results](./static/reactive/jar/reactive-jar.zip) and check it on your own.
+You could download the [Jar Performance Tests Results](./static/reactive/jar/fast/reactive-fast-jar.zip) and check it on your own.
 
 * UBER JAR
 
