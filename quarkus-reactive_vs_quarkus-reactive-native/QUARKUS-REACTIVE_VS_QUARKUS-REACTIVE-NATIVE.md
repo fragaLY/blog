@@ -298,35 +298,7 @@ So, if you have any setup on Openshift, you could try to check it on your own us
 
 * Buildpack
 
-Global information:
-
-![](./static/reactive/buildpack/global.png)
-
-Requests:
-
-![](./static/reactive/buildpack/requests.png)
-
-Requests per second:
-
-![](./static/reactive/buildpack/requests_per_second.png)
-
-Responses per second:
-
-![](./static/reactive/buildpack/responses_per_second.png)
-
-Response time for first minute:
-
-![](./static/reactive/buildpack/response_time_1.png)
-
-Response time for all time:
-
-![](./static/reactive/buildpack/response_time_all.png)
-
-Docker image investigation:
-
-![](./static/reactive/buildpack/dive_docker_image.png)
-
-You could download the [Buildpack Performance Tests Results](./static/reactive/buildpack/reactive-s2i.zip) and check it on your own.
+I've tried the set of builders and no one, even provided by Daniel Oh on his youtube channel did work correctly.
 
 Let's gather all the information:
 
@@ -337,7 +309,6 @@ Let's gather all the information:
 |JIB/ubi8     |16            |384               |1.151      |10244       |593.275|20170                        |1305            |999          |55               |8          |26           |70              |
 |JIB/distroless|14           |249               |1.088      |10202       |428.563|33060                        |1339            |915          |55               |15         |26           |93              |
 |DOCKER       |39            |416               |0.948      |10238       |540.492|24206                        |1315            |207          |55               |18         |21           |53              |
-|BUILDPACK    |              |                  |           |            |       |                             |                |             |                 |           |             |                |
 
 Move on.
 
@@ -347,7 +318,24 @@ Move on.
 
 Now it's a time to compare previous solutions with native ones.
 
-TBD
+|TYPE                       |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
+|:--------------------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
+|FULLY STATIC               |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|LINUX EXECUTABLE           |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|CONTAINER-IMAGE EXTENSIONS |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|MANUALLY MICRO BASE IMAGE  |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|MANUALLY MINIMAL BASE IMAGE|?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|MULTI-STAGE DOCKER BUILD   |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|DISTROLESS BASE IMAGE      |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|SCRATCH BASE IMAGE         |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|BUILDPACK                  |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+
+For the TBD type, I've got the best results, so I will try UPX and compare the results after compression.
+
+|TYPE                       |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
+|:--------------------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
+|UPX MIN COMPRESSED         |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|UPX MAX COMPRESSED         |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -355,22 +343,23 @@ TBD
 
 Let's compare all the results including the Spring Web, Spring Reactive and their native solutions as well.
 
-|FRAMEWORK|APPLICATION TYPE|BUILD TYPE        |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|TOTAL REQUESTS|OK     |KO(%)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|CPU (%) |THREADS (MAX)|POSTGRES CPU (%)|
-|:--------|:---------------|:-----------------|:-------------|:-----------------|:----------|:-----------|:-------------|:------|:----|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
-|SPRING   |WEB             |BUILD PACK        |751           |144,79            |1,585      |10201       |453012        |339759 |25   |374.566|47831                        |584             |310     |12,5    |64           |99              |
-|         |                |NATIVE BUILD TOOLS|210           |116,20            |0,310      |8759        |480763        |342782 |29   |414.785|32175                        |1829            |263     |8       |52           |99              |
-|         |                |UNDERTOW          |5             |49,70             |3,59       |10311       |523756        |396071 |24   |381.127|50977                        |1611            |658     |11      |33           |99              |
-|         |                |UNDERTOW IN DOCKER|46            |280               |5,20       |10264       |430673        |289692 |33   |448.682|29998                        |916             |840     |15      |32           |99              |
-|         |REACTIVE        |BUILD PACK        |1243          |98,5              |0,103      |10268       |691487        |573983 |17   |615.75	|17891                        |1904            |685     |30      |14           |70              |
-|         |                |NATIVE BUILD TOOLS|187           |71,7              |0,107      |10224       |1013549       |915094 |10   |934.147|12591                        |3038            |634     |32      |23           |70              |
-|         |                |JAR               |3,1           |40,6              |2,55       |10326       |1168782       |1079847|8    |1091,3 |10406                        |4391            |1823    |8       |31           |70              |
-|         |                |JAR IN DOCKER     |39            |271               |3,95       |10258       |699180        |581761 |17   |631.599|18955                        |2250            |883     |29      |31           |70              |
-|         |                |                  |              |                  |           |            |              |       |     |       |                             |                |        |        |             |                |
-|QUARKUS  |REACTIVE        |FAST JAR          |4             |N/A               |0,987      |10246       |828711        |718773 |13   |755.434|13686                        |1971            |1054    |9       |25           |99              |
-|         |                |UBER JAR          |8             |17,7              |1,884      |10258       |826311        |716252 |13   |753.933|14111                        |2149            |989     |5       |23           |99              |
-|         |                |JIB WITH UBI      |16            |384               |1.151      |10244       |661502        |120360 |18   |593.275|20170                        |1305            |1054    |8       |26           |70              |
-|         |                |JIB WITH DISTROLESS|14           |249               |1.088      |10202       |473991        |486400	|20   |540.492|33060                        |1339            |970     |8       |26           |93              |
-|         |                |DOCKER            |39            |416               |0.948      |10238       |609675        |343384 |28   |428.563|24206                        |1315            |262     |18      |21           |53              |
+|FRAMEWORK|APPLICATION TYPE|BUILD TYPE         |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|TOTAL REQUESTS|OK     |KO(%)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|CPU (%) |THREADS (MAX)|POSTGRES CPU (%)|
+|:--------|:---------------|:------------------|:-------------|:-----------------|:----------|:-----------|:-------------|:------|:----|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
+|SPRING   |WEB             |NATIVE BUILD PACK  |751           |144,79            |1,585      |10201       |453012        |339759 |25   |374.566|47831                        |584             |310     |12,5    |64           |99              |
+|         |                |NATIVE BUILD TOOLS |210           |116,20            |0,310      |8759        |480763        |342782 |29   |414.785|32175                        |1829            |263     |8       |52           |99              |
+|         |                |UNDERTOW           |5             |49,70             |3,59       |10311       |523756        |396071 |24   |381.127|50977                        |1611            |658     |11      |33           |99              |
+|         |                |UNDERTOW IN DOCKER |46            |280               |5,20       |10264       |430673        |289692 |33   |448.682|29998                        |916             |840     |15      |32           |99              |
+|         |REACTIVE        |NATIVE BUILD PACK  |1243          |98,5              |0,103      |10268       |691487        |573983 |17   |615.75 |17891                        |1904            |685     |30      |14           |70              |
+|         |                |NATIVE BUILD TOOLS |187           |71,7              |0,107      |10224       |1013549       |915094 |10   |934.147|12591                        |3038            |634     |32      |23           |70              |
+|         |                |JAR                |3,1           |40,6              |2,55       |10326       |1168782       |1079847|8    |1091,3 |10406                        |4391            |1823    |8       |31           |70              |
+|         |                |JAR IN DOCKER      |39            |271               |3,95       |10258       |699180        |581761 |17   |631.599|18955                        |2250            |883     |29      |31           |70              |
+|         |                |                   |              |                  |           |            |              |       |     |       |                             |                |        |        |             |                |
+|QUARKUS  |REACTIVE        |FAST JAR           |4             |N/A               |0,987      |10246       |828711        |718773 |13   |755.434|13686                        |1971            |1054    |9       |25           |99              |
+|         |                |UBER JAR           |8             |17,7              |1,884      |10258       |826311        |716252 |13   |753.933|14111                        |2149            |989     |5       |23           |99              |
+|         |                |JIB WITH UBI       |16            |384               |1.151      |10244       |661502        |120360 |18   |593.275|20170                        |1305            |1054    |8       |26           |70              |
+|         |                |JIB WITH DISTROLESS|14            |249               |1.088      |10202       |473991        |486400 |20   |540.492|33060                        |1339            |970     |8       |26           |93              |
+|         |                |DOCKER             |39            |416               |0.948      |10238       |609675        |343384 |28   |428.563|24206                        |1315            |262     |18      |21           |53              |
+|         |                |NATIVE FULLY STATIC|?             |???               |?          |?????       |??????        |?????? |??   |???????|?????                        |????            |???     |??      |??           |??              |
 
 ------------------------------------------------------------------------------------------------------------------------
 
