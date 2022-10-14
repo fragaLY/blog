@@ -485,9 +485,11 @@ Now, I am going to test the best in-docker solution for Spring and Quarkus with:
 - --security-opt seccomp=unconfined;
 - use volumes to create a directory within Docker's storage.
 
-These stunts are performed by trained professional, don't try this on production.
+I've tried to compare it on Quarkus native distroless base image.
+After tuning we've got a boost in performance of up to 11%.
+All results you could find in chapter 6.
 
-TODO ADD TABLE FOR TUNED IMAGES
+These stunts are performed by trained professional, don't try this on production.
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -495,31 +497,28 @@ TODO ADD TABLE FOR TUNED IMAGES
 
 Let's compare all the results including the Spring Web, Spring Reactive and their native solutions as well.
 
-|FRAMEWORK|APPLICATION TYPE|BUILD TYPE                          |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|TOTAL REQUESTS|OK     |KO(%)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|CPU (%) |THREADS (MAX)|POSTGRES CPU (%)|
-|:--------|:---------------|:-----------------------------------|:-------------|:-----------------|:----------|:-----------|:-------------|:------|:----|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
-|SPRING   |WEB             |NATIVE BUILD PACK *                 |751           |144,79            |1,585      |10201       |453012        |339759 |25   |374.566|47831                        |584             |310     |12,5    |64           |99              |
-|         |                |NATIVE BUILD TOOLS *                |210           |116,20            |0,310      |8759        |480763        |342782 |29   |414.785|32175                        |1829            |263     |8       |52           |99              |
-|         |                |UNDERTOW                            |5             |49,70             |3,59       |10311       |523756        |396071 |24   |381.127|50977                        |1611            |658     |11      |33           |99              |
-|         |                |UNDERTOW IN DOCKER                  |46            |280               |5,20       |10264       |430673        |289692 |33   |448.682|29998                        |916             |840     |15      |32           |99              |
-|         |                |UNDERTOW IN DOCKER **               |??            |???               |????       |?????       |??????        |?????? |??   |???.???|?????                        |???             |???     |??      |??           |??              |
-|         |REACTIVE + R2DBC|NATIVE BUILD PACK *                 |1243          |98,5              |0,103      |10268       |691487        |573983 |17   |615.75 |17891                        |1904            |685     |30      |14           |70              |
-|         |                |NATIVE BUILD TOOLS *                |187           |71,7              |0,107      |10224       |1013549       |915094 |10   |934.147|12591                        |3038            |634     |32      |23           |70              |
-|         |                |JAR                                 |3,1           |40,6              |2,55       |10326       |1168782       |1079847|8    |1091,3 |10406                        |4391            |1823    |8       |31           |70              |
-|         |                |JAR IN DOCKER                       |39            |271               |3,95       |10258       |699180        |581761 |17   |631.599|18955                        |2250            |883     |29      |31           |70              |
-|         |                |JAR IN DOCKER **                    |??            |???               |????       |?????       |??????        |?????? |??   |???.???|?????                        |???             |???     |??      |??           |??              |
-|         |                |                                    |              |                  |           |            |              |       |     |       |                             |                |        |        |             |                |
-|QUARKUS  |REACTIVE + R2DBC|FAST JAR                            |4             |N/A               |0,987      |10246       |828711        |718773 |13   |755.434|13686                        |1971            |1054    |9       |25           |99              |
-|         |                |UBER JAR                            |8             |17,7              |1,884      |10258       |826311        |716252 |13   |753.933|14111                        |2149            |989     |5       |23           |99              |
-|         |                |JIB WITH UBI                        |16            |384               |1.151      |10244       |661502        |120360 |18   |593.275|20170                        |1305            |1054    |8       |26           |70              |
-|         |                |JIB WITH UBI **                     |???           |???               |????       |?????       |??????        |?????? |??   |???.???|?????                        |???             |???     |??      |??           |??              |
-|         |                |JIB WITH DISTROLESS                 |14            |249               |1.088      |10202       |473991        |486400 |20   |540.492|33060                        |1339            |970     |8       |26           |93              |
-|         |                |DOCKER                              |39            |416               |0.948      |10238       |609675        |343384 |28   |428.563|24206                        |1315            |262     |18      |21           |53              |
-|         |                |NATIVE EXECUTABLE                   |180           |49.3              |0.223      |10232       |768017        |654382 |15   |697.563|16426                        |1967            |646     |10      |15           |99              |
-|         | + UPX-MAX      |NATIVE EXECUTABLE                   |741           |15                |N/A        |N/A         |N/A           |N/A    |N/A  |N/A    |N/A                          |N/A             |N/A     |N/A     |N/A          |N/A             |
-|         |                |NATIVE MICRO BASE IMAGE             |301           |78.6              |0.031      |10253       |570959        |445872 |22   |507.971|25637                        |1282            |690     |20      |8            |57              |
-|         |                |NATIVE MINIMAL BASE IMAGE           |301           |152               |0.025      |10238       |523534        |395079 |25   |448.231|35777                        |914             |669     |17      |8            |61              |
-|         |                |NATIVE DISTROLESS BASE IMAGE *      |238           |72.1              |0.032      |10260       |546371        |419297 |23   |473.458|30156                        |17471747        |622     |23      |8            |45              |
-|         |                |NATIVE DISTROLESS BASE IMAGE * + ** |??            |???               |????       |?????       |??????        |?????? |??   |???.???|?????                        |???             |???     |??      |??           |??              |
+|FRAMEWORK|APPLICATION TYPE|BUILD TYPE                          |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|TOTAL REQUESTS |OK     |KO(%)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|CPU (%) |THREADS (MAX)|POSTGRES CPU (%)|
+|:--------|:---------------|:-----------------------------------|:-------------|:-----------------|:----------|:-----------|:--------------|:------|:----|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
+|SPRING   |WEB             |NATIVE BUILD PACK *                 |751           |144,79            |1,585      |10201       |453012         |339759 |25   |374.566|47831                        |584             |310     |12,5    |64           |99              |
+|         |                |NATIVE BUILD TOOLS *                |210           |116,20            |0,310      |8759        |480763         |342782 |29   |414.785|32175                        |1829            |263     |8       |52           |99              |
+|         |                |UNDERTOW                            |5             |49,70             |3,59       |10311       |523756         |396071 |24   |381.127|50977                        |1611            |658     |11      |33           |99              |
+|         |                |UNDERTOW IN DOCKER                  |46            |280               |5,20       |10264       |430673         |289692 |33   |448.682|29998                        |916             |840     |15      |32           |99              |
+|         |REACTIVE + R2DBC|NATIVE BUILD PACK *                 |1243          |98,5              |0,103      |10268       |691487         |573983 |17   |615.75 |17891                        |1904            |685     |30      |14           |70              |
+|         |                |JAR                                 |3,1           |40,6              |2,55       |10326       |1168782        |1079847|8    |1091,3 |10406                        |4391            |1823    |8       |31           |70              |
+|         |                |JAR IN DOCKER                       |39            |271               |3,95       |10258       |699180         |581761 |17   |631.599|18955                        |2250            |883     |29      |31           |70              |
+|         |                |JAR IN DOCKER **                    |??            |???               |????       |?????       |??????         |?????? |??   |???.???|?????                        |???             |???     |??      |??           |??              |
+|         |                |                                    |              |                  |           |            |               |       |     |       |                             |                |        |        |             |                |
+|QUARKUS  |REACTIVE + R2DBC|FAST JAR                            |4             |N/A               |0,987      |10246       |828711         |718773 |13   |755.434|13686                        |1971            |1054    |9       |25           |99              |
+|         |                |UBER JAR                            |8             |17,7              |1,884      |10258       |826311         |716252 |13   |753.933|14111                        |2149            |989     |5       |23           |99              |
+|         |                |JIB WITH UBI                        |16            |384               |1.151      |10244       |661502         |120360 |18   |593.275|20170                        |1305            |1054    |8       |26           |70              |
+|         |                |JIB WITH DISTROLESS                 |14            |249               |1.088      |10202       |473991         |486400 |20   |540.492|33060                        |1339            |970     |8       |26           |93              |
+|         |                |DOCKER                              |39            |416               |0.948      |10238       |609675         |343384 |28   |428.563|24206                        |1315            |262     |18      |21           |53              |
+|         |                |NATIVE EXECUTABLE                   |180           |49.3              |0.223      |10232       |768017         |654382 |15   |697.563|16426                        |1967            |646     |10      |15           |99              |
+|         | + UPX-MAX      |NATIVE EXECUTABLE                   |741           |15                |N/A        |N/A         |N/A            |N/A    |N/A  |N/A    |N/A                          |N/A             |N/A     |N/A     |N/A          |N/A             |
+|         |                |NATIVE MICRO BASE IMAGE             |301           |78.6              |0.031      |10253       |570959         |445872 |22   |507.971|25637                        |1282            |690     |20      |8            |57              |
+|         |                |NATIVE MINIMAL BASE IMAGE           |301           |152               |0.025      |10238       |523534         |395079 |25   |448.231|35777                        |914             |669     |17      |8            |61              |
+|         |                |NATIVE DISTROLESS BASE IMAGE *      |238           |72.1              |0.032      |10260       |546371         |419297 |23   |473.458|30156                        |1747            |622     |23      |8            |45              |
+|         |                |NATIVE DISTROLESS BASE IMAGE * + ** |238           |72.1              |0.037      |10259       |584874         |460724 |21   |515.762|23786                        |2254            |628     |17      |8            |47              |
 
 * is experimental feature;
 ** with --security-opt seccomp=unconfined and volume creation.
@@ -540,7 +539,7 @@ Let's continue to bleed from charts :)
 
 * JAR IN DOCKER:
 
-TODO ADD CHARTS OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUARKUS REACTIVE JAR IN DOCKER + AFTER TUNING
+TODO ADD CHARTS OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUARKUS REACTIVE JAR IN DOCKER
 
 * NATIVES:
 
@@ -553,9 +552,12 @@ TODO ADD CHARTS OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUAR
 ![](./static/common/native/cpu.png)
 ![](./static/common/native/threads.png)
 
+* NATIVE IN DOCKER:
+
 TODO ADD CHARTS OF SPRING WEB NATIVE IN DOCKER, SPRING REACTIVE NATIVE IN DOCKER, QUARKUS REACTIVE NATIVE IN DOCKER + AFTER TUNING
 
 * GATHERING EVERYTHING TOGETHER:
+
 ![](./static/common/build-time.png)
 ![](./static/common/artifact-size.png)
 ![](./static/common/boot-up.png)
@@ -564,6 +566,17 @@ TODO ADD CHARTS OF SPRING WEB NATIVE IN DOCKER, SPRING REACTIVE NATIVE IN DOCKER
 ![](./static/common/ram.png)
 ![](./static/common/cpu.png)
 ![](./static/common/threads.png)
+
+Actually, I could share my thoughts about Quarkus and compare it with Reactive solutions in Spring:
+- A lot of different approaches out of the box;
+- Some of these approaches don't work;
+- Artifacts sizes are less than those created by Spring;
+- A bit less build time for native solutions;
+- Resources consumption is less;
+- Saturation point and RPS are less :(
+
+What to bring into production is up to you.
+But Quarkus provides its solution as ready for production, Spring Native is an experimental feature at the moment.
 
 ------------------------------------------------------------------------------------------------------------------------
 
