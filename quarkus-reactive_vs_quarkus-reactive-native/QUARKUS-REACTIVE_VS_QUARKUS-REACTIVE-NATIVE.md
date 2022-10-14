@@ -521,7 +521,7 @@ Let's compare all the results including the Spring Web, Spring Reactive and thei
 * is experimental feature;
 ** with --security-opt seccomp=unconfined and volume creation.
 
-If your eyes are bleeding from the numbers, I've prepared some graphs for you.
+If your eyes are bleeding from the numbers, I've prepared some charts for you.
 
 * Let's compare basic solutions that provides us with jars after the build:
 
@@ -534,17 +534,21 @@ If your eyes are bleeding from the numbers, I've prepared some graphs for you.
 ![](./static/common/jar/cpu.png)
 ![](./static/common/jar/threads.png)
 
-TODO ADD GRAPH OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUARKUS REACTIVE JAR IN DOCKER
+TODO ADD CHARTS OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUARKUS REACTIVE JAR IN DOCKER (AFTER TUNING?)
 
-TODO ADD GRAPH OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUARKUS REACTIVE JAR IN DOCKER after tuning
+* Natives:
 
-TODO ADD GRAPH OF SPRING WEB NATIVE, SPRING REACTIVE NATIVE, QUARKUS REACTIVE NATIVE
+![](./static/common/native/build-time.png)
+![](./static/common/native/artifact-size.png)
+![](./static/common/native/boot-up.png)
+![](./static/common/native/rps.png)
+![](./static/common/native/saturation.png)
+![](./static/common/native/ram.png)
+![](./static/common/native/cpu.png)
+![](./static/common/native/threads.png)
 
-TODO ADD GRAPH OF SPRING WEB NATIVE IN DOCKER, SPRING REACTIVE NATIVE IN DOCKER, QUARKUS REACTIVE NATIVE IN DOCKER
+TODO ADD CHARTS OF SPRING WEB NATIVE IN DOCKER, SPRING REACTIVE NATIVE IN DOCKER, QUARKUS REACTIVE NATIVE IN DOCKER (AFTER TUNING?)
 
-TODO ADD GRAPH OF SPRING WEB NATIVE IN DOCKER, SPRING REACTIVE NATIVE IN DOCKER, QUARKUS REACTIVE NATIVE IN DOCKER after tuning
-
-TODO COMMON GRAPH
 
 ------------------------------------------------------------------------------------------------------------------------
 
