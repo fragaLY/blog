@@ -506,7 +506,6 @@ Let's compare all the results including the Spring Web, Spring Reactive and thei
 |         |REACTIVE + R2DBC|NATIVE BUILD PACK *                 |1243          |98,5              |0,103      |10268       |691487         |573983 |17   |615.75 |17891                        |1904            |685     |30      |14           |70              |
 |         |                |JAR                                 |3,1           |40,6              |2,55       |10326       |1168782        |1079847|8    |1091,3 |10406                        |4391            |1823    |8       |31           |70              |
 |         |                |JAR IN DOCKER                       |39            |271               |3,95       |10258       |699180         |581761 |17   |631.599|18955                        |2250            |883     |29      |31           |70              |
-|         |                |JAR IN DOCKER **                    |??            |???               |????       |?????       |??????         |?????? |??   |???.???|?????                        |???             |???     |??      |??           |??              |
 |         |                |                                    |              |                  |           |            |               |       |     |       |                             |                |        |        |             |                |
 |QUARKUS  |REACTIVE + R2DBC|FAST JAR                            |4             |N/A               |0,987      |10246       |828711         |718773 |13   |755.434|13686                        |1971            |1054    |9       |25           |99              |
 |         |                |UBER JAR                            |8             |17,7              |1,884      |10258       |826311         |716252 |13   |753.933|14111                        |2149            |989     |5       |23           |99              |
@@ -539,7 +538,14 @@ Let's continue to bleed from charts :)
 
 * JAR IN DOCKER:
 
-TODO ADD CHARTS OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUARKUS REACTIVE JAR IN DOCKER
+![](./static/common/jar/docker/build-time.png)
+![](./static/common/jar/docker/artifact-size.png)
+![](./static/common/jar/docker/boot-up.png)
+![](./static/common/jar/docker/rps.png)
+![](./static/common/jar/docker/saturation.png)
+![](./static/common/jar/docker/ram.png)
+![](./static/common/jar/docker/cpu.png)
+![](./static/common/jar/docker/threads.png)
 
 * NATIVES:
 
@@ -552,20 +558,7 @@ TODO ADD CHARTS OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUAR
 ![](./static/common/native/cpu.png)
 ![](./static/common/native/threads.png)
 
-* NATIVE IN DOCKER:
 
-TODO ADD CHARTS OF SPRING WEB NATIVE IN DOCKER, SPRING REACTIVE NATIVE IN DOCKER, QUARKUS REACTIVE NATIVE IN DOCKER + AFTER TUNING
-
-* GATHERING EVERYTHING TOGETHER:
-
-![](./static/common/build-time.png)
-![](./static/common/artifact-size.png)
-![](./static/common/boot-up.png)
-![](./static/common/rps.png)
-![](./static/common/saturation.png)
-![](./static/common/ram.png)
-![](./static/common/cpu.png)
-![](./static/common/threads.png)
 
 Actually, I could share my thoughts about Quarkus and compare it with Reactive solutions in Spring:
 - A lot of different approaches out of the box;
