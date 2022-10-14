@@ -408,12 +408,44 @@ Docker image investigation:
 
 You could download the [Docker Performance Tests Results](./static/native/minimal-base/reactive-native-minimal-base.zip) and check it on your own.
 
+* MANUALLY - Native Distroless Image
+
+Global information:
+
+![](./static/native/distroless/global.png)
+
+Requests:
+
+![](./static/native/distroless/requests.png)
+
+Requests per second:
+
+![](./static/native/distroless/requests_per_second.png)
+
+Responses per second:
+
+![](./static/native/distroless/responses_per_second.png)
+
+Response time for first minute:
+
+![](./static/native/distroless/response_time_1.png)
+
+Response time for all time:
+
+![](./static/native/distroless/response_time_all.png)
+
+Docker image investigation:
+
+![](./static/native/distroless/dive_docker_image.png)
+
+You could download the [Docker Performance Tests Results](./static/native/minimal-base/reactive-native-minimal-base.zip) and check it on your own.
+
 |TYPE                       |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
 |:--------------------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
 |NATIVE EXECUTABLE          |180           |49.3              |0.223      |10232       |697.563|16426                        |1967            |646     |10         |15           |99              |
 |MANUALLY MICRO BASE IMAGE  |301           |78.6              |0.031      |10253       |507.971|25637                        |1282            |690     |20         |8            |57              |
-|MANUALLY MINIMAL BASE IMAGE|301           |152               |0.025      |10238       |448.231|35777                        |914             |669     |17         |8            |61              |
-|DISTROLESS BASE IMAGE      |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|MANUALLY MINIMAL BASE IMAGE|301           |152               |0.032      |10238       |448.231|35777                        |914             |669     |17         |8            |61              |
+|DISTROLESS BASE IMAGE *    |238           |72.1              |0.032      |10260       |473.458|30156                        |1747            |622     |23         |8            |45              |
 |SCRATCH BASE IMAGE         |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
 |BUILDPACK                  |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
 
@@ -426,36 +458,82 @@ For the TBD type, I've got the best results, so I will try UPX and compare the r
 
 ------------------------------------------------------------------------------------------------------------------------
 
-<h6>CHAPTER 5: IF YOU WISH TO BE THE KING OF THE JUNGLE, IT'S NOT ENOUGH TO ACT LIKE A KING. YOU MUST BE THE KING.</h6>
+<h6>CHAPTER 5: NOW STARTS THE ALPHA DANCE.</h6>
 
-Let's compare all the results including the Spring Web, Spring Reactive and their native solutions as well.
+As you can find, most of the in-docker solutions are pretty poor in comparison with non-docker performance.
 
-|FRAMEWORK|APPLICATION TYPE|BUILD TYPE           |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|TOTAL REQUESTS|OK     |KO(%)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|CPU (%) |THREADS (MAX)|POSTGRES CPU (%)|
-|:--------|:---------------|:--------------------|:-------------|:-----------------|:----------|:-----------|:-------------|:------|:----|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
-|SPRING   |WEB             |NATIVE BUILD PACK    |751           |144,79            |1,585      |10201       |453012        |339759 |25   |374.566|47831                        |584             |310     |12,5    |64           |99              |
-|         |                |NATIVE BUILD TOOLS   |210           |116,20            |0,310      |8759        |480763        |342782 |29   |414.785|32175                        |1829            |263     |8       |52           |99              |
-|         |                |UNDERTOW             |5             |49,70             |3,59       |10311       |523756        |396071 |24   |381.127|50977                        |1611            |658     |11      |33           |99              |
-|         |                |UNDERTOW IN DOCKER   |46            |280               |5,20       |10264       |430673        |289692 |33   |448.682|29998                        |916             |840     |15      |32           |99              |
-|         |REACTIVE + R2DBC|NATIVE BUILD PACK    |1243          |98,5              |0,103      |10268       |691487        |573983 |17   |615.75 |17891                        |1904            |685     |30      |14           |70              |
-|         |                |NATIVE BUILD TOOLS   |187           |71,7              |0,107      |10224       |1013549       |915094 |10   |934.147|12591                        |3038            |634     |32      |23           |70              |
-|         |                |JAR                  |3,1           |40,6              |2,55       |10326       |1168782       |1079847|8    |1091,3 |10406                        |4391            |1823    |8       |31           |70              |
-|         |                |JAR IN DOCKER        |39            |271               |3,95       |10258       |699180        |581761 |17   |631.599|18955                        |2250            |883     |29      |31           |70              |
-|         |                |                     |              |                  |           |            |              |       |     |       |                             |                |        |        |             |                |
-|QUARKUS  |REACTIVE + R2DBC|FAST JAR             |4             |N/A               |0,987      |10246       |828711        |718773 |13   |755.434|13686                        |1971            |1054    |9       |25           |99              |
-|         |                |UBER JAR             |8             |17,7              |1,884      |10258       |826311        |716252 |13   |753.933|14111                        |2149            |989     |5       |23           |99              |
-|         |                |JIB WITH UBI         |16            |384               |1.151      |10244       |661502        |120360 |18   |593.275|20170                        |1305            |1054    |8       |26           |70              |
-|         |                |JIB WITH DISTROLESS  |14            |249               |1.088      |10202       |473991        |486400 |20   |540.492|33060                        |1339            |970     |8       |26           |93              |
-|         |                |DOCKER               |39            |416               |0.948      |10238       |609675        |343384 |28   |428.563|24206                        |1315            |262     |18      |21           |53              |
-|         |                |NATIVE EXECUTABLE    |180           |49.3              |0.223      |10232       |768017        |654382 |15   |697.563|16426                        |1967            |646     |10      |15           |99              |
-|         |                |MICRO BASE IMAGE     |301           |78.6              |0.031      |10253       |570959        |445872 |22   |507.971|25637                        |1282            |690     |20      |8            |57              |
-|         |                |MINIMAL BASE IMAGE   |301           |152               |0.025      |10238       |523534        |395079 |25   |448.231|35777                        |914             |669     |17      |8            |61              |
-|         |                |DISTROLESS BASE IMAGE|301           |152               |0.025      |10238       |523534        |395079 |25   |448.231|35777                        |914             |669     |17      |8            |61              |
+[On macOS and Windows, for example, standard Linux-based Docker containers aren’t actually running directly on the OS,
+since the OS isn’t Linux.
+And the image filesystem from the container itself is typically mounted with some sort of overlay filesystem,
+which can slow things down, so for anything I/O bound you want to use a bind-mounted volume.](https://pythonspeed.com/articles/docker-performance-overhead/)
+"Itamar Turner-Trauring"
+
+It's about two points:
+- Security;
+- I/O and volumes operations.
+
+What about the security, docker uses one mechanism named [seccomp](https://docs.docker.com/engine/security/seccomp/) and the [issue](https://github.com/moby/moby/issues/41389) had not been fixed yet.
+I would like to mention that Podman and Kubernetes have no issues with it.
+So, if we are going to check the performance running our CI/CD - it could be or not enabled. Up to you.
+Chose the best approach for your business.
+
+Regarding the volume,
+[Bind mounts have limited functionality compared to volumes.
+When you use a bind mount, a file or directory on the host machine is mounted into a container.
+The file or directory is referenced by its absolute path on the host machine.
+By contrast, when you use a volume, a new directory is created within Docker’s storage directory on the host machine, and Docker manages that directory’s contents.](https://docs.docker.com/storage/bind-mounts/)
+
+Now, I am going to test the best in-docker solution for Spring and Quarkus with:
+- --security-opt seccomp=unconfined;
+- use volumes to create a directory within Docker's storage.
+
+These stunts are performed by trained professionals, don't try this on production.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-<h6>CHAPTER 6: NOW STARTS THE ALPHA DANCE.</h6>
+<h6>CHAPTER 6: IF YOU WISH TO BE THE KING OF THE JUNGLE, IT'S NOT ENOUGH TO ACT LIKE A KING. YOU MUST BE THE KING.</h6>
 
-TBD
+Let's compare all the results including the Spring Web, Spring Reactive and their native solutions as well.
+
+|FRAMEWORK|APPLICATION TYPE|BUILD TYPE                     |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|TOTAL REQUESTS|OK     |KO(%)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|CPU (%) |THREADS (MAX)|POSTGRES CPU (%)|
+|:--------|:---------------|:------------------------------|:-------------|:-----------------|:----------|:-----------|:-------------|:------|:----|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
+|SPRING   |WEB             |NATIVE BUILD PACK              |751           |144,79            |1,585      |10201       |453012        |339759 |25   |374.566|47831                        |584             |310     |12,5    |64           |99              |
+|         |                |NATIVE BUILD TOOLS             |210           |116,20            |0,310      |8759        |480763        |342782 |29   |414.785|32175                        |1829            |263     |8       |52           |99              |
+|         |                |UNDERTOW                       |5             |49,70             |3,59       |10311       |523756        |396071 |24   |381.127|50977                        |1611            |658     |11      |33           |99              |
+|         |                |UNDERTOW IN DOCKER             |46            |280               |5,20       |10264       |430673        |289692 |33   |448.682|29998                        |916             |840     |15      |32           |99              |
+|         |                |UNDERTOW IN DOCKER **          |??            |???               |????       |?????       |??????        |?????? |??   |???.???|?????                        |???             |???     |??      |??           |??              |
+|         |REACTIVE + R2DBC|NATIVE BUILD PACK              |1243          |98,5              |0,103      |10268       |691487        |573983 |17   |615.75 |17891                        |1904            |685     |30      |14           |70              |
+|         |                |NATIVE BUILD TOOLS             |187           |71,7              |0,107      |10224       |1013549       |915094 |10   |934.147|12591                        |3038            |634     |32      |23           |70              |
+|         |                |JAR                            |3,1           |40,6              |2,55       |10326       |1168782       |1079847|8    |1091,3 |10406                        |4391            |1823    |8       |31           |70              |
+|         |                |JAR IN DOCKER                  |39            |271               |3,95       |10258       |699180        |581761 |17   |631.599|18955                        |2250            |883     |29      |31           |70              |
+|         |                |JAR IN DOCKER **               |??            |???               |????       |?????       |??????        |?????? |??   |???.???|?????                        |???             |???     |??      |??           |??              |
+|         |                |                               |              |                  |           |            |              |       |     |       |                             |                |        |        |             |                |
+|QUARKUS  |REACTIVE + R2DBC|FAST JAR                       |4             |N/A               |0,987      |10246       |828711        |718773 |13   |755.434|13686                        |1971            |1054    |9       |25           |99              |
+|         |                |UBER JAR                       |8             |17,7              |1,884      |10258       |826311        |716252 |13   |753.933|14111                        |2149            |989     |5       |23           |99              |
+|         |                |JIB WITH UBI                   |16            |384               |1.151      |10244       |661502        |120360 |18   |593.275|20170                        |1305            |1054    |8       |26           |70              |
+|         |                |JIB WITH UBI **                |??            |???               |????       |?????       |??????        |?????? |??   |???.???|?????                        |???             |???     |??      |??           |??              |
+|         |                |JIB WITH DISTROLESS            |14            |249               |1.088      |10202       |473991        |486400 |20   |540.492|33060                        |1339            |970     |8       |26           |93              |
+|         |                |DOCKER                         |39            |416               |0.948      |10238       |609675        |343384 |28   |428.563|24206                        |1315            |262     |18      |21           |53              |
+|         |                |NATIVE EXECUTABLE              |180           |49.3              |0.223      |10232       |768017        |654382 |15   |697.563|16426                        |1967            |646     |10      |15           |99              |
+|         |                |NATIVE MICRO BASE IMAGE        |301           |78.6              |0.031      |10253       |570959        |445872 |22   |507.971|25637                        |1282            |690     |20      |8            |57              |
+|         |                |NATIVE MINIMAL BASE IMAGE      |301           |152               |0.025      |10238       |523534        |395079 |25   |448.231|35777                        |914             |669     |17      |8            |61              |
+|         |                |NATIVE DISTROLESS BASE IMAGE * |238           |72.1              |0.032      |10260       |546371        |419297 |23   |473.458|30156                        |1747            |622     |23      |8            |45              |
+|         |                |NATIVE SCRATCH BASE IMAGE      |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |???             |???     |??      |?            |??              |
+|         |                |NATIVE BUILDPACK               |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |???             |???     |??      |?            |??              |
+|         |                |NATIVE UPX MIN COMPRESSED      |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |???             |???     |??      |?            |??              |
+|         |                |NATIVE UPX MAX COMPRESSED      |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |???             |???     |??      |?            |??              |
+
+* - is experimental feature;
+** - with --security-opt seccomp=unconfined and volume creation.
+
+TODO ADD GRAPH OF SPRING WEB JAR, SPRING REACTIVE JAR, QUARKUS REACTIVE JAR
+TODO ADD GRAPH OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUARKUS REACTIVE JAR IN DOCKER
+TODO ADD GRAPH OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUARKUS REACTIVE JAR IN DOCKER after tuning
+TODO ADD GRAPH OF SPRING WEB NATIVE, SPRING REACTIVE NATIVE, QUARKUS REACTIVE NATIVE
+TODO ADD GRAPH OF SPRING WEB NATIVE IN DOCKER, SPRING REACTIVE NATIVE IN DOCKER, QUARKUS REACTIVE NATIVE IN DOCKER
+TODO ADD GRAPH OF SPRING WEB NATIVE IN DOCKER, SPRING REACTIVE NATIVE IN DOCKER, QUARKUS REACTIVE NATIVE IN DOCKER after tuning
+
+TODO COMMON GRAPH
 
 ------------------------------------------------------------------------------------------------------------------------
 
