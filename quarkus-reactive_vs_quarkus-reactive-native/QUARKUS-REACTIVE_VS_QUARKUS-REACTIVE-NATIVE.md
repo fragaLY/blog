@@ -121,13 +121,9 @@ So, being bounded by my env I will have results for:
   - Native native executable,
   manually using the micro base image,
   manually using the minimal base image,
-  using a scratch base image,
-  using the container-image extensions,
   using a Distroless base image,
   using buildpack;
   - For the best-rated result of the native executable I will provide the results of compression using [UPX](https://quarkus.io/guides/upx) both for max and min compression.
-
-Hm, 15 approaches for only one framework. Nice one.
 
 Just do it.
 
@@ -446,8 +442,6 @@ You could download the [Docker Performance Tests Results](./static/native/minima
 |MANUALLY MICRO BASE IMAGE  |301           |78.6              |0.031      |10253       |507.971|25637                        |1282            |690     |20         |8            |57              |
 |MANUALLY MINIMAL BASE IMAGE|301           |152               |0.032      |10238       |448.231|35777                        |914             |669     |17         |8            |61              |
 |DISTROLESS BASE IMAGE *    |238           |72.1              |0.032      |10260       |473.458|30156                        |1747            |622     |23         |8            |45              |
-|SCRATCH BASE IMAGE         |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
-|BUILDPACK                  |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
 
 For the TBD type, I've got the best results, so I will try UPX and compare the results after compression.
 
@@ -474,7 +468,7 @@ It's about two points:
 
 What about the security, docker uses one mechanism named [seccomp](https://docs.docker.com/engine/security/seccomp/) and the [issue](https://github.com/moby/moby/issues/41389) had not been fixed yet.
 I would like to mention that Podman and Kubernetes have no issues with it.
-So, if we are going to check the performance running our CI/CD - it could be or not enabled. Up to you.
+So, if we are going to check the performance running your CI/CD - it could be or not enabled. Up to you.
 Chose the best approach for your business.
 
 Regarding the volume,
@@ -489,6 +483,8 @@ Now, I am going to test the best in-docker solution for Spring and Quarkus with:
 
 These stunts are performed by trained professionals, don't try this on production.
 
+TODO ADD TABLE FOR TUNED IMAGES
+
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>CHAPTER 6: IF YOU WISH TO BE THE KING OF THE JUNGLE, IT'S NOT ENOUGH TO ACT LIKE A KING. YOU MUST BE THE KING.</h6>
@@ -497,13 +493,13 @@ Let's compare all the results including the Spring Web, Spring Reactive and thei
 
 |FRAMEWORK|APPLICATION TYPE|BUILD TYPE                     |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|TOTAL REQUESTS|OK     |KO(%)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|CPU (%) |THREADS (MAX)|POSTGRES CPU (%)|
 |:--------|:---------------|:------------------------------|:-------------|:-----------------|:----------|:-----------|:-------------|:------|:----|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
-|SPRING   |WEB             |NATIVE BUILD PACK              |751           |144,79            |1,585      |10201       |453012        |339759 |25   |374.566|47831                        |584             |310     |12,5    |64           |99              |
-|         |                |NATIVE BUILD TOOLS             |210           |116,20            |0,310      |8759        |480763        |342782 |29   |414.785|32175                        |1829            |263     |8       |52           |99              |
+|SPRING   |WEB             |NATIVE BUILD PACK *            |751           |144,79            |1,585      |10201       |453012        |339759 |25   |374.566|47831                        |584             |310     |12,5    |64           |99              |
+|         |                |NATIVE BUILD TOOLS *           |210           |116,20            |0,310      |8759        |480763        |342782 |29   |414.785|32175                        |1829            |263     |8       |52           |99              |
 |         |                |UNDERTOW                       |5             |49,70             |3,59       |10311       |523756        |396071 |24   |381.127|50977                        |1611            |658     |11      |33           |99              |
 |         |                |UNDERTOW IN DOCKER             |46            |280               |5,20       |10264       |430673        |289692 |33   |448.682|29998                        |916             |840     |15      |32           |99              |
 |         |                |UNDERTOW IN DOCKER **          |??            |???               |????       |?????       |??????        |?????? |??   |???.???|?????                        |???             |???     |??      |??           |??              |
-|         |REACTIVE + R2DBC|NATIVE BUILD PACK              |1243          |98,5              |0,103      |10268       |691487        |573983 |17   |615.75 |17891                        |1904            |685     |30      |14           |70              |
-|         |                |NATIVE BUILD TOOLS             |187           |71,7              |0,107      |10224       |1013549       |915094 |10   |934.147|12591                        |3038            |634     |32      |23           |70              |
+|         |REACTIVE + R2DBC|NATIVE BUILD PACK *            |1243          |98,5              |0,103      |10268       |691487        |573983 |17   |615.75 |17891                        |1904            |685     |30      |14           |70              |
+|         |                |NATIVE BUILD TOOLS *           |187           |71,7              |0,107      |10224       |1013549       |915094 |10   |934.147|12591                        |3038            |634     |32      |23           |70              |
 |         |                |JAR                            |3,1           |40,6              |2,55       |10326       |1168782       |1079847|8    |1091,3 |10406                        |4391            |1823    |8       |31           |70              |
 |         |                |JAR IN DOCKER                  |39            |271               |3,95       |10258       |699180        |581761 |17   |631.599|18955                        |2250            |883     |29      |31           |70              |
 |         |                |JAR IN DOCKER **               |??            |???               |????       |?????       |??????        |?????? |??   |???.???|?????                        |???             |???     |??      |??           |??              |
@@ -518,8 +514,6 @@ Let's compare all the results including the Spring Web, Spring Reactive and thei
 |         |                |NATIVE MICRO BASE IMAGE        |301           |78.6              |0.031      |10253       |570959        |445872 |22   |507.971|25637                        |1282            |690     |20      |8            |57              |
 |         |                |NATIVE MINIMAL BASE IMAGE      |301           |152               |0.025      |10238       |523534        |395079 |25   |448.231|35777                        |914             |669     |17      |8            |61              |
 |         |                |NATIVE DISTROLESS BASE IMAGE * |238           |72.1              |0.032      |10260       |546371        |419297 |23   |473.458|30156                        |1747            |622     |23      |8            |45              |
-|         |                |NATIVE SCRATCH BASE IMAGE      |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |???             |???     |??      |?            |??              |
-|         |                |NATIVE BUILDPACK               |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |???             |???     |??      |?            |??              |
 |         |                |NATIVE UPX MIN COMPRESSED      |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |???             |???     |??      |?            |??              |
 |         |                |NATIVE UPX MAX COMPRESSED      |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |???             |???     |??      |?            |??              |
 
@@ -527,10 +521,15 @@ Let's compare all the results including the Spring Web, Spring Reactive and thei
 ** - with --security-opt seccomp=unconfined and volume creation.
 
 TODO ADD GRAPH OF SPRING WEB JAR, SPRING REACTIVE JAR, QUARKUS REACTIVE JAR
+
 TODO ADD GRAPH OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUARKUS REACTIVE JAR IN DOCKER
+
 TODO ADD GRAPH OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUARKUS REACTIVE JAR IN DOCKER after tuning
+
 TODO ADD GRAPH OF SPRING WEB NATIVE, SPRING REACTIVE NATIVE, QUARKUS REACTIVE NATIVE
+
 TODO ADD GRAPH OF SPRING WEB NATIVE IN DOCKER, SPRING REACTIVE NATIVE IN DOCKER, QUARKUS REACTIVE NATIVE IN DOCKER
+
 TODO ADD GRAPH OF SPRING WEB NATIVE IN DOCKER, SPRING REACTIVE NATIVE IN DOCKER, QUARKUS REACTIVE NATIVE IN DOCKER after tuning
 
 TODO COMMON GRAPH
