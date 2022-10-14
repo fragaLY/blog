@@ -558,7 +558,16 @@ Let's continue to bleed from charts :)
 ![](./static/common/native/cpu.png)
 ![](./static/common/native/threads.png)
 
+* NATIVE IN DOCKER:
 
+![](./static/common/native/docker/build-time.png)
+![](./static/common/native/docker/artifact-size.png)
+![](./static/common/native/docker/boot-up.png)
+![](./static/common/native/docker/rps.png)
+![](./static/common/native/docker/saturation.png)
+![](./static/common/native/docker/ram.png)
+![](./static/common/native/docker/cpu.png)
+![](./static/common/native/docker/threads.png)
 
 Actually, I could share my thoughts about Quarkus and compare it with Reactive solutions in Spring:
 - A lot of different approaches out of the box;
