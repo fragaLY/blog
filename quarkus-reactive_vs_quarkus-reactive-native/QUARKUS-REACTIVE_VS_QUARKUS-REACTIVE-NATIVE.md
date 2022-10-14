@@ -442,14 +442,14 @@ UPX works by compressing the sections stored within the Section Table of the PE 
 A strong indicator of UPX being used is the renaming of the header names (UPX0/UPX1).
 The main purpose of UPX is to reduce file size, this helps mask the malware as a .jpg or to spread through emails.
 
-|TYPE                                                   |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
-|:------------------------------------------------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
-|NATIVE EXECUTABLE                                      |180           |49.3              |0.223      |10232       |697.563|16426                        |1967            |646     |10         |15           |99              |
-|NATIVE EXECUTABLE - UPX MAX ULTRA BRUTE COMPRESSED     |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
-|MANUALLY MICRO BASE IMAGE                              |301           |78.6              |0.031      |10253       |507.971|25637                        |1282            |690     |20         |8            |57              |
-|MANUALLY MINIMAL BASE IMAGE                            |301           |152               |0.032      |10238       |448.231|35777                        |914             |669     |17         |8            |61              |
-|DISTROLESS BASE IMAGE                                  |238           |72.1              |0.032      |10260       |473.458|30156                        |1747            |622     |23         |8            |45              |
-|DISTROLESS BASE IMAGE - UPX MAX ULTRA BRUTE COMPRESSED |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|TYPE                           |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
+|:------------------------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
+|NATIVE EXECUTABLE              |180           |49.3              |0.223      |10232       |697.563|16426                        |1967            |646     |10         |15           |99              |
+|NATIVE EXECUTABLE - UPX MAX    |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|MANUALLY MICRO BASE IMAGE      |301           |78.6              |0.031      |10253       |507.971|25637                        |1282            |690     |20         |8            |57              |
+|MANUALLY MINIMAL BASE IMAGE    |301           |152               |0.032      |10238       |448.231|35777                        |914             |669     |17         |8            |61              |
+|DISTROLESS BASE IMAGE          |238           |72.1              |0.032      |10260       |473.458|30156                        |1747            |622     |23         |8            |45              |
+|DISTROLESS BASE IMAGE - UPX MAX|?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -512,11 +512,11 @@ Let's compare all the results including the Spring Web, Spring Reactive and thei
 |         |                |JIB WITH DISTROLESS            |14            |249               |1.088      |10202       |473991        |486400 |20   |540.492|33060                        |1339            |970     |8       |26           |93              |
 |         |                |DOCKER                         |39            |416               |0.948      |10238       |609675        |343384 |28   |428.563|24206                        |1315            |262     |18      |21           |53              |
 |         |                |NATIVE EXECUTABLE              |180           |49.3              |0.223      |10232       |768017        |654382 |15   |697.563|16426                        |1967            |646     |10      |15           |99              |
-|         |UPX-MAX, BRUTE  |NATIVE EXECUTABLE              |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |????            |???     |??      |??           |??              |
+|         |UPX-MAX         |NATIVE EXECUTABLE              |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |????            |???     |??      |??           |??              |
 |         |                |NATIVE MICRO BASE IMAGE        |301           |78.6              |0.031      |10253       |570959        |445872 |22   |507.971|25637                        |1282            |690     |20      |8            |57              |
 |         |                |NATIVE MINIMAL BASE IMAGE      |301           |152               |0.025      |10238       |523534        |395079 |25   |448.231|35777                        |914             |669     |17      |8            |61              |
 |         |                |NATIVE DISTROLESS BASE IMAGE * |238           |72.1              |0.032      |10260       |546371        |419297 |23   |473.458|30156                        |1747            |622     |23      |8            |45              |
-|         |UPX-MAX, BRUTE  |NATIVE DISTROLESS BASE IMAGE * |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |????            |???     |??      |??           |??              |
+|         |UPX-MAX         |NATIVE DISTROLESS BASE IMAGE * |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |????            |???     |??      |??           |??              |
 
 * is experimental feature;
 ** with --security-opt seccomp=unconfined and volume creation.
@@ -549,6 +549,15 @@ TODO ADD CHARTS OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUAR
 
 TODO ADD CHARTS OF SPRING WEB NATIVE IN DOCKER, SPRING REACTIVE NATIVE IN DOCKER, QUARKUS REACTIVE NATIVE IN DOCKER (AFTER TUNING?)
 
+* Gathering everything together:
+![](./static/common/build-time.png)
+![](./static/common/artifact-size.png)
+![](./static/common/boot-up.png)
+![](./static/common/rps.png)
+![](./static/common/saturation.png)
+![](./static/common/ram.png)
+![](./static/common/cpu.png)
+![](./static/common/threads.png)
 
 ------------------------------------------------------------------------------------------------------------------------
 
