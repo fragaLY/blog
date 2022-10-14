@@ -116,20 +116,19 @@ In Quarkus you have [several ways](https://quarkus.io/guides/container-image) of
 And a bit more of building the native executable, especially as a part of the docker image.
 And I am going to check all of these cases.
 
-So, in total I will have results for:
+So, being bounded by my env I will have results for:
   - Typical fast and uber jars and 4 different images that had been built with JIB, Docker, S2I, and Buildpack;
-  - Fully static native executable (non-ready for production),
-  Linux executable without GraalVM,
-  using the container-image extensions,
+  - Native native executable (non-ready for production),
   manually using the micro base image,
   manually using the minimal base image,
   using a multi-stage Docker build,
-  using a Distroless base image,
   using a scratch base image,
+  using the container-image extensions,
+  using a Distroless base image,
   using buildpack;
   - For the best-rated result of the native executable I will provide the results of compression using [UPX](https://quarkus.io/guides/upx) both for max and min compression.
 
-Hm, 17 approaches for only one framework. Nice one.
+Hm, 15 approaches for only one framework. Nice one.
 
 Just do it.
 
@@ -346,12 +345,38 @@ Response time for all time:
 
 You could download the [Docker Performance Tests Results](./static/native/executable/reactive-native-executable.zip) and check it on your own.
 
+* MANUALLY - Native Micro Base Image
+
+Global information:
+
+![](./static/native/micro-base/global.png)
+
+Requests:
+
+![](./static/native/micro-base/requests.png)
+
+Requests per second:
+
+![](./static/native/micro-base/requests_per_second.png)
+
+Responses per second:
+
+![](./static/native/micro-base/responses_per_second.png)
+
+Response time for first minute:
+
+![](./static/native/micro-base/response_time_1.png)
+
+Response time for all time:
+
+![](./static/native/micro-base/response_time_all.png)
+
+You could download the [Docker Performance Tests Results](./static/native/micro-base/reactive-native-micro-base.zip) and check it on your own.
+
 |TYPE                       |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
 |:--------------------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
 |NATIVE EXECUTABLE          |180           |49.3              |0.223      |10232       |697.563|16426                        |1967            |646     |10         |15           |99              |
-|LINUX EXECUTABLE           |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
-|CONTAINER-IMAGE EXTENSIONS |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
-|MANUALLY MICRO BASE IMAGE  |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|MANUALLY MICRO BASE IMAGE  |301           |78.6              |0.031      |10253       |507.971|25637                        |1282            |690     |20         |8            |57              |
 |MANUALLY MINIMAL BASE IMAGE|?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
 |MULTI-STAGE DOCKER BUILD   |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
 |DISTROLESS BASE IMAGE      |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
@@ -388,6 +413,7 @@ Let's compare all the results including the Spring Web, Spring Reactive and thei
 |         |                |JIB WITH DISTROLESS|14            |249               |1.088      |10202       |473991        |486400 |20   |540.492|33060                        |1339            |970     |8       |26           |93              |
 |         |                |DOCKER             |39            |416               |0.948      |10238       |609675        |343384 |28   |428.563|24206                        |1315            |262     |18      |21           |53              |
 |         |                |NATIVE EXECUTABLE  |180           |49.3              |0.223      |10232       |768017        |654382 |15   |697.563|16426                        |1967            |646     |10      |15           |99              |
+|         |                |MICRO BASE IMAGE   |301           |78.6              |0.031      |10253       |570959        |445872 |22   |507.971|25637                        |1282            |690     |20      |8            |57              |
 
 ------------------------------------------------------------------------------------------------------------------------
 
