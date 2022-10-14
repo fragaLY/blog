@@ -436,19 +436,20 @@ Docker image investigation:
 
 You could download the [Docker Performance Tests Results](./static/native/minimal-base/reactive-native-minimal-base.zip) and check it on your own.
 
-|TYPE                       |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
-|:--------------------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
-|NATIVE EXECUTABLE          |180           |49.3              |0.223      |10232       |697.563|16426                        |1967            |646     |10         |15           |99              |
-|MANUALLY MICRO BASE IMAGE  |301           |78.6              |0.031      |10253       |507.971|25637                        |1282            |690     |20         |8            |57              |
-|MANUALLY MINIMAL BASE IMAGE|301           |152               |0.032      |10238       |448.231|35777                        |914             |669     |17         |8            |61              |
-|DISTROLESS BASE IMAGE *    |238           |72.1              |0.032      |10260       |473.458|30156                        |1747            |622     |23         |8            |45              |
+(!) Now let's try [UPX](https://quarkus.io/guides/upx) and compare the results after ultra-brute compression.
 
-For the TBD type, I've got the best results, so I will try UPX and compare the results after compression.
+UPX works by compressing the sections stored within the Section Table of the PE file.
+A strong indicator of UPX being used is the renaming of the header names (UPX0/UPX1).
+The main purpose of UPX is to reduce file size, this helps mask the malware as a .jpg or to spread through emails.
 
-|TYPE                       |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
-|:--------------------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
-|UPX MIN COMPRESSED         |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
-|UPX MAX COMPRESSED         |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|TYPE                                                   |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
+|:------------------------------------------------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
+|NATIVE EXECUTABLE                                      |180           |49.3              |0.223      |10232       |697.563|16426                        |1967            |646     |10         |15           |99              |
+|NATIVE EXECUTABLE - UPX MAX ULTRA BRUTE COMPRESSED     |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|MANUALLY MICRO BASE IMAGE                              |301           |78.6              |0.031      |10253       |507.971|25637                        |1282            |690     |20         |8            |57              |
+|MANUALLY MINIMAL BASE IMAGE                            |301           |152               |0.032      |10238       |448.231|35777                        |914             |669     |17         |8            |61              |
+|DISTROLESS BASE IMAGE                                  |238           |72.1              |0.032      |10260       |473.458|30156                        |1747            |622     |23         |8            |45              |
+|DISTROLESS BASE IMAGE - UPX MAX ULTRA BRUTE COMPRESSED |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -481,7 +482,7 @@ Now, I am going to test the best in-docker solution for Spring and Quarkus with:
 - --security-opt seccomp=unconfined;
 - use volumes to create a directory within Docker's storage.
 
-These stunts are performed by trained professionals, don't try this on production.
+These stunts are performed by trained professional, don't try this on production.
 
 TODO ADD TABLE FOR TUNED IMAGES
 
@@ -507,20 +508,31 @@ Let's compare all the results including the Spring Web, Spring Reactive and thei
 |QUARKUS  |REACTIVE + R2DBC|FAST JAR                       |4             |N/A               |0,987      |10246       |828711        |718773 |13   |755.434|13686                        |1971            |1054    |9       |25           |99              |
 |         |                |UBER JAR                       |8             |17,7              |1,884      |10258       |826311        |716252 |13   |753.933|14111                        |2149            |989     |5       |23           |99              |
 |         |                |JIB WITH UBI                   |16            |384               |1.151      |10244       |661502        |120360 |18   |593.275|20170                        |1305            |1054    |8       |26           |70              |
-|         |                |JIB WITH UBI **                |??            |???               |????       |?????       |??????        |?????? |??   |???.???|?????                        |???             |???     |??      |??           |??              |
+|         |                |JIB WITH UBI **                |???           |???               |????       |?????       |??????        |?????? |??   |???.???|?????                        |???             |???     |??      |??           |??              |
 |         |                |JIB WITH DISTROLESS            |14            |249               |1.088      |10202       |473991        |486400 |20   |540.492|33060                        |1339            |970     |8       |26           |93              |
 |         |                |DOCKER                         |39            |416               |0.948      |10238       |609675        |343384 |28   |428.563|24206                        |1315            |262     |18      |21           |53              |
 |         |                |NATIVE EXECUTABLE              |180           |49.3              |0.223      |10232       |768017        |654382 |15   |697.563|16426                        |1967            |646     |10      |15           |99              |
+|         |UPX-MAX, BRUTE  |NATIVE EXECUTABLE              |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |????            |???     |??      |??           |??              |
 |         |                |NATIVE MICRO BASE IMAGE        |301           |78.6              |0.031      |10253       |570959        |445872 |22   |507.971|25637                        |1282            |690     |20      |8            |57              |
 |         |                |NATIVE MINIMAL BASE IMAGE      |301           |152               |0.025      |10238       |523534        |395079 |25   |448.231|35777                        |914             |669     |17      |8            |61              |
 |         |                |NATIVE DISTROLESS BASE IMAGE * |238           |72.1              |0.032      |10260       |546371        |419297 |23   |473.458|30156                        |1747            |622     |23      |8            |45              |
-|         |                |NATIVE UPX MIN COMPRESSED      |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |???             |???     |??      |?            |??              |
-|         |                |NATIVE UPX MAX COMPRESSED      |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |???             |???     |??      |?            |??              |
+|         |UPX-MAX, BRUTE  |NATIVE DISTROLESS BASE IMAGE * |???           |????              |?????      |?????       |??????        |?????? |??   |???????|?????                        |????            |???     |??      |??           |??              |
 
-* - is experimental feature;
-** - with --security-opt seccomp=unconfined and volume creation.
+* is experimental feature;
+** with --security-opt seccomp=unconfined and volume creation.
 
-TODO ADD GRAPH OF SPRING WEB JAR, SPRING REACTIVE JAR, QUARKUS REACTIVE JAR
+If your eyes are bleeding from the numbers, I've prepared some graphs for you.
+
+* Let's compare basic solutions that provides us with jars after the build:
+
+![](./static/common/jar/build-time.png)
+![](./static/common/jar/artifact-size.png)
+![](./static/common/jar/boot-up.png)
+![](./static/common/jar/rps.png)
+![](./static/common/jar/saturation.png)
+![](./static/common/jar/ram.png)
+![](./static/common/jar/cpu.png)
+![](./static/common/jar/threads.png)
 
 TODO ADD GRAPH OF SPRING WEB JAR IN DOCKER, SPRING REACTIVE JAR IN DOCKER, QUARKUS REACTIVE JAR IN DOCKER
 
