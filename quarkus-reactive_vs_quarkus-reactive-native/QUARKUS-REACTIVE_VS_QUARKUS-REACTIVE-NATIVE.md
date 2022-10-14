@@ -128,7 +128,7 @@ So, being bounded by my env I will have results for:
   using buildpack;
   - For the best-rated result of the native executable I will provide the results of compression using [UPX](https://quarkus.io/guides/upx) both for max and min compression.
 
-Hm, 15 approaches for only one framework. Nice one.
+Hm, 14 approaches for only one framework. Nice one.
 
 Just do it.
 
@@ -377,11 +377,43 @@ Docker image investigation:
 
 You could download the [Docker Performance Tests Results](./static/native/micro-base/reactive-native-micro-base.zip) and check it on your own.
 
+* MANUALLY - Native Minimal Base Image
+
+Global information:
+
+![](./static/native/minimal-base/global.png)
+
+Requests:
+
+![](./static/native/minimal-base/requests.png)
+
+Requests per second:
+
+![](./static/native/minimal-base/requests_per_second.png)
+
+Responses per second:
+
+![](./static/native/minimal-base/responses_per_second.png)
+
+Response time for first minute:
+
+![](./static/native/minimal-base/response_time_1.png)
+
+Response time for all time:
+
+![](./static/native/minimal-base/response_time_all.png)
+
+Docker image investigation:
+
+![](./static/native/minimal-base/dive_docker_image.png)
+
+You could download the [Docker Performance Tests Results](./static/native/minimal-base/reactive-native-minimal-base.zip) and check it on your own.
+
 |TYPE                       |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
 |:--------------------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
 |NATIVE EXECUTABLE          |180           |49.3              |0.223      |10232       |697.563|16426                        |1967            |646     |10         |15           |99              |
 |MANUALLY MICRO BASE IMAGE  |301           |78.6              |0.031      |10253       |507.971|25637                        |1282            |690     |20         |8            |57              |
-|MANUALLY MINIMAL BASE IMAGE|301           |152               |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
+|MANUALLY MINIMAL BASE IMAGE|301           |152               |0.025      |10238       |448.231|35777                        |914             |669     |17         |8            |61              |
 |MULTI-STAGE DOCKER BUILD   |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
 |DISTROLESS BASE IMAGE      |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
 |SCRATCH BASE IMAGE         |?             |?                 |?          |?           |?      |?                            |?               |?       |?          |?            |?               |
@@ -418,7 +450,7 @@ Let's compare all the results including the Spring Web, Spring Reactive and thei
 |         |                |DOCKER             |39            |416               |0.948      |10238       |609675        |343384 |28   |428.563|24206                        |1315            |262     |18      |21           |53              |
 |         |                |NATIVE EXECUTABLE  |180           |49.3              |0.223      |10232       |768017        |654382 |15   |697.563|16426                        |1967            |646     |10      |15           |99              |
 |         |                |MICRO BASE IMAGE   |301           |78.6              |0.031      |10253       |570959        |445872 |22   |507.971|25637                        |1282            |690     |20      |8            |57              |
-|         |                |MINIMAL BASE IMAGE |301           |152               |0.031      |10253       |570959        |445872 |22   |507.971|25637                        |1282            |690     |20      |8            |57              |
+|         |                |MINIMAL BASE IMAGE |301           |152               |0.025      |10238       |523534        |395079 |25   |448.231|35777                        |914             |669     |17      |8            |61              |
 
 ------------------------------------------------------------------------------------------------------------------------
 
