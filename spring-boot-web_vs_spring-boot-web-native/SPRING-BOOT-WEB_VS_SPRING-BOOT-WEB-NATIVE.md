@@ -1,5 +1,7 @@
 ------------------------------------------------------------------------------------------------------------------------
 
+![🎥 Youtube Video with presentation](https://www.youtube.com/watch?v=dNG4xYFfB-Y)
+
 ![](./static/main.jpeg)
 
 <h6>CHAPTER 1: YOU CAN'T BE DOING THIS, VADZIM. YOU CAN'T KEEP TRYING TO TUNE PERFORMANCE ALL THE TIME.</h6>
@@ -778,6 +780,7 @@ Long live Pivotal Software!
 This article is the first in my performance journey.
 
 Next, I will bring you details regarding the [Spring Reactive](https://spring.io/reactive) approaches, [Quarkus](https://quarkus.io/), [Micronaut](https://micronaut.io/), [Vert.x](https://vertx.io/), [Helidon](https://helidon.io/), and [Ktor](https://ktor.io/).
+
 I will try to build it as native as well.
 
 So, will be in touch.
