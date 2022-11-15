@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------------
 
-[🎥 Tech talk on Youtube](https://www.youtube.com/watch?v=dNG4xYFfB-Y)
+[🎥 Tech talk on Youtube](https://www.youtube.com/watch?v=SgBSDg44OyA)
 
 ![](./static/main.jpeg)
 
