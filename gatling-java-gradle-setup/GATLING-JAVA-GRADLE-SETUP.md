@@ -40,7 +40,7 @@ Now just technical stuff regarding the preset of Gatling using Gradle.
 ``` gradle
 plugins {
     id "java"
-    id "io.gatling.gradle" version "3.8.2"
+    id "io.gatling.gradle" version "3.8.4"
 }
 
 group 'by.vk'
@@ -52,16 +52,17 @@ repositories {
 
 dependencies {
     //region gatling
-    implementation("io.gatling:gatling-core:3.8.2")
-    implementation("io.gatling:gatling-http:3.8.2")
-    implementation("io.gatling:gatling-app:3.8.2")
-    gatlingRuntimeOnly("io.gatling:gatling-charts:3.8.2")
-    gatlingRuntimeOnly("io.gatling.highcharts:gatling-charts-highcharts:3.8.2")
+    implementation("io.gatling:gatling-http:3.8.4")
+    implementation("io.gatling:gatling-core:3.8.4")
+    implementation("io.gatling:gatling-http:3.8.4")
+    implementation("io.gatling:gatling-app:3.8.4")
+    gatlingRuntimeOnly("io.gatling:gatling-charts:3.8.4")
+    gatlingRuntimeOnly("io.gatling.highcharts:gatling-charts-highcharts:3.8.4")
     //endregion
 }
 
 gatling {
-    logLevel = 'WARN'
+    logLevel = 'INFO'
     logHttp = 'ALL'
     systemProperties = ['file.encoding': 'UTF-8']
     jvmArgs = [
@@ -75,8 +76,8 @@ gatling {
             '-XX:+ParallelRefProcEnabled',
             '-XX:MaxInlineLevel=20',
             '-XX:MaxTrivialSize=12',
-            '-XX:+UseStringDeduplication',
             '-XX:+ExitOnOutOfMemoryError',
+            '-XX:+UseStringDeduplication',
             '-XX:+OptimizeStringConcat',
             '-XX:HeapDumpPath=/opt/tmp/heapdump.bin'
     ]
