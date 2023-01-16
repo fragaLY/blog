@@ -13,3 +13,5 @@
 :white_check_mark: ['Comparing Spring Reactive and Spring Reactive as Native'](spring-boot-reactive_vs_spring-boot-reactive-native/SPRING-BOOT-REACTIVE_VS_SPRING-BOOT-REACTIVE-NATIVE.md) using Java, Gradle, Gatling, Spring Reactive, Spring Data R2DBC, Spring Native using Native Build tools and Build Pack;
 
 :white_check_mark: ['Comparing Quarkus Reactive and Quarkus Reactive as Native'](quarkus-reactive_vs_quarkus-reactive-native/QUARKUS-REACTIVE_VS_QUARKUS-REACTIVE-NATIVE.md) using Java, Gradle, Gatling, Quarkus Reactive, Quarkus PG Reactive Client, Quarkus Native;
+
+:white_check_mark: ['The Open Network'](the-open-network/THE-OPEN-NETWORK.md) creating the TON Site in the TON Network using TON Proxy, TON Storage, TON DNS, and TON Payments;
