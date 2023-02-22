@@ -42,7 +42,8 @@ But... I've faced several problems during the migration:
 1. Micronaut doesn't support Money type in Postgres. And that's [cool](https://wiki.postgresql.org/wiki/Don%27t_Do_This#Don.27t_use_money);
 2. Not so clear documentation as it is for Quarkus and Spring. In some cases it's really poor;
 3. To avoid workarounds on the backend part with micronaut data lib, I had to rename several columns i.e. origin -> origin_id;
-4. If not to define connections as 'pool' you are working with connection per thread model.
+4. If not to define connections as 'pool' you are working with connection per thread model;
+5. [Doesn't support Gradle 8.0.1](https://github.com/micronaut-projects/micronaut-gradle-plugin/issues/649). The team doesn't follow one of the major building tools. Didn't prepare using RC of Gradle.
 
 The languages, frameworks, and tools I used:
 
@@ -474,8 +475,8 @@ Let's compare all the results including the Spring Web, Spring Reactive, Quarkus
 |         |                |AOT OPTIMIZED DOCKER IMAGE          |              |                  |           |               |     |       |                             |                |        |        |             |                |
 
 - ACTIVE USERS ~10k
-* * is experimental feature;
-* ** with --security-opt seccomp=unconfined and volume creation.
+> * is experimental feature;
+> ** with --security-opt seccomp=unconfined and volume creation.
 
 If your eyes are bleeding from the numbers, I've prepared some charts for you.
 Let's continue to bleed from charts :)
@@ -525,8 +526,10 @@ Let's continue to bleed from charts :)
 ![](./static/common/native/docker/threads.png)
 
 Actually, I could share my thoughts about Micronaut and compare it with Reactive solutions in Spring and Quarkus:
-- Not so clear documentation;
+- Not so good and clear documentation as for Spring and Quarkus;
 - Some of these approaches don't work without workarounds;
+- Doesn't support the newest MAJOR Gradle releases;
+-
 
 What to bring into production is up to you.
 
