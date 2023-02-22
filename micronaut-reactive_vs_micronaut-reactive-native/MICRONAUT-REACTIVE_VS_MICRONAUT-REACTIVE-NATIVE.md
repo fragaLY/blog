@@ -353,83 +353,96 @@ Response time for all time:
 
 ![](./static/native/executable/response_time_all.png)
 
-You could download the [Docker Performance Tests Results](./static/native/executable/reactive-native-executable.zip) and check it on your own.
+You could download the [Native Executable Performance Tests Results](./static/native/executable/reactive-native-executable.zip) and check it on your own.
 
 * Default Native Docker Image
 
 Global information:
 
-![](./static/native/micro-base/global.png)
+![](./static/native/default/global.png)
 
 Requests:
 
-![](./static/native/micro-base/requests.png)
+![](./static/native/default/requests.png)
 
 Requests per second:
 
-![](./static/native/micro-base/requests_per_second.png)
+![](./static/native/default/requests_per_second.png)
 
 Responses per second:
 
-![](./static/native/micro-base/responses_per_second.png)
+![](./static/native/default/responses_per_second.png)
 
 Response time for first minute:
 
-![](./static/native/micro-base/response_time_1.png)
+![](./static/native/default/response_time_1.png)
 
 Response time for all time:
 
-![](./static/native/micro-base/response_time_all.png)
+![](./static/native/default/response_time_all.png)
 
 Docker image investigation:
 
-![](./static/native/micro-base/dive_docker_image.png)
+Dive:
 
-You could download the [Docker Performance Tests Results](./static/native/micro-base/reactive-native-micro-base.zip) and check it on your own.
+![](./static/native/default/dive_docker_image.png)
+
+Grype:
+
+![](./static/native/default/grype_docker_image.png)
+
+You could download the [Native Executable in Docker Performance Tests Results](./static/native/default/reactive-native-micro-base.zip) and check it on your own.
 
 * AOT Optimized Docker Image
 
 Global information:
 
-![](./static/native/minimal-base/global.png)
+![](./static/native/optimized/global.png)
 
 Requests:
 
-![](./static/native/minimal-base/requests.png)
+![](./static/native/optimized/requests.png)
 
 Requests per second:
 
-![](./static/native/minimal-base/requests_per_second.png)
+![](./static/native/optimized/requests_per_second.png)
 
 Responses per second:
 
-![](./static/native/minimal-base/responses_per_second.png)
+![](./static/native/optimized/responses_per_second.png)
 
 Response time for first minute:
 
-![](./static/native/minimal-base/response_time_1.png)
+![](./static/native/optimized/response_time_1.png)
 
 Response time for all time:
 
-![](./static/native/minimal-base/response_time_all.png)
+![](./static/native/optimized/response_time_all.png)
 
 Docker image investigation:
 
-![](./static/native/minimal-base/dive_docker_image.png)
+Dive:
 
-You could download the [Docker Performance Tests Results](./static/native/minimal-base/reactive-native-minimal-base.zip) and check it on your own.
+![](./static/native/optimized/dive_docker_image.png)
+
+Grype:
+
+![](./static/native/optimized/grype_docker_image.png)
+
+
+You could download the [AOT Optimized Docker Image Performance Tests Results](./static/native/optimized/reactive-native-minimal-base.zip) and check it on your own.
 
 |TYPE                           |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
 |:------------------------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
-|NATIVE EXECUTABLE              |180           |49.3              |0.223      |10232       |697.563|16426                        |1967            |646     |10         |15           |99              |
-|DEFAULT NATIVE DOCKER IMAGE    |741           |15                |N/A        |N/A         |N/A    |N/A                          |N/A             |N/A     |N/A        |N/A          |N/A             |
-|AOT OPTIMIZED DOCKER IMAGE     |301           |78.6              |0.031      |10253       |507.971|25637                        |1282            |690     |20         |8            |57              |
+|NATIVE EXECUTABLE              |              |                  |           |            |       |                             |                |        |           |             |                |
+|DEFAULT NATIVE DOCKER IMAGE    |              |                  |           |            |       |                             |                |        |           |             |                |
+|AOT OPTIMIZED DOCKER IMAGE     |              |                  |           |            |       |                             |                |        |           |             |                |
 
 ------------------------------------------------------------------------------------------------------------------------
 
-<h6>CHAPTER 6: IF YOU WISH TO BE THE KING OF THE JUNGLE, IT'S NOT ENOUGH TO ACT LIKE A KING. YOU MUST BE THE KING.</h6>
+<h6>CHAPTER 6: WHY SO SERIOUS?</h6>
 
-Let's compare all the results including the Spring Web, Spring Reactive and their native solutions as well.
+Let's compare all the results including the Spring Web, Spring Reactive, Quarkus, and their native solutions as well.
 
 |FRAMEWORK|APPLICATION TYPE|BUILD TYPE                          |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|TOTAL REQUESTS |KO(%)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|CPU (%) |THREADS (MAX)|POSTGRES CPU (%)|
 |:--------|:---------------|:-----------------------------------|:-------------|:-----------------|:----------|:--------------|:----|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
@@ -519,7 +532,7 @@ What to bring into production is up to you.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-<h6>BONUS: I'LL HAVE A PINT AND A PICKLED EGG.</h6>
+<h6>PS: AS YOU KNOW, MADNESS IS LIKE GRAVITY...ALL IT TAKES IS A LITTLE PUSH.</h6>
 
 This article is the 4th in my performance journey.
 
