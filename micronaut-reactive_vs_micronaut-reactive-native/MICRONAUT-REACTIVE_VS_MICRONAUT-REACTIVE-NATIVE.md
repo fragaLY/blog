@@ -196,6 +196,7 @@ In Micronaut you have [several ways](https://guides.micronaut.io/latest/micronau
 I will provide you the link to sources in the end of this article.
 
 And now "Just do it".
+
 ![](./static/jdit.jpeg)
 
 ------------------------------------------------------------------------------------------------------------------------
