@@ -20,8 +20,9 @@ And I would like to test the reactive approach using [reactor-http](https://gith
 
 I hope you are familiar with my previous performance results regarding the Spring Web (as Native), and Spring Reactive (as Native), and Quarkus Reactive (as Native).
 If not, please take a look on it:
-- [Spring Reactive (as Native)] (../spring-boot-reactive_vs_spring-boot-reactive-native/SPRING-BOOT-REACTIVE_VS_SPRING-BOOT-REACTIVE-NATIVE.md)
-- [Quarkus Reactive (as Native)] (../quarkus-reactive_vs_quarkus-reactive-native/QUARKUS-REACTIVE_VS_QUARKUS-REACTIVE-NATIVE.md)
+
+- [Spring Reactive (as Native)](../spring-boot-reactive_vs_spring-boot-reactive-native/SPRING-BOOT-REACTIVE_VS_SPRING-BOOT-REACTIVE-NATIVE.md)
+- [Quarkus Reactive (as Native)](../quarkus-reactive_vs_quarkus-reactive-native/QUARKUS-REACTIVE_VS_QUARKUS-REACTIVE-NATIVE.md)
 
 This article is not about Micronaut internal architecture and design, its paradigms, and the solutions that Micronaut Team brings to life.
 This article is about performance.
@@ -527,6 +528,6 @@ So, will be in touch.
 HAVE A NICE DAY.
 
 ------------------------------------------------------------------------------------------------------------------------
-[SOURCES](https://github.com/fragaLY/performance-researches/tree/master/micronaut-reactive).
+[SOURCES](https://github.com/fragaLY/performance-researches/tree/master/micronaut-reactive)
 
 [BACK TO THE MAIN PAGE](../README.md)
