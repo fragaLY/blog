@@ -432,9 +432,9 @@ Grype:
 
 You could download the [AOT Optimized Docker Image Performance Tests Results](./static/native/optimized/reactive-native-minimal-base.zip) and check it on your own.
 
-|TYPE                           |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
+|TYPE                           |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|CPU (%)    |THREADS (MAX)|POSTGRES CPU (%)|
 |:------------------------------|:-------------|:-----------------|:----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
-|NATIVE EXECUTABLE              |188           |78                |0.042      |       |                             |                |        |           |             |65              |
+|NATIVE EXECUTABLE              |188           |78                |0.042      |534.58 |25728                        |1717            |762     |38         |35           |65              |
 |DEFAULT NATIVE DOCKER IMAGE    |              |                  |           |       |                             |                |        |           |             |                |
 |AOT OPTIMIZED DOCKER IMAGE     |              |                  |           |       |                             |                |        |           |             |                |
 
@@ -469,7 +469,7 @@ Let's compare all the results including the Spring Web, Spring Reactive, Quarkus
 |MICRONAUT|REACTIVE + R2DBC|JAR                                 |17            |21.4              |1.176      |683907         |17   |616.132|19540                        |2487            |4495    |10      |49           |75              |
 |         |                |DEFAULT DOCKER IMAGE                |74            |346               |2.373      |488076         |27   |425.895|41730                        |1189            |586     |59      |23           |26              |
 |         |                |JIB                                 |21            |252               |1.767      |489590         |27   |416.672|37474                        |1023            |586     |26      |60           |31              |
-|         |                |NATIVE EXECUTABLE                   |188           |78                |0.042      |               |     |       |                             |                |        |        |             |65              |
+|         |                |NATIVE EXECUTABLE                   |188           |78                |0.042      |604610	        |20   |534.58 |25728                        |1717            |762     |38      |35           |65              |
 |         |                |DEFAULT NATIVE DOCKER IMAGE         |              |                  |           |               |     |       |                             |                |        |        |             |                |
 |         |                |AOT OPTIMIZED DOCKER IMAGE          |              |                  |           |               |     |       |                             |                |        |        |             |                |
 
