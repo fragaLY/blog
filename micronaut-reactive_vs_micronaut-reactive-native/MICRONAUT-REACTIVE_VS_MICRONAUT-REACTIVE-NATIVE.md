@@ -474,8 +474,10 @@ Let's compare all the results including the Spring Web, Spring Reactive, Quarkus
 |         |                |DEFAULT NATIVE DOCKER IMAGE         |              |                  |           |               |     |       |                             |                |        |        |             |                |
 |         |                |AOT OPTIMIZED DOCKER IMAGE          |              |                  |           |               |     |       |                             |                |        |        |             |                |
 
-- ACTIVE USERS ~10k
+> ACTIVE USERS ~10k
+
 > * is experimental feature;
+
 > ** with --security-opt seccomp=unconfined and volume creation.
 
 If your eyes are bleeding from the numbers, I've prepared some charts for you.
@@ -531,7 +533,7 @@ Actually, I could share my thoughts about Micronaut and compare it with Reactive
 - Doesn't support the newest MAJOR Gradle releases;
 -
 
-What to bring into production is up to you.
+What to bring into production is up to you. But it's not for me. Too much effort to solve the problems that should be done out of the box nowadays.
 
 ------------------------------------------------------------------------------------------------------------------------
 
