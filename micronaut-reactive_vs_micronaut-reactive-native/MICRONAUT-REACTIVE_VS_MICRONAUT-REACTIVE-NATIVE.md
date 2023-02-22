@@ -34,7 +34,7 @@ And today I will check the performance of a native executable (including in the 
 <h6>CHAPTER 2: WHAT DOESN'T KILL YOU, SIMPLY MAKES YOU STRONGER!</h6>
 
 So, we are going to create our application based on Micronaut.
-Hopefully, the developers who are familiar with Spring Framework could easily migrate to Micronaut.
+Hopefully, the developers who are familiar with Spring or Quarkus could easily migrate to Micronaut.
 But... I've faced several problems during the migration:
 1. Micronaut doesn't support Money type in Postgres. And that's [cool](https://wiki.postgresql.org/wiki/Don%27t_Do_This#Don.27t_use_money);
 2. Not so clear documentation as it is for Quarkus and Spring. In some cases it's really poor;
@@ -57,8 +57,15 @@ I will highlight some of the configurations here.
 
 ### Gradle Build Script
 
-# TODO VK: AOT AND NATIVE CHANGES
 ```groovy
+
+// https://github.com/bmuschko/gradle-docker-plugin/issues/1035
+buildscript {
+    dependencies {
+        classpath("com.github.docker-java:docker-java:3.3.0")
+        classpath("com.github.docker-java:docker-java-transport-httpclient5:3.3.0")
+    }
+}
 
 plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
@@ -96,23 +103,27 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("io.vertx:vertx-pg-client")
     runtimeOnly("io.r2dbc:r2dbc-pool")
-    runtimeOnly('org.postgresql:r2dbc-postgresql:1.0.1.RELEASE')
+    runtimeOnly("org.postgresql:r2dbc-postgresql:1.0.1.RELEASE")
 }
 
 tasks {
     jib {
         to {
-            image = 'service-a2b:latest'
+            image = 'micronaut-reactive-distroless:latest'
         }
         from {
             image = "gcr.io/distroless/java17"
         }
         container {
-            jvmFlags = ['-noverify', '-XX:+UseContainerSupport', '-XX:MaxRAMPercentage=75.0', '-XX:InitialRAMPercentage=50.0', '-XX:+OptimizeStringConcat', '-XX:+UseStringDeduplication', '-XX:+ExitOnOutOfMemoryError', '-XX:+AlwaysActAsServerClassMachine', '-Xmx512m', '-Xms128m', '-XX:MaxMetaspaceSize=128m', '-XX:MaxDirectMemorySize=256m', '-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/opt/tmp/heapdump.bin', '-Dcom.sun.management.jmxremote', '-Dcom.sun.management.jmxremote.port=8051', '-Dcom.sun.management.jmxremote.local.only=false', '-Dcom.sun.management.jmxremote.authenticate=false', '-Dcom.sun.management.jmxremote.ssl=false']
+            jvmFlags = ['-noverify', '-XX:+UseContainerSupport', '-XX:MaxRAMPercentage=75.0', '-XX:InitialRAMPercentage=50.0', '-XX:+OptimizeStringConcat', '-XX:+UseStringDeduplication', '-XX:+ExitOnOutOfMemoryError', '-XX:+AlwaysActAsServerClassMachine', '-Xmx512m', '-Xms128m', '-XX:MaxMetaspaceSize=128m', '-XX:MaxDirectMemorySize=256m', '-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/opt/tmp/heapdump.bin', '-Djava.rmi.server.hostname=localhost', '-Dcom.sun.management.jmxremote=true', '-Dcom.sun.management.jmxremote.rmi.port=8051','-Dcom.sun.management.jmxremote.port=8051', '-Dcom.sun.management.jmxremote.local.only=false', '-Dcom.sun.management.jmxremote.authenticate=false', '-Dcom.sun.management.jmxremote.ssl=false']
             ports = ['8080', '8051']
             labels.set([maintainer: 'Vadzim Kavalkou <vadzim.kavalkou@gmail.com>', appname: 'a2b-service', version: '0.0.1-SNAPSHOT'])
-            creationTime = 'USE_CURRENT_TIMESTAMP'
+            creationTime.set('USE_CURRENT_TIMESTAMP')
         }
+    }
+    dockerfile {
+        exposedPorts.set([8080, 8051])
+        args = ['-XX:+UseContainerSupport', '-XX:MaxRAMPercentage=75.0', '-XX:InitialRAMPercentage=50.0', '-XX:+OptimizeStringConcat', '-XX:+UseStringDeduplication', '-XX:+ExitOnOutOfMemoryError', '-XX:+AlwaysActAsServerClassMachine', '-Xmx512m', '-Xms128m', '-XX:MaxMetaspaceSize=128m', '-XX:MaxDirectMemorySize=256m', '-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/opt/tmp/heapdump.bin', '-Djava.rmi.server.hostname=localhost', '-Dcom.sun.management.jmxremote=true', '-Dcom.sun.management.jmxremote.rmi.port=8051','-Dcom.sun.management.jmxremote.port=8051', '-Dcom.sun.management.jmxremote.local.only=false', '-Dcom.sun.management.jmxremote.authenticate=false', '-Dcom.sun.management.jmxremote.ssl=false']
     }
 }
 
@@ -122,6 +133,16 @@ micronaut {
         incremental(true)
         annotations("by.vk.*")
     }
+    aot {
+        cacheEnvironment = true
+        optimizeServiceLoading = true
+        optimizeClassLoading = true
+        convertYamlToJava = true
+        precomputeOperations = true
+        deduceEnvironment = true
+        optimizeNetty = true
+    }
+
 }
 
 ```
