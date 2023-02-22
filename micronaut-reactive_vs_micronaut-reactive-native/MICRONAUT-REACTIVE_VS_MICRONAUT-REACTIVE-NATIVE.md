@@ -20,8 +20,8 @@ And I would like to test the reactive approach using [reactor-http](https://gith
 
 I hope you are familiar with my previous performance results regarding the Spring Web (as Native), and Spring Reactive (as Native), and Quarkus Reactive (as Native).
 If not, please take a look on it:
-- Spring Reactive (as Native) (../spring-boot-reactive_vs_spring-boot-reactive-native/SPRING-BOOT-REACTIVE_VS_SPRING-BOOT-REACTIVE-NATIVE.md)
-- Quarkus Reactive (as Native) (../quarkus-reactive_vs_quarkus-reactive-native/QUARKUS-REACTIVE_VS_QUARKUS-REACTIVE-NATIVE.md)
+- [Spring Reactive (as Native)] (../spring-boot-reactive_vs_spring-boot-reactive-native/SPRING-BOOT-REACTIVE_VS_SPRING-BOOT-REACTIVE-NATIVE.md)
+- [Quarkus Reactive (as Native)] (../quarkus-reactive_vs_quarkus-reactive-native/QUARKUS-REACTIVE_VS_QUARKUS-REACTIVE-NATIVE.md)
 
 This article is not about Micronaut internal architecture and design, its paradigms, and the solutions that Micronaut Team brings to life.
 This article is about performance.
@@ -508,24 +508,19 @@ Let's continue to bleed from charts :)
 ![](./static/common/native/docker/cpu.png)
 ![](./static/common/native/docker/threads.png)
 
-Actually, I could share my thoughts about Quarkus and compare it with Reactive solutions in Spring:
-- A lot of different approaches out of the box;
-- Some of these approaches don't work;
-- Artifacts sizes are less than those created by Spring;
-- A bit less build time for native solutions;
-- Resources consumption is less;
-- Saturation point and RPS are less :(
+Actually, I could share my thoughts about Micronaut and compare it with Reactive solutions in Spring and Quarkus:
+- Not so clear documentation;
+- Some of these approaches don't work without workarounds;
 
 What to bring into production is up to you.
-But Quarkus provides its solution as ready for production, Spring Native is an experimental feature at the moment.
 
 ------------------------------------------------------------------------------------------------------------------------
 
 <h6>BONUS: I'LL HAVE A PINT AND A PICKLED EGG.</h6>
 
-This article is the 3rd in my performance journey.
+This article is the 4th in my performance journey.
 
-Next, I will bring you details regarding the [Micronaut](https://micronaut.io/), [Vert.x](https://vertx.io/), [Helidon](https://helidon.io/), and [Ktor](https://ktor.io/).
+Next, I will bring you details regarding the [Vert.x](https://vertx.io/), [Helidon](https://helidon.io/), and [Ktor](https://ktor.io/).
 
 So, will be in touch.
 
