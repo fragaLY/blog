@@ -474,11 +474,9 @@ Let's compare all the results including the Spring Web, Spring Reactive, Quarkus
 |         |                |DEFAULT NATIVE DOCKER IMAGE         |              |                  |           |               |     |       |                             |                |        |        |             |                |
 |         |                |AOT OPTIMIZED DOCKER IMAGE          |              |                  |           |               |     |       |                             |                |        |        |             |                |
 
-> ACTIVE USERS ~10k
-
-> * is experimental feature;
-
-> ** with --security-opt seccomp=unconfined and volume creation.
+ACTIVE USERS ~10k
+\* is experimental feature;
+** with --security-opt seccomp=unconfined and volume creation.
 
 If your eyes are bleeding from the numbers, I've prepared some charts for you.
 Let's continue to bleed from charts :)
