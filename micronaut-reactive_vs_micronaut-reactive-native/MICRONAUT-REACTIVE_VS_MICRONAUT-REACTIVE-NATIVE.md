@@ -6,7 +6,9 @@
 
 Hello, world,
 
-Today I would like to test [Micronaut](https://micronaut.io/): "A MODERN, JVM-BASED, FULL-STACK FRAMEWORK FOR BUILDING MODULAR, EASILY TESTABLE MICROSERVICE AND SERVERLESS APPLICATIONS".
+Today I would like to test [Micronaut](https://micronaut.io/):
+
+>A MODERN, JVM-BASED, FULL-STACK FRAMEWORK FOR BUILDING MODULAR, EASILY TESTABLE MICROSERVICE AND SERVERLESS APPLICATIONS.
 
 Modern... talking? :) Let's check it.
 
