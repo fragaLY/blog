@@ -49,7 +49,7 @@ The languages, frameworks, and tools I used:
 
 |JDK|GC|Gradle|Micronaut|Gatling|Dive  |Grype |
 |:--|:-|:-----|:--------|:------|:-----|:-----|
-|17 |G1|8.0.1 |3.8.4    |3.9.1  |0.10.0|0.57.1|
+|17 |G1|8.0.1 |3.8.5    |3.9.2  |0.10.0|0.57.1|
 
 My local setup:
 
@@ -442,7 +442,7 @@ You could download the [AOT Optimized Docker Image Performance Tests Results](./
 |TYPE                           |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|CPU (%)    |THREADS (MAX)|POSTGRES CPU (%)|
 |:------------------------------|:-------------|:-----------------|:----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
 |NATIVE EXECUTABLE              |188           |78                |0.042      |534.58 |25728                        |1717            |762     |38         |35           |65              |
-|DEFAULT NATIVE DOCKER IMAGE    |339           |99.3              |0.115      |338.455|46090                        |1072            |        |           |             |                |
+|DEFAULT NATIVE DOCKER IMAGE    |339           |99.3              |0.115      |338.455|46090                        |1072            |419.2   |50         |14           |25              |
 |AOT OPTIMIZED DOCKER IMAGE     |              |                  |           |       |                             |                |        |           |             |                |
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -477,7 +477,7 @@ Let's compare all the results including the Spring Web, Spring Reactive, Quarkus
 |         |                |DEFAULT DOCKER IMAGE                |74            |346               |2.373      |488076         |27   |425.895|41730                        |1189            |586     |59      |23           |26              |
 |         |                |JIB                                 |21            |252               |1.767      |489590         |27   |416.672|37474                        |1023            |586     |26      |60           |31              |
 |         |                |NATIVE EXECUTABLE                   |188           |78                |0.042      |604610	        |20   |534.58 |25728                        |1717            |762     |38      |35           |65              |
-|         |                |DEFAULT NATIVE DOCKER IMAGE         |457           |99.3              |0.115      |371624         |44   |338.455|46090                        |1072            |        |        |             |                |
+|         |                |DEFAULT NATIVE DOCKER IMAGE         |457           |99.3              |0.115      |371624         |44   |338.455|46090                        |1072            |419.2   |50      |14           |25              |
 |         |                |AOT OPTIMIZED DOCKER IMAGE          |              |                  |           |               |     |       |                             |                |        |        |             |                |
 
 > ACTIVE USERS ~10k
