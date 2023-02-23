@@ -358,6 +358,13 @@ You could download the [Native Executable Performance Tests Results](./static/na
 
 * Default Native Docker Image
 
+Firstly, I will demonstrate you errors.
+
+> Checksums ".n.h.c.c.DecompressionException: CRC value mismatch."
+Checksums fail everywhere. And logs are clear.
+
+![](./static/native/docker/default/errors.png)
+
 Global information:
 
 ![](./static/native/docker/default/global.png)
@@ -430,13 +437,12 @@ Grype:
 
 ![](./static/native/docker/optimized/grype_docker_image.png)
 
-
 You could download the [AOT Optimized Docker Image Performance Tests Results](./static/native/docker/optimized/reactive-native-optimized.zip) and check it on your own.
 
 |TYPE                           |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|CPU (%)    |THREADS (MAX)|POSTGRES CPU (%)|
 |:------------------------------|:-------------|:-----------------|:----------|:------|:----------------------------|:---------------|:-------|:----------|:------------|:---------------|
 |NATIVE EXECUTABLE              |188           |78                |0.042      |534.58 |25728                        |1717            |762     |38         |35           |65              |
-|DEFAULT NATIVE DOCKER IMAGE    |              |99.3              |           |       |                             |                |        |           |             |                |
+|DEFAULT NATIVE DOCKER IMAGE    |339           |99.3              |0.115      |338.455|46090                        |1072            |        |           |             |                |
 |AOT OPTIMIZED DOCKER IMAGE     |              |                  |           |       |                             |                |        |           |             |                |
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -471,12 +477,14 @@ Let's compare all the results including the Spring Web, Spring Reactive, Quarkus
 |         |                |DEFAULT DOCKER IMAGE                |74            |346               |2.373      |488076         |27   |425.895|41730                        |1189            |586     |59      |23           |26              |
 |         |                |JIB                                 |21            |252               |1.767      |489590         |27   |416.672|37474                        |1023            |586     |26      |60           |31              |
 |         |                |NATIVE EXECUTABLE                   |188           |78                |0.042      |604610	        |20   |534.58 |25728                        |1717            |762     |38      |35           |65              |
-|         |                |DEFAULT NATIVE DOCKER IMAGE         |              |99.3              |           |               |     |       |                             |                |        |        |             |                |
+|         |                |DEFAULT NATIVE DOCKER IMAGE         |457           |99.3              |0.115      |371624         |44   |338.455|46090                        |1072            |        |        |             |                |
 |         |                |AOT OPTIMIZED DOCKER IMAGE          |              |                  |           |               |     |       |                             |                |        |        |             |                |
 
-ACTIVE USERS ~10k
-\* is experimental feature;
-** with --security-opt seccomp=unconfined and volume creation.
+> ACTIVE USERS ~10k
+
+> \* is experimental feature;
+
+> ** with --security-opt seccomp=unconfined and volume creation.
 
 If your eyes are bleeding from the numbers, I've prepared some charts for you.
 Let's continue to bleed from charts :)
@@ -529,7 +537,8 @@ Actually, I could share my thoughts about Micronaut and compare it with Reactive
 - Not so good and clear documentation as for Spring and Quarkus;
 - Some of these approaches don't work without workarounds;
 - Doesn't support the newest MAJOR Gradle releases;
-- Native solutions has less vulnerabilities;
+- Native solutions has less vulnerabilities. But ...
+- Native in Docker solution doesn't work properly with netty. Checksums ".n.h.c.c.DecompressionException: CRC value mismatch." fail everywhere. And logs are clear.
 
 What to bring into production is up to you. But it's not for me. Too much effort to solve the problems that should be done out of the box nowadays.
 
