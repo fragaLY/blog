@@ -460,11 +460,12 @@ Let's compare all the results including the Spring Web, Spring Reactive, Quarkus
 
 |FRAMEWORK|APPLICATION TYPE|BUILD TYPE                         |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|TOTAL REQUESTS|KO(%)|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|RAM (MB)|CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
 |:--------|:---------------|:----------------------------------|:-------------|:-----------------|:----------|:-------------|:----|:------|:----------------------------|:---------------|:-------|:------|:------------|:---------------|
-|SPRING   |WEB             |NATIVE BUILD PACK *                |751           |144.79            |1,585      |453012        |25   |374.566|47831                        |584             |310     |12.5   |64           |99              |
-|         |                |NATIVE BUILD TOOLS *               |210           |116.20            |0.310      |480763        |29   |414.785|32175                        |1829            |263     |8      |52           |99              |
+|SPRING   |WEB             |NATIVE BUILD PACK                  |751           |144.79            |1,585      |453012        |25   |374.566|47831                        |584             |310     |12.5   |64           |99              |
+|         |                |NATIVE BUILD TOOLS                 |210           |116.20            |0.310      |480763        |29   |414.785|32175                        |1829            |263     |8      |52           |99              |
 |         |                |UNDERTOW                           |5             |49.70             |3.59       |523756        |24   |381.127|50977                        |1611            |658     |11     |33           |99              |
 |         |                |UNDERTOW IN DOCKER                 |46            |280               |5.20       |430673        |33   |448.682|29998                        |916             |840     |15     |32           |99              |
-|         |REACTIVE + R2DBC|NATIVE BUILD PACK *                |1243          |98.5              |0.103      |691487        |17   |615.750|17891                        |1904            |685     |30     |14           |70              |
+|         |REACTIVE + R2DBC|NATIVE BUILD PACK                  |1243          |98.5              |0.103      |691487        |17   |615.750|17891                        |1904            |685     |30     |14           |70              |
+|         |                |NATIVE BUILD TOOLS                 |187           |71.7              |0,107      |1013549       |10   |934.147|12591                        |3038            |634     |32     |23           |70              |
 |         |                |JAR                                |3.1           |40.6              |2.55       |1168782       |8    |1091.30|10406                        |4391            |1823    |8      |31           |70              |
 |         |                |JAR IN DOCKER                      |39            |271               |3.95       |699180        |17   |631.599|18955                        |2250            |883     |29     |31           |70              |
 |         |                |                                   |              |                  |           |              |     |       |                             |                |        |       |             |                |
@@ -484,7 +485,7 @@ Let's compare all the results including the Spring Web, Spring Reactive, Quarkus
 |         |                |DEFAULT DOCKER IMAGE               |74            |346               |2.373      |488076        |27   |425.895|41730                        |1189            |586     |59     |23           |26              |
 |         |                |JIB                                |21            |252               |1.767      |489590        |27   |416.672|37474                        |1023            |586     |26     |60           |31              |
 |         |                |NATIVE EXECUTABLE                  |188           |78                |0.042      |604610	      |20   |534.580|25728                        |1717            |762     |38     |35           |65              |
-|         |                |DEFAULT NATIVE DOCKER IMAGE        |457           |99.3              |0.115      |371624        |44   |338.455|46090                        |1072            |419.2   |50     |14           |25              |
+|         |                |DEFAULT NATIVE DOCKER IMAGE        |457           |99.3              |0.115      |371624        |44   |338.455|46090                        |1072            |419     |50     |14           |25              |
 |         |                |AOT OPTIMIZED DOCKER IMAGE         |5808          |99.4              |0.088      |339333        |49   |308.204|53506                        |1095            |381     |60     |15           |12              |
 |         |                |                                   |              |                  |           |              |     |       |                             |                |        |       |             |                |
 
@@ -498,47 +499,19 @@ A bit of magic and the charts appear. They include the data of Spring Web, Sprin
 
 * Let's compare basic solutions that provides us with JARS after the build:
 
-![](./static/common/jar/build-time.png)
-![](./static/common/jar/artifact-size.png)
-![](./static/common/jar/boot-up.png)
-![](./static/common/jar/rps.png)
-![](./static/common/jar/saturation.png)
-![](./static/common/jar/ram.png)
-![](./static/common/jar/cpu.png)
-![](./static/common/jar/threads.png)
+![](./static/common/jar/jar.png)
 
 * JAR IN DOCKER:
 
-![](./static/common/jar/docker/build-time.png)
-![](./static/common/jar/docker/artifact-size.png)
-![](./static/common/jar/docker/boot-up.png)
-![](./static/common/jar/docker/rps.png)
-![](./static/common/jar/docker/saturation.png)
-![](./static/common/jar/docker/ram.png)
-![](./static/common/jar/docker/cpu.png)
-![](./static/common/jar/docker/threads.png)
+![](./static/common/jar/docker/jar-in-docker.png)
 
 * NATIVES:
 
-![](./static/common/native/build-time.png)
-![](./static/common/native/artifact-size.png)
-![](./static/common/native/boot-up.png)
-![](./static/common/native/rps.png)
-![](./static/common/native/saturation.png)
-![](./static/common/native/ram.png)
-![](./static/common/native/cpu.png)
-![](./static/common/native/threads.png)
+![](./static/common/native/native.png)
 
 * NATIVE IN DOCKER:
 
-![](./static/common/native/docker/build-time.png)
-![](./static/common/native/docker/artifact-size.png)
-![](./static/common/native/docker/boot-up.png)
-![](./static/common/native/docker/rps.png)
-![](./static/common/native/docker/saturation.png)
-![](./static/common/native/docker/ram.png)
-![](./static/common/native/docker/cpu.png)
-![](./static/common/native/docker/threads.png)
+![](./static/common/native/docker/native-in-docker.png)
 
 Actually, I could share my thoughts about Micronaut and compare it with Reactive solutions in Spring and Quarkus:
 - Not so good and clear documentation as for Spring and Quarkus;
@@ -547,7 +520,8 @@ Actually, I could share my thoughts about Micronaut and compare it with Reactive
 - Native solutions has less vulnerabilities. But ...
 - Native in Docker solution doesn't work properly with netty. Checksums ".n.h.c.c.DecompressionException: CRC value mismatch." fail everywhere. And logs are clear.
 
-What to bring into production is up to you. But it's not for me. Too much effort to solve the problems that should be done out of the box nowadays.
+What to bring into production is up to you.
+Few years ago it was a game changer in the microframeworks area but not today. This framework is not for me. Too much effort to solve the problems that should be done out of the box nowadays.
 
 ------------------------------------------------------------------------------------------------------------------------
 
