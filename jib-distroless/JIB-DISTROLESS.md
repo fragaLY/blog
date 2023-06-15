@@ -37,77 +37,34 @@ In scope of investigation, we added [distroless](https://console.cloud.google.co
 
 |SIZE |VULNERABILITIES           |
 |:----|:-------------------------|
-|      |        |
+|242MB|39(0 critical, 2 high)    |
 
 ![](./static/dive_distroless.jpeg)
 
 ![](./static/grype_distroless.jpeg)
 
-I know what you are thinking. The size is still pretty big. Use Native, Vadzim. Migrate to Go, Rust...
+I know what you are thinking about. The size is still pretty big. Use Native, Vadzim. Migrate to Go, Rust...
 This is kinda a miracle in the business world. I believe, you understand me and migration costs and risks.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-<h6>CHAPTER 3: YOU SHOULD NEVER UNDERESTIMATE THE PREDICTABILITY OF PRODUCER.</h6>
+<h6>CHAPTER 3: -TREVOR, IS SOMEONE CHASING YOU? -NOT YET. BUT THEY WILL WHEN THEY FIND OUT WHO I AM.</h6>
 
-<b>Producer Settings</b>
+To be honest, I am sharing with you results and it's up to you to bring this approach in your project or not.
 
-|Setting|Values|Useful Links|
-|:------|:-----|:-----------|
-|retries|'[1,...,2147483647]'|[retries](https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html)|
-|transaction-id-prefix|'name by convention'|[transaction-id-prefix](https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html)|
-|enable.idempotence|'true/false'|[idempotence](https://www.conduktor.io/kafka/idempotent-kafka-producer)|
-|compression.type|'none/gzip/zl4/snappy/zstd'|[compression](https://www.conduktor.io/kafka/kafka-message-compression)|
-|max.in.flight.requests.per.connection|'[1,...,2147483647]'|[in-flight-requests-per-connection](https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html)|
+**But for us it was a significant improvement:**
+- 3 times less size
+- 13 times less vulnerabilities
 
-[Common Producers Settings](https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html)
+**And as a result:**
 
-Sample of Spring Configuration:
-``` yaml
-spring:
-  kafka:
-    producer:
-      bootstrap-servers: http://localhost:9092, http://localhost:9093, http://localhost:9094
-      key-serializer: org.apache.kafka.common.serialization.LongSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      acks: all
-      retries: 5
-      transaction-id-prefix: kafka-producer
-      properties:
-        enable.idempotence: true
-        compression.type: none
-        max.in.flight.requests.per.connection: 1
-        auto.create.topics.enable: false
-    template:
-      default-topic: notification-event
-    properties:
-      min.insync.replicas: 2
-    listener:
-      ack-mode: manual
-      missing-topics-fatal: false
-
-```
-
-------------------------------------------------------------------------------------------------------------------------
-
-<h6>CHAPTER 4: SO WHAT DO YOU DO? YOU GO TO SEE THE MAN THAT KNOWS ABOUT THESE SORT OF ZOOKEEPER-FREE.</h6>
-
-For sure, if you are in touch with Kafka development you've already heard about 'Zookeeper-free'.
-
-So, I would like to share with you a nice [article](https://www.confluent.io/blog/kafka-without-zookeeper-a-sneak-peek/) about it.
-
-------------------------------------------------------------------------------------------------------------------------
-
-<h6>CHAPTER 5: ANYTHING TO DECLARE? YEAH. DON'T GO TO SYNCHRONOUS COMMUNICATION.</h6>
-
-Moreover, there is a :gear:	[gist](https://gist.github.com/fragaLY/f0a9a235c3e924b90dc83de5ec964271) regarding this settings.
-
-If you have any question, feel free to contact me direct in [linkedin](https://www.linkedin.com/in/vadzimkavalkou/).
-
-Of course in the chapter naming is a typical quote and joke. Remember, the asynchronous messaging is not a silver bullet, sometimes it doesn't fit your needs.
-
-:gun: Sometimes you ought to follow the next quote:
->"HEAVY IS GOOD, HEAVY IS RELIABLE. IF IT DOESN'T WORK YOU CAN ALWAYS HIT THEM WITH IT."
+- less time to test
+- less time to build and deliver
+- less time to fix vulnerabilities
+- less time to deploy and rollback
+- less time to fix production issues
+- less money to spend on infrastructure, for storing, delivering, and transferring images
+- more time to drink coffee and find new ways to improve your product
 
 ------------------------------------------------------------------------------------------------------------------------
 
