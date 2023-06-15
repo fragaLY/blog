@@ -17,3 +17,5 @@
 :white_check_mark: ['The Open Network'](the-open-network/THE-OPEN-NETWORK.md) creating the TON Site in the TON Network using TON Proxy, TON Storage, TON DNS, and TON Payments;
 
 :white_check_mark: ['Comparing Micronaut Reactive and Micronaut Reactive as Native'](micronaut-reactive_vs_micronaut-reactive-native/MICRONAUT-REACTIVE_VS_MICRONAUT-REACTIVE-NATIVE.md) using Java, Gradle, Gatling, Micronaut Reactive, Micronaut R2DBC, Micronaut Native;
+
+:white_check_mark: ['Jib and Distroless'](jib-distroless/JIB-DISTROLESS.md) saving money for building, storing, and transferring images.
