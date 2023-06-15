@@ -29,9 +29,9 @@ What we had before investigation:
 |:----|:-------------------------|
 |760MB|515(34 critical, 126 high)|
 
-![](./static/dive_base.jpeg)
+![](./static/dive_base.png)
 
-![](./static/grype_base.jpeg)
+![](./static/grype_base.png)
 
 In scope of investigation, we added [distroless](https://console.cloud.google.com/gcr/images/distroless/global/java17-debian11) as a base image and started to use a Jib and we got:
 
@@ -39,9 +39,9 @@ In scope of investigation, we added [distroless](https://console.cloud.google.co
 |:----|:-------------------------|
 |242MB|39(0 critical, 2 high)    |
 
-![](./static/dive_distroless.jpeg)
+![](./static/dive_distroless.png)
 
-![](./static/grype_distroless.jpeg)
+![](./static/grype_distroless.png)
 
 I know what you are thinking about. The size is still pretty big. Use Native, Vadzim. Migrate to Go, Rust...
 This is kinda a miracle in the business world. I believe, you understand me and migration costs and risks.
