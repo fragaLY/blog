@@ -48,7 +48,6 @@ Let's assume that the average user has the biggest interest to book the transfer
 As a result, we will have 16 per day and 112 hours of load per week.
 
 Furthermore, I would like to share with you some presents:
-* I disabled all application levels caches to get clear performance metrics of the server as it is;
 * The database and application are running in the same network to avoid net lags and penalties;
 * The fetching strategy is `EAGER`. First, to do a higher load and non-optimized queries to the database. Second, not to spend time to set up entity graphs.
 * The average time to boot up the service will not depend on the database structure due to the fact that I am not using any database migration tools such as [Flyway](https://flywaydb.org/) or [Liquibase](https://www.liquibase.org/);
