@@ -152,7 +152,7 @@ version: '3.8'
 services:
 
   postgres:
-    image: postgres:14.2-alpine
+    image: postgres:16.1-alpine
     container_name: postgres
     hostname: postgres
     restart: on-failure
