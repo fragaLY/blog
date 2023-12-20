@@ -34,7 +34,7 @@ The goal of this project is to incubate the support for Spring Native, an altern
 
 I will not dive deeper into AOT and [GraalVM](https://www.graalvm.org/). This is out of the scope of this article.
 
-So, what I am going to check? I would like to check the performance of applications using [Tomcat](https://tomcat.apache.org/), [Jetty](https://www.eclipse.org/jetty/), [Undertow](https://undertow.io/), [JIB](https://github.com/GoogleContainerTools/jib)-built image, and Native Application using both [native build tools](https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/#getting-started-native-build-tools) and [build packs](https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/#getting-started-buildpacks).
+So, what I am going to check? I would like to check the performance of applications using [Tomcat](https://tomcat.apache.org/), [JIB](https://github.com/GoogleContainerTools/jib)-built image, and Native Application using both [native build tools](https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/#getting-started-native-build-tools) and [build packs](https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/#getting-started-buildpacks).
 
 Let's move forward.
 
@@ -451,53 +451,11 @@ Let's check the results.
 
 * TOMCAT
 
-``` yaml
-server:
-  compression:
-    enabled: true
-  tomcat:
-    accept-count: 100 # default: 100
-    threads:
-      max: 200 # default: 200
-      min-spare: 10 # default: 10
-
-```
-
 ![](./static/web/tomcat.png)
-
-* JETTY
-
-``` yaml
-server:
- compression:
-   enabled: true
- jetty:
-   threads:
-     max: 200 # default: 200
-     min: 8 # default: 8
-
-```
-
-![](./static/web/jetty.png)
-
-
-* UNDERTOW
-
-``` yaml
-server:
- compression:
-   enabled: true
- undertow:
-   threads:
-     io: 4 # default: equals to cores count
-     worker: 8 # default: 8
-
-```
 
 Global information:
 
 ![](./static/web/global.png)
-
 
 Requests:
 
@@ -530,12 +488,6 @@ Let's gather all the information:
 |TYPE    |BUILD TIME (s)|ARTIFACT SIZE (MB)|BOOT UP (s)|ACTIVE USERS|RPS    |RESPONSE TIME (95th pct) (ms)|SATURATION POINT|JVM HEAP (MB)|JVM NON-HEAP (MB)|JVM CPU (%)|THREADS (MAX)|POSTGRES CPU (%)|
 |:-------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:------------|:----------------|:----------|:------------|:---------------|
 |TOMCAT  |N/A           |N/A               |3,94       |8168        |418,715|:white_check_mark: 29289     |1568            |:white_check_mark: 365|94      |12         |226          |99              |
-|JETTY   |N/A           |N/A               |3,83       |10201       |421.816|54207                        |1592            |1137         |94               |14         |224          |99              |
-|UNDERTOW|:white_check_mark: 5|:white_check_mark: 49,70|:white_check_mark: 3,59|:white_check_mark: 10311|381.127|50977|:white_check_mark: 1611|658|94      |:white_check_mark: 11|:white_check_mark: 33|99|
-|UNDERTOW IN DOCKER|46  |280               |5,20       |10264       |:white_check_mark: 448.682|29998     |916             |756          |94               |15         |32           |99              |
-
-As you can see, in most cases undertow seems pretty good and has the best saturation point.
-Nevertheless, the tomcat provides us with a better response time and JVM heap metrics.
 
 The metrics of the docker container we will compare a bit soon with the other solution.
 Move on.
@@ -554,28 +506,31 @@ Some of the cases I tried to investigate in the Spring Native repository, some o
 
 ### STRONGLY RECOMMEND NOT TO USE SPRING NATIVE IN PRODUCTION AT THE MOMENT. IT COULD LEAD TO UNPREDICTABLE LOSSES.
 
-|JDK|GC|Gradle|Spring Boot|Spring AOT|
-|:--|:-|:-----|:----------|:---------|
-|17 |G1|7.5   |2.7.1      |0.12.1    |
+|JDK|GC|Gradle|Spring Boot|
+|:--|:-|:-----|:----------|
+|21 |G1|8.5   |3.2.1      |
 
 ### Gradle Build Script
 
 ``` groovy
-import org.springframework.aot.gradle.dsl.AotMode
-
 plugins {
-    id("java")
-    id("org.springframework.boot") version "2.7.1"
-    id("io.spring.dependency-management") version "1.0.12.RELEASE"
-    id("org.springframework.experimental.aot") version "0.12.1"
+    java
+    application
     id("org.hibernate.orm")
+    id("org.springframework.boot") version "3.2.0"
+    id("io.spring.dependency-management") version "1.1.4"
+    id("org.graalvm.buildtools.native") version "0.9.28"
+    id("com.google.cloud.tools.jib") version "3.4.0"
 }
 
-group = 'by.vk'
-version = '0.0.1-SNAPSHOT'
+group = "by.vk"
+version = "1.0.0-RC1"
+
+springBoot {
+    buildInfo()
+}
 
 repositories {
-    maven { url 'https://repo.spring.io/release' }
     mavenCentral()
 }
 
@@ -584,9 +539,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-actuator") {
-        exclude group: 'io.micrometer', module: 'micrometer-core'
-    }
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
     //endregion
     //region logback
     implementation("ch.qos.logback.contrib:logback-jackson:0.1.5")
@@ -601,30 +554,32 @@ dependencies {
     //endregion
 }
 
-bootBuildImage {
-    buildpacks = ["gcr.io/paketo-buildpacks/java-native-image:7.23.0"]
-    builder = "paketobuildpacks/builder:tiny"
-    environment = [
-            "BP_NATIVE_IMAGE": "true"
-    ]
-}
-
-springAot {
-    mode = AotMode.NATIVE
-    debugVerify = false
-    removeXmlSupport = true
-    removeSpelSupport = true
-    removeYamlSupport = false
-    removeJmxSupport = true
-    verify = true
+tasks.bootBuildImage {
+    buildpacks.set(listOf("gcr.io/paketo-buildpacks/java-native-image:latest"))
+    builder.set("paketobuildpacks/builder:tiny")
+    environment.set(mapOf("BP_NATIVE_IMAGE" to "true"))
 }
 
 hibernate {
-    enhance {
+    enhance(closureOf<org.hibernate.orm.tooling.gradle.EnhanceExtension> {
         enableLazyInitialization = false
         enableDirtyTracking = true
         enableAssociationManagement = true
         enableExtendedEnhancement = false
+    })
+}
+
+jib {
+    to {
+        image = "ghcr.io/fragaly/a2b-service:${project.name}"
+    }
+    from {
+        image = "gcr.io/distroless/java21-debian12:latest"
+    }
+    container {
+        ports = listOf("8080")
+        labels.set(mapOf("appname" to application.applicationName, "version" to version.toString(), "maintainer" to "Vadzim Kavalkou <vadzim.kavalkou@gmail.com>"))
+        creationTime.set("USE_CURRENT_TIMESTAMP")
     }
 }
 ```
@@ -635,33 +590,22 @@ And application.yml:
 server:
   compression:
     enabled: true
-  tomcat:
-    threads:
-      max: 32
-      min-spare: 4
 
 spring:
+  threads:
+    virtual:
+      enabled: true
   main:
     banner-mode: off
-  cache:
-    type: none
   data:
     jpa:
       repositories:
         bootstrap-mode: default
   datasource:
     driverClassName: org.postgresql.Driver
-    url: "jdbc:postgresql://postgres-a2b:5432/a2b?currentSchema=a2b" #for local solution replace 'postgres-a2b' with localhost and port '5432' to '5433'
+    url: "jdbc:postgresql://postgres-a2b:5432/a2b?currentSchema=a2b" # for local solution replace 'postgres-a2b' with localhost and port '5432' to '5433'
     username: "postgres"
     password: "postgres"
-    hikari:
-      minimumIdle: 4 # default: same as maximumPoolSize
-      maximumPoolSize: 8 # cores * 2; default is 10
-      connection-timeout: 35000 #default 30000
-      pool-name: "hikari-pool"
-      idle-timeout: 10000 # default: 600000 (10 minutes)
-      max-lifetime: 35000 # default: 1800000 (30 minutes)
-      keepaliveTime: 30000 # default: 0 (disabled)
   jpa:
     open-in-view: false
     database-platform: org.hibernate.dialect.PostgreSQL95Dialect
@@ -669,11 +613,6 @@ spring:
       ddl-auto: none
     properties:
       hibernate:
-        cache:
-          use_query_cache: false
-          use_second_level_cache: false
-          use_structured_entries: false
-          use_minimal_puts: false
         default_schema: "a2b"
         types:
           print:
@@ -698,7 +637,7 @@ management:
     metrics.enabled: true
     prometheus.enabled: true
   endpoints.web.exposure.include: "*"
-  metrics.export.prometheus.enabled: true
+  prometheus.metrics.export.enabled: true
 
 logging.level:
   ROOT: info
@@ -707,8 +646,6 @@ logging.level:
 ```
 
 Let's build both solutions, and check its performance.
-
-* TOMCAT (other servers are not supported)
 
 ``` yaml
 server:
@@ -759,8 +696,7 @@ OK, OK, OK. What do we have?
 |:-----------------|:-------------|:-----------------|:----------|:-----------|:------|:----------------------------|:---------------|:-------|:-------|:------------|:---------------|
 |BUILD PACK        |751           |144,79            |1,585      |10201       |374.566|47831                        |584             |310     |12,5    |64           |99              |
 |NATIVE BUILD TOOLS|210           |116,20            |:white_check_mark: 0,310      |8759        |414.785|32175                        |:white_check_mark: 1829            |:white_check_mark: 263     |:white_check_mark: 8       |52           |99              |
-|UNDERTOW          |:white_check_mark: 5             |:white_check_mark: 49,70             |3,59       |:white_check_mark: 10311       |381.127|50977                        |1611            |658     |11      |33           |99              |
-|UNDERTOW IN DOCKER|46            |280               |5,20       |10264       |:white_check_mark: 448.682|:white_check_mark: 29998                        |916             |840     |15      |:white_check_mark: 32           |99              |
+|TOMCAT|46            |280               |5,20       |10264       |:white_check_mark: 448.682|:white_check_mark: 29998                        |916             |840     |15      |:white_check_mark: 32           |99              |
 
 To be honest, it's hard to compare different approaches with different purposes. Hold on. The purpose is the only one - the profit.
 You could choose the approach that fits better for your business. You know your customers better than someone else. Even better in some cases than a customer. LOL.
@@ -771,7 +707,7 @@ If it's not applicable for you and you have to have time to market as less as po
 Nevertheless, the native build tools build provides not have such a big build time as the build pack and provides us with the best saturation point, RAM usage, and CPU utilization.
 And, of cuz, take a look at the boot-up time... 310 ms, Caaaaarl.
 
-In other cases, the solution with Undertow is pretty better and stable. To take the risk or not - is your decision. Chose your destiny.
+Chose your destiny.
 
 ![](./static/sum-up.png)
 
