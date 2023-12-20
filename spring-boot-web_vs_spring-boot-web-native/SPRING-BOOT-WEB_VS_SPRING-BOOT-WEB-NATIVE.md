@@ -289,7 +289,7 @@ The languages, frameworks, and tools I used.
 
 |JDK|GC|Gradle|Spring Boot|
 |:--|:-|:-----|:----------|
-|17 |G1|7.5   |2.7.1      |
+|21 |G1|8.5   |3.2.1      |
 
 I will highlight some of the configurations here.
 
@@ -297,15 +297,25 @@ I will highlight some of the configurations here.
 
 ```groovy
 plugins {
-    id("java")
-    id("org.springframework.boot") version "2.7.1"
-    id("io.spring.dependency-management") version "1.0.12.RELEASE"
-    id("com.google.cloud.tools.jib") version "3.2.1"
+    java
+    application
+    id("org.springframework.boot") version "3.2.1"
+    id("io.spring.dependency-management") version "1.1.4"
+    id("com.google.cloud.tools.jib") version "3.4.0"
 }
 
-group = 'by.vk'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+group = "by.vk"
+version = "1.0.0-RC1"
+
+configurations {
+    compileOnly {
+        extendsFrom(configurations.annotationProcessor.get())
+    }
+}
+
+springBoot {
+    buildInfo()
+}
 
 repositories {
     mavenCentral()
@@ -313,17 +323,12 @@ repositories {
 
 dependencies {
     //region spring
-    implementation("com.vladmihalcea:hibernate-types-55:2.16.3")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    implementation("org.springframework:spring-context-indexer")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-web") {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-    }
-    implementation("org.springframework.boot:spring-boot-starter-undertow")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework:spring-context-indexer")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-    implementation("org.springdoc:springdoc-openapi-ui:1.6.9")
     //endregion
     //region logback
     implementation("ch.qos.logback.contrib:logback-jackson:0.1.5")
@@ -338,18 +343,44 @@ dependencies {
     //endregion
 }
 
+object JVMProps {
+    const val XMX = "512m"
+    const val XMS = "256m"
+    const val XSS = "256k"
+    const val MAX_METASPACE_SIZE = "128m"
+    const val MAX_DIRECT_MEMORY_SIZE = "128m"
+    const val HEAPDUMP_PATH = "/opt/tmp/heapdump.bin"
+    const val MAX_RAM_PERCENTAGE = "80"
+    const val INITIAL_RAM_PERCENTAGE = "50"
+}
+
+
 jib {
     to {
-        image = 'service-a2b:latest'
+        image = "ghcr.io/fragaly/a2b-service:${project.name}"
     }
     from {
-        image = "gcr.io/distroless/java17"
+        image = "gcr.io/distroless/java21-debian12:latest"
     }
     container {
-        jvmFlags = ['-noverify', '-XX:+UseContainerSupport', '-XX:MaxRAMPercentage=75.0', '-XX:InitialRAMPercentage=50.0', '-XX:+OptimizeStringConcat', '-XX:+UseStringDeduplication', '-XX:+ExitOnOutOfMemoryError', '-XX:+AlwaysActAsServerClassMachine', '-Xmx512m', '-Xms128m', '-XX:MaxMetaspaceSize=128m', '-XX:MaxDirectMemorySize=256m', '-XX:+HeapDumpOnOutOfMemoryError', '-XX:HeapDumpPath=/opt/tmp/heapdump.bin']
-        ports = ['8080']
-        labels.set([maintainer: 'Vadzim Kavalkou <vadzim.kavalkou@gmail.com>', appname: 'a2b-service', version: '0.0.1-SNAPSHOT'])
-        creationTime = 'USE_CURRENT_TIMESTAMP'
+        jvmFlags = listOf(
+                "-Xss${JVMProps.XSS}",
+                "-Xmx${JVMProps.XMX}",
+                "-Xms${JVMProps.XMS}",
+                "-XX:MaxMetaspaceSize=${JVMProps.MAX_METASPACE_SIZE}",
+                "-XX:MaxDirectMemorySize=${JVMProps.MAX_DIRECT_MEMORY_SIZE}",
+                "-XX:MaxRAMPercentage=${JVMProps.MAX_RAM_PERCENTAGE}",
+                "-XX:InitialRAMPercentage=${JVMProps.INITIAL_RAM_PERCENTAGE}",
+                "-XX:+HeapDumpOnOutOfMemoryError",
+                "-XX:HeapDumpPath=${JVMProps.HEAPDUMP_PATH}",
+                "-XX:+UseContainerSupport",
+                "-XX:+OptimizeStringConcat",
+                "-XX:+UseStringDeduplication",
+                "-XX:+ExitOnOutOfMemoryError",
+                "-XX:+AlwaysActAsServerClassMachine")
+        ports = listOf("8080")
+        labels.set(mapOf("appname" to application.applicationName, "version" to version.toString(), "maintainer" to "Vadzim Kavalkou <vadzim.kavalkou@gmail.com>"))
+        creationTime.set("USE_CURRENT_TIMESTAMP")
     }
 }
 ```
@@ -360,41 +391,25 @@ And application.yml, for sure.
 server:
   compression:
     enabled: true
-  undertow:
-    threads:
-      io: 4 # default: equals to cores count
-      worker: 8 # default: 8
 
 spring:
+  threads:
+    virtual:
+      enabled: true
   main:
     banner-mode: off
-  cache:
-    type: none
   datasource:
     driverClassName: org.postgresql.Driver
-    url: "jdbc:postgresql://postgres-a2b:5432/a2b?currentSchema=a2b" #for local solution replace 'postgres-a2b' with localhost and port '5432' to '5433'
-    username: "postgres"
-    password: "postgres"
-    hikari:
-      minimumIdle: 4 # default: same as maximumPoolSize
-      maximumPoolSize: 8 # cores * 2; default is 10
-      connection-timeout: 35000 #default 30000
-      pool-name: "hikari-pool"
-      idle-timeout: 10000 # default: 600000 (10 minutes)
-      max-lifetime: 35000 # default: 1800000 (30 minutes)
-      keepaliveTime: 30000 # default: 0 (disabled)
+    url: "jdbc:postgresql://localhost:5433/a2b?currentSchema=a2b" #for local solution replace 'postgres-a2b' with localhost and port '5432' to '5433'
+    username: "user"
+    password: "password"
   jpa:
     open-in-view: false
-    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: none
     properties:
       hibernate:
-        cache:
-          use_query_cache: false
-          use_second_level_cache: false
-          use_structured_entries: false
-          use_minimal_puts: false
         default_schema: "a2b"
         types:
           print:
@@ -419,7 +434,7 @@ management:
     metrics.enabled: true
     prometheus.enabled: true
   endpoints.web.exposure.include: "*"
-  metrics.export.prometheus.enabled: true
+  prometheus.metrics.export.enabled: true
 
 logging.level:
   ROOT: info
